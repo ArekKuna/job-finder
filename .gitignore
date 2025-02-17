@@ -1,7 +1,7 @@
 ######BACKEND
 
 # compiled output
-job-finder-backend/backend/dist
+job-finder-backend/dist
 job-finder-backend/node_modules
 job-finder-backend/build
 
