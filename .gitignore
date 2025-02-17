@@ -1,0 +1,88 @@
+######BACKEND
+
+# compiled output
+job-finder-backend/backend/dist
+job-finder-backend/node_modules
+job-finder-backend/build
+
+# Logs
+job-finder-backend/logs
+job-finder-backend/*.log
+job-finder-backend/npm-debug.log*
+job-finder-backend/pnpm-debug.log*
+job-finder-backend/yarn-debug.log*
+job-finder-backend/yarn-error.log*
+job-finder-backend/lerna-debug.log*
+
+# OS
+job-finder-backend/.DS_Store
+
+# Tests
+job-finder-backend//coverage
+job-finder-backend//.nyc_output
+
+# IDEs and editors
+job-finder-backend//.idea
+job-finder-backend/.project
+job-finder-backend/.classpath
+job-finder-backend/.c9/
+job-finder-backend/*.launch
+job-finder-backend/.settings/
+job-finder-backend/*.sublime-workspace
+
+# IDE - VSCode
+job-finder-backend/.vscode/*
+job-finder-backend/!.vscode/settings.json
+job-finder-backend/!.vscode/tasks.json
+job-finder-backend/!.vscode/launch.json
+job-finder-backend/!.vscode/extensions.json
+
+# dotenv environment variable files
+job-finder-backend/.env
+job-finder-backend/.env.development.local
+job-finder-backend/.env.test.local
+job-finder-backend/.env.production.local
+job-finder-backend/.env.local
+
+# temp directory
+job-finder-backend/.temp
+job-finder-backend/.tmp
+
+# Runtime data
+job-finder-backend/pids
+job-finder-backend/*.pid
+job-finder-backend/*.seed
+job-finder-backend/*.pid.lock
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+job-finder-backend/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+######FRONTEND
+
+# Logs
+job-finder-frontend/logs
+job-finder-frontend/*.log
+job-finder-frontend/npm-debug.log*
+job-finder-frontend/yarn-debug.log*
+job-finder-frontend/yarn-error.log*
+job-finder-frontend/pnpm-debug.log*
+job-finder-frontend/lerna-debug.log*
+
+job-finder-frontend/node_modules
+job-finder-frontend/dist
+job-finder-frontend/dist-ssr
+job-finder-frontend/*.local
+
+# Editor directories and files
+job-finder-frontend/.vscode/*
+job-finder-frontend/!.vscode/extensions.json
+job-finder-frontend/.idea
+job-finder-frontend/.DS_Store
+job-finder-frontend/*.suo
+job-finder-frontend/*.ntvs*
+job-finder-frontend/*.njsproj
+job-finder-frontend/*.sln
+job-finder-frontend/*.sw?
+
+#####GLOBAL
+.DS_STORE
