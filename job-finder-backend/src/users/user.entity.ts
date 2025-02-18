@@ -1,36 +1,19 @@
-import { IsEmail, IsEnum, IsString, Matches, MinLength } from 'class-validator';
+import { Exclude } from 'class-transformer';
+import { UserRole } from 'src/common/value-object/user-role';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-
-enum UserRole {
-  USER = 'USER',
-  EMPLOYER = 'EMPLOYER',
-  ADMIN = 'ADMIN',
-}
-
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Exclude()
+  @Column({ type: 'enum', enum: UserRole, default: UserRole.EMPLOYEE })
+  role: UserRole;
+
   @Column()
-  @IsEmail()
   email: string;
 
+  @Exclude()
   @Column()
-  @IsString()
-  @MinLength(8, { message: 'Password must be at least 8 characters long' })
-  @Matches(/[a-z]/, {
-    message: 'Password must contain at least one lowercase letter',
-  })
-  @Matches(/[A-Z]/, {
-    message: 'Password must contain at least one uppercase letter',
-  })
-  @Matches(/[\W_]/, {
-    message: 'Password must contain at least one special character',
-  })
   password: string;
-
-  @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
-  @IsEnum(UserRole)
-  role: UserRole;
 }
