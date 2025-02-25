@@ -5,11 +5,11 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './user.entity';
 import { Repository } from 'typeorm';
-import { AuthService } from 'src/modules/auth/auth.service';
-import { UserRole } from 'src/common/enums/user-role.enum';
-import { UserCredentials } from 'src/common/interfaces/user-credentials.interface';
+import { User } from 'modules/users/user.entity';
+import { AuthService } from 'modules/auth/auth.service';
+import { UserCredentials } from 'common/interfaces/user-credentials.interface';
+import { UserRole } from 'common/enums/user-role.enum';
 
 @Injectable()
 export class UsersService {

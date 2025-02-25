@@ -1,11 +1,11 @@
 import { Module, ValidationPipe } from '@nestjs/common';
-import { UsersModule } from './modules/users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './modules/users/user.entity';
 import { APP_PIPE } from '@nestjs/core';
-import { AuthModule } from './modules/auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { UsersModule } from 'modules/users/users.module';
+import { User } from 'modules/users/user.entity';
+import { AuthModule } from 'modules/auth/auth.module';
 
 @Module({
   imports: [

@@ -4,12 +4,12 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UsersService } from 'src/modules/users/users.service';
+import { JwtService } from '@nestjs/jwt';
 import { compare, genSalt, hash } from 'bcrypt';
 import { instanceToPlain } from 'class-transformer';
-import { JwtService } from '@nestjs/jwt';
-import { UserCredentials } from 'src/common/interfaces/user-credentials.interface';
-import { UserValidationResult } from './shared/interfaces/validation-result.interface';
+import { UsersService } from 'modules/users/users.service';
+import { UserCredentials } from 'common/interfaces/user-credentials.interface';
+import { UserValidationResult } from 'modules/auth/shared/interfaces/validation-result.interface';
 
 @Injectable()
 export class AuthService {
