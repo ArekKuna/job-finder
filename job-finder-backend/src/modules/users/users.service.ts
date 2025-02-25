@@ -7,9 +7,9 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
-import { instanceToPlain } from 'class-transformer';
-import { AuthService } from 'src/auth/auth.service';
-import { UserRole } from 'src/common/value-object/user-role';
+import { AuthService } from 'src/modules/auth/auth.service';
+import { UserRole } from 'src/common/enums/user-role.enum';
+import { UserCredentials } from 'src/common/interfaces/user-credentials.interface';
 
 @Injectable()
 export class UsersService {
@@ -19,14 +19,18 @@ export class UsersService {
     private authService: AuthService,
   ) {}
 
-  async signUpEmployee(email: string, password: string) {
+  async signUpEmployee(input: UserCredentials) {
+    const { email, password } = input;
+
     const existingUser = await this.findUserByEmail(email);
 
     if (existingUser) {
       throw new BadRequestException('Invalid data');
     }
 
-    const hashedPassword = await this.authService.securePassword(password);
+    const hashedPassword = await this.authService.securePassword(
+      input.password,
+    );
 
     const newUser = this.usersRepository.create({
       email,
@@ -36,10 +40,12 @@ export class UsersService {
 
     await this.usersRepository.save(newUser);
 
-    return instanceToPlain(newUser);
+    return await this.authService.authenticateUser({ ...newUser, password });
   }
 
-  async signUpEmployer(email: string, password: string) {
+  async signUpEmployer(input: UserCredentials) {
+    const { email, password } = input;
+
     const existingUser = await this.findUserByEmail(email);
 
     if (existingUser) {
@@ -56,7 +62,7 @@ export class UsersService {
 
     await this.usersRepository.save(newUser);
 
-    return instanceToPlain(newUser);
+    return await this.authService.authenticateUser({ ...newUser, password });
   }
 
   async findUserByEmail(email: string): Promise<User | null> {
