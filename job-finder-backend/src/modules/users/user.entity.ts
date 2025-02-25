@@ -1,6 +1,6 @@
-import { Exclude } from 'class-transformer';
-import { UserRole } from 'src/common/enums/user-role.enum';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Exclude } from 'class-transformer';
+import { UserRole } from 'common/enums/user-role.enum';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
