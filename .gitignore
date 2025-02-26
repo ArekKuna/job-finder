@@ -39,8 +39,8 @@ job-finder-backend/!.vscode/extensions.json
 
 # dotenv environment variable files
 job-finder-backend/.env
-job-finder-backend/.env.development.local
-job-finder-backend/.env.test.local
+job-finder-backend/.env.development
+job-finder-backend/.env.test
 job-finder-backend/.env.production.local
 job-finder-backend/.env.local
 
