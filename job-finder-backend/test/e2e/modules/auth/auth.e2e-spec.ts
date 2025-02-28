@@ -1,16 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import { App } from 'supertest/types';
-import { DataSource, EntityManager } from 'typeorm';
 import * as request from 'supertest';
 import { AppModule } from 'app.module';
 import { UserRole } from 'common/enums/user-role.enum';
 import { Users } from 'modules/users/users.entity';
+import { TypeormDatabaseConnectionService } from 'common/database/typeorm-database-connection.service';
 
 describe('UsersAuthorization', () => {
   let app: INestApplication<App>;
-  let dataSource: DataSource;
-  let entityManager: EntityManager;
+  let databaseConnectionService: TypeormDatabaseConnectionService;
   const email = 'kuna.arek@gmail.com';
   const password = 'PiesPluto12@';
   const userId = 'fd40cba5-8f97-4afe-be1d-bd951163183f';
@@ -23,16 +22,15 @@ describe('UsersAuthorization', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    databaseConnectionService = app.get(TypeormDatabaseConnectionService);
+
+    await databaseConnectionService.truncateTable(['users']);
+
     await app.init();
-
-    dataSource = moduleFixture.get(DataSource);
-    entityManager = dataSource.createEntityManager();
-
-    await dataSource.query(`TRUNCATE TABLE users RESTART IDENTITY CASCADE`);
   });
 
   afterAll(async () => {
-    await dataSource.destroy();
+    await databaseConnectionService.closeConnection();
     await app.close();
   });
 
@@ -65,7 +63,7 @@ describe('UsersAuthorization', () => {
       role: UserRole.EMPLOYER,
     };
 
-    await entityManager.insert('users', existingUser);
+    await databaseConnectionService.insert('users', existingUser);
 
     const response: request.Response = await request(app.getHttpServer())
       .post('/users/employer/signup')

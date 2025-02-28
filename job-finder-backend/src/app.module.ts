@@ -6,6 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { UsersModule } from 'modules/users/users.module';
 import { AuthModule } from 'modules/auth/auth.module';
 import { DatabaseConfig } from 'config/database.config';
+import { TypeormDatabaseConnectionService } from 'common/database/typeorm-database-connection.service';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { DatabaseConfig } from 'config/database.config';
   ],
   controllers: [],
   providers: [
+    TypeormDatabaseConnectionService,
     {
       provide: APP_PIPE,
       useValue: new ValidationPipe({
