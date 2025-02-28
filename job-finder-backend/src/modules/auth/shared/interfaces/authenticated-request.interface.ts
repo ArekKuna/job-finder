@@ -1,6 +1,6 @@
 import { Request } from 'express';
-import { User } from 'modules/users/user.entity';
+import { Users } from 'modules/users/users.entity';
 
 export interface AuthenticatedRequest extends Request {
-  user?: Partial<User>;
+  user?: Partial<Users>;
 }

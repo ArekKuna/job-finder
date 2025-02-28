@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from 'modules/users/user.entity';
+import { Users } from 'modules/users/users.entity';
 import { AuthService } from 'modules/auth/auth.service';
 import { UserCredentials } from 'common/interfaces/user-credentials.interface';
 import { UserRole } from 'common/enums/user-role.enum';
@@ -14,7 +14,8 @@ import { UserRole } from 'common/enums/user-role.enum';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) private readonly usersRepository: Repository<User>,
+    @InjectRepository(Users)
+    private readonly usersRepository: Repository<Users>,
     @Inject(forwardRef(() => AuthService))
     private authService: AuthService,
   ) {}
@@ -25,7 +26,7 @@ export class UsersService {
     const existingUser = await this.findUserByEmail(email);
 
     if (existingUser) {
-      throw new BadRequestException('Invalid data');
+      throw new BadRequestException('Bad user input');
     }
 
     const hashedPassword = await this.authService.securePassword(
@@ -49,7 +50,7 @@ export class UsersService {
     const existingUser = await this.findUserByEmail(email);
 
     if (existingUser) {
-      throw new BadRequestException('Invalid data');
+      throw new BadRequestException('Bad user input');
     }
 
     const hashedPassword = await this.authService.securePassword(password);
@@ -65,7 +66,7 @@ export class UsersService {
     return await this.authService.authenticateUser({ ...newUser, password });
   }
 
-  async findUserByEmail(email: string): Promise<User | null> {
+  async findUserByEmail(email: string): Promise<Users | null> {
     const user = this.usersRepository.findOneBy({ email });
 
     return user;
