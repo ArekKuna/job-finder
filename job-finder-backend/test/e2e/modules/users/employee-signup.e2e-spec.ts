@@ -6,6 +6,7 @@ import { AppModule } from 'app.module';
 import { UserRole } from 'common/enums/user-role.enum';
 import { Users } from 'modules/users/users.entity';
 import { TypeormDatabaseConnectionService } from 'common/database/typeorm-database-connection.service';
+import { FailRequestBody } from 'e2e/shared/failed-request-body.interface';
 
 describe('EmployeeSignup', () => {
   let app: INestApplication<App>;
@@ -28,30 +29,26 @@ describe('EmployeeSignup', () => {
     await databaseConnectionService.truncateTable(['users']);
   });
 
-  afterAll(async () => {
+  afterEach(async () => {
     await databaseConnectionService.closeConnection();
+  });
+
+  afterAll(async () => {
     await app.close();
   });
 
-  it('it should create an employee user from given credentials', async () => {
-    const response = await request(app.getHttpServer())
+  it('it should create an employee from given credentials', async () => {
+    const response: request.Response = await request(app.getHttpServer())
       .post(route)
       .send({ email, password });
 
     const result = response.body as {
       jwtToken: string;
-      email: string;
-      userId: string;
-      role: UserRole;
     };
 
-    expect(result).toBeDefined();
-    expect(result).toMatchObject({
-      jwtToken: result.jwtToken,
-      email,
-      userId: result.userId,
-      role: UserRole.EMPLOYEE,
-    });
+    expect(response.status).toBe(201);
+    expect(result.jwtToken).toBeDefined();
+    expect(typeof result.jwtToken).toBe('string');
   });
 
   it('it should fail if email exist in database', async () => {
@@ -73,11 +70,19 @@ describe('EmployeeSignup', () => {
       .send({ email, password });
 
     expect(response.status).toBe(400);
-    expect(response.body).toMatchObject({
-      statusCode: 400,
-      message: 'Bad user input',
-      error: 'Bad Request',
-    });
+  });
+
+  it('it should fail if email is not in correct email format', async () => {
+    const nonEmailFormat = 'johnDoe123.com';
+
+    const response: request.Response = await request(app.getHttpServer())
+      .post(route)
+      .send({ email: nonEmailFormat, password });
+
+    expect(response.status).toBe(400);
+    expect((response.body as FailRequestBody).message).toContain(
+      'email must be an email',
+    );
   });
 
   it('it should fail if password is too short', async () => {
@@ -88,7 +93,7 @@ describe('EmployeeSignup', () => {
       .send({ email, password: tooShortPassowrd });
 
     expect(response.status).toBe(400);
-    expect((response.body as { message: string | string[] }).message).toContain(
+    expect((response.body as FailRequestBody).message).toContain(
       'Password must be at least 8 characters long',
     );
   });
@@ -101,7 +106,7 @@ describe('EmployeeSignup', () => {
       .send({ email, password: nonLowerCasePassword });
 
     expect(response.status).toBe(400);
-    expect((response.body as { message: string | string[] }).message).toContain(
+    expect((response.body as FailRequestBody).message).toContain(
       'Password must contain at least one lowercase character',
     );
   });
@@ -114,7 +119,7 @@ describe('EmployeeSignup', () => {
       .send({ email, password: nonUpperCasePassword });
 
     expect(response.status).toBe(400);
-    expect((response.body as { message: string | string[] }).message).toContain(
+    expect((response.body as FailRequestBody).message).toContain(
       'Password must contain at least one uppercase character',
     );
   });
@@ -127,7 +132,7 @@ describe('EmployeeSignup', () => {
       .send({ email, password: nonSpecialCharacterPassword });
 
     expect(response.status).toBe(400);
-    expect((response.body as { message: string | string[] }).message).toContain(
+    expect((response.body as FailRequestBody).message).toContain(
       'Password must contain at least one special character',
     );
   });

@@ -8,13 +8,18 @@ import { Users } from 'modules/users/users.entity';
 import { TypeormDatabaseConnectionService } from 'common/database/typeorm-database-connection.service';
 import { FailRequestBody } from 'e2e/shared/failed-request-body.interface';
 
-describe('EmployerSignup', () => {
+describe('UserLogin', () => {
   let app: INestApplication<App>;
   let databaseConnectionService: TypeormDatabaseConnectionService;
 
-  const route = '/users/employer/signup';
-  const email = 'john.doe@gmail.com';
-  const password = 'StrongPassword123!';
+  const route = '/auth/login';
+  const existingUser: Users = {
+    email: 'john.doe@gmail.com',
+    password: '$2b$10$oEtt4GYh7TCmMle3jqvjdeK5soOxjrhrCBIPim/mDSSMGyfN31rGa',
+    id: '3d09c95b-6313-4bbc-acd1-474e55d11c94',
+    role: UserRole.EMPLOYEE,
+  };
+  const password = 'StrongPassword12@';
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -37,37 +42,40 @@ describe('EmployerSignup', () => {
     await app.close();
   });
 
-  it('it should create an employer from given credentials', async () => {
+  it('it should login an existing user', async () => {
+    await databaseConnectionService.insert('users', existingUser);
+
     const response: request.Response = await request(app.getHttpServer())
       .post(route)
-      .send({ email, password });
+      .send({ email: existingUser.email, password });
 
-    const result = response.body as {
-      jwtToken: string;
-    };
+    const result = response.body as { jwtToken: string };
 
     expect(response.status).toBe(201);
     expect(result.jwtToken).toBeDefined();
     expect(typeof result.jwtToken).toBe('string');
   });
 
-  it('it should fail if email exist in database', async () => {
-    const userId = 'fd40cba5-8f97-4afe-be1d-bd951163183f';
-    const hashedPassword =
-      '$2b$10$Q5cpo5SoA9X0jV8PTMdzZ.i3jiZKUElP9LY0hCBHBbfhmywtb/B1C';
-
-    const existingUser: Users = {
-      email,
-      password: hashedPassword,
-      id: userId,
-      role: UserRole.EMPLOYER,
-    };
+  it('it should fail to login user if email does not exist in database', async () => {
+    const nonExistingEmail = 'johnDoe@gmail.com';
 
     await databaseConnectionService.insert('users', existingUser);
 
     const response: request.Response = await request(app.getHttpServer())
       .post(route)
-      .send({ email, password });
+      .send({ email: nonExistingEmail, password });
+
+    expect(response.status).toBe(400);
+  });
+
+  it('it should fail to login user if password does not match given email', async () => {
+    const givenPassword = 'Strongpassword123@';
+
+    await databaseConnectionService.insert('users', existingUser);
+
+    const response: request.Response = await request(app.getHttpServer())
+      .post(route)
+      .send({ email: existingUser.email, password: givenPassword });
 
     expect(response.status).toBe(400);
   });
@@ -90,7 +98,7 @@ describe('EmployerSignup', () => {
 
     const response: request.Response = await request(app.getHttpServer())
       .post(route)
-      .send({ email, password: tooShortPassowrd });
+      .send({ email: existingUser.email, password: tooShortPassowrd });
 
     expect(response.status).toBe(400);
     expect((response.body as FailRequestBody).message).toContain(
@@ -103,7 +111,7 @@ describe('EmployerSignup', () => {
 
     const response: request.Response = await request(app.getHttpServer())
       .post(route)
-      .send({ email, password: nonLowerCasePassword });
+      .send({ email: existingUser.email, password: nonLowerCasePassword });
 
     expect(response.status).toBe(400);
     expect((response.body as FailRequestBody).message).toContain(
@@ -116,7 +124,7 @@ describe('EmployerSignup', () => {
 
     const response: request.Response = await request(app.getHttpServer())
       .post(route)
-      .send({ email, password: nonUpperCasePassword });
+      .send({ email: existingUser.email, password: nonUpperCasePassword });
 
     expect(response.status).toBe(400);
     expect((response.body as FailRequestBody).message).toContain(
@@ -129,7 +137,10 @@ describe('EmployerSignup', () => {
 
     const response: request.Response = await request(app.getHttpServer())
       .post(route)
-      .send({ email, password: nonSpecialCharacterPassword });
+      .send({
+        email: existingUser.email,
+        password: nonSpecialCharacterPassword,
+      });
 
     expect(response.status).toBe(400);
     expect((response.body as FailRequestBody).message).toContain(

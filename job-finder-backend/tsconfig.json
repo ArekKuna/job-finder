@@ -19,7 +19,8 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "common/*": ["common/*"],
-      "modules/*": ["modules/*"]
+      "modules/*": ["modules/*"],
+      "e2e/*": ["../test/e2e/*"]
     }
   }
 }
