@@ -1,8 +1,8 @@
 import {
+  BadRequestException,
   forwardRef,
   Inject,
   Injectable,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare, genSalt, hash } from 'bcrypt';
@@ -22,7 +22,7 @@ export class AuthService {
     const validatedUser = await this.validateUser(input);
 
     if (!validatedUser) {
-      throw new UnauthorizedException('Bad user input');
+      throw new BadRequestException('Bad user input');
     }
 
     return await this.signIn(validatedUser);
