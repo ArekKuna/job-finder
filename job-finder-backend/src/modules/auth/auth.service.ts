@@ -6,10 +6,9 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare, genSalt, hash } from 'bcrypt';
-import { instanceToPlain } from 'class-transformer';
 import { UsersService } from 'modules/users/users.service';
 import { UserCredentials } from 'common/interfaces/user-credentials.interface';
-import { UserValidationResult } from 'modules/auth/shared/interfaces/validation-result.interface';
+import { ValidatedUser } from 'modules/auth/shared/interfaces/validated-user';
 
 @Injectable()
 export class AuthService {
@@ -20,18 +19,16 @@ export class AuthService {
   ) {}
 
   async authenticateUser(input: UserCredentials) {
-    const user = await this.validateUser(input);
+    const validatedUser = await this.validateUser(input);
 
-    if (!user) {
-      throw new UnauthorizedException('');
+    if (!validatedUser) {
+      throw new UnauthorizedException('Bad user input');
     }
 
-    return await this.signIn(user);
+    return await this.signIn(validatedUser);
   }
 
-  async validateUser(
-    input: UserCredentials,
-  ): Promise<UserValidationResult | null> {
+  async validateUser(input: UserCredentials) {
     const user = await this.usersService.findUserByEmail(input.email);
 
     if (!user) {
@@ -44,21 +41,18 @@ export class AuthService {
       return null;
     }
 
-    const { email, role } = user;
-
-    return { email, userId: user.id, role };
+    return { userId: user.id, userRole: user.role };
   }
 
-  async signIn(validatedUser: UserValidationResult) {
+  async signIn(validatedUser: ValidatedUser) {
     const tokenPayload = {
       sub: validatedUser.userId,
-      email: validatedUser.email,
-      role: validatedUser.role,
+      userRole: validatedUser.userRole,
     };
 
     const jwtToken = await this.jwtService.signAsync(tokenPayload);
 
-    return { jwtToken, ...instanceToPlain(validatedUser) };
+    return { jwtToken };
   }
 
   async securePassword(password: string) {

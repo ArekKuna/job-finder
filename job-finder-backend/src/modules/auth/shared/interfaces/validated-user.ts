@@ -1,7 +1,6 @@
 import { UserRole } from 'common/enums/user-role.enum';
 
-export interface UserValidationResult {
+export interface ValidatedUser {
   userId: string;
-  email: string;
-  role: UserRole;
+  userRole: UserRole;
 }
