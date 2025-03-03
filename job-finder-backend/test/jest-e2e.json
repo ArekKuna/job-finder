@@ -3,7 +3,6 @@
   "rootDir": "e2e/",
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
-  "globalSetup": "../setup.ts",
   "maxWorkers": 1,
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"

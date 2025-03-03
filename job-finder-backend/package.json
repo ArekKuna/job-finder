@@ -6,6 +6,12 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "typeorm:migration:generate": "typeorm migration:create src/migrations/db/migration",
+    "typeorm:migration:migrate:dev": "yarn build && typeorm migration:run -d dist/common/database/data-source-development.js",
+    "typeorm:migration:down:dev": "typeorm migration:revert -d dist/common/database/data-source-development.js",
+    "typeorm:migration:migrate:test": "yarn build && typeorm migration:run -d dist/common/database/data-source-test.js",
+    "typeorm:migration:down:test": "typeorm migration:revert -d dist/common/database/data-source-test.js",
+    "typeorm:reset": "yarn build && yarn typeorm:migration:down && yarn typeorm:migration:migrate",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",

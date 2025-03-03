@@ -3,7 +3,8 @@ import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 import * as dotenv from 'dotenv';
 
-dotenv.config({ path: '.env.development' });
+const envFile = `.env.${process.env.NODE_ENV || 'development'}`;
+dotenv.config({ path: envFile });
 
 @Injectable()
 export class DatabaseConfig implements TypeOrmOptionsFactory {
@@ -18,7 +19,7 @@ export class DatabaseConfig implements TypeOrmOptionsFactory {
       password: this.configService.get<string>('DB_PASSWORD'),
       database: this.configService.get<string>('DB_NAME'),
       entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-      synchronize: true,
+      synchronize: false,
     };
   }
 }
