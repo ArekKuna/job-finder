@@ -4,7 +4,7 @@ import { App } from 'supertest/types';
 import * as request from 'supertest';
 import { AppModule } from 'app.module';
 import { UserRole } from 'common/enums/user-role.enum';
-import { Users } from 'modules/users/users.entity';
+import { User } from 'modules/users/user.entity';
 import { TypeormDatabaseConnectionService } from 'common/database/typeorm-database-connection.service';
 import { FailRequestBody } from 'e2e/shared/failed-request-body.interface';
 
@@ -13,11 +13,13 @@ describe('UserLogin', () => {
   let databaseConnectionService: TypeormDatabaseConnectionService;
 
   const route = '/auth/login';
-  const existingUser: Users = {
+  const existingUser: User = {
     email: 'john.doe@gmail.com',
     password: '$2b$10$oEtt4GYh7TCmMle3jqvjdeK5soOxjrhrCBIPim/mDSSMGyfN31rGa',
     id: '3d09c95b-6313-4bbc-acd1-474e55d11c94',
     role: UserRole.EMPLOYEE,
+    created_at: new Date(),
+    updated_at: new Date(),
   };
   const password = 'StrongPassword12@';
 
