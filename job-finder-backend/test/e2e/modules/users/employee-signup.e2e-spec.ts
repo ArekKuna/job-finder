@@ -4,7 +4,7 @@ import { App } from 'supertest/types';
 import * as request from 'supertest';
 import { AppModule } from 'app.module';
 import { UserRole } from 'common/enums/user-role.enum';
-import { Users } from 'modules/users/users.entity';
+import { User } from 'modules/users/user.entity';
 import { TypeormDatabaseConnectionService } from 'common/database/typeorm-database-connection.service';
 import { FailRequestBody } from 'e2e/shared/failed-request-body.interface';
 
@@ -56,11 +56,13 @@ describe('EmployeeSignup', () => {
     const hashedPassword =
       '$2b$10$Q5cpo5SoA9X0jV8PTMdzZ.i3jiZKUElP9LY0hCBHBbfhmywtb/B1C';
 
-    const existingUser: Users = {
+    const existingUser: User = {
       email,
       password: hashedPassword,
       id: userId,
       role: UserRole.EMPLOYEE,
+      created_at: new Date(),
+      updated_at: new Date(),
     };
 
     await databaseConnectionService.insert('users', existingUser);
