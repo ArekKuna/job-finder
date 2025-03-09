@@ -1,8 +1,9 @@
-function App() {
+import { AppRoutes } from "views/Router";
 
-  return (
-    <div>MY APP</div>
-  )
+import "./main.css";
+
+function App() {
+  return <AppRoutes />;
 }
 
-export default App
+export default App;
