@@ -1,28 +1,46 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { HamburgerMenu } from "components/Layout/Header/MobileHeader/HamburgerMenu";
 import { JobFinderLogo } from "components/Layout/JobFinderLogo/JobFinderLogo";
+import { MobileHeaderTitle } from "components/Layout/Header/MobileHeader/MobileHeaderTitle";
+import { MobileNav } from "components/Layout/Header/MobileHeader/MobileNav";
 
 export const MobileHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleOpenMenu = () => {
+  const handleMenuVisibility = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  return (
-    <motion.div
-      className="fixed top-0 left-0 p-2 w-full flex justify-between bg-white"
-      animate={{ height: isMenuOpen ? "100vh" : "71px" }}
-      initial={{ height: "71px" }}
-      transition={{ duration: 0.9, ease: "circInOut" }}
-    >
-      <NavLink to="/">
-        <JobFinderLogo />
-      </NavLink>
+  const location = useLocation();
+  const isLandingPage = location.pathname === "/";
 
-      <HamburgerMenu isMenuOpen={isMenuOpen} onOpenMenu={handleOpenMenu} />
-    </motion.div>
+  return (
+    <div>
+      <motion.div
+        className="fixed top-0 left-0 p-2 w-full flex flex-col shadow-md bg-white overflow-hidden"
+        animate={{ height: isMenuOpen ? window.innerHeight : "70px" }}
+        initial={{ height: "70px" }}
+        transition={{ duration: 0.9, ease: "circInOut" }}
+      >
+        <div className="flex justify-between">
+          <NavLink to="/">
+            <JobFinderLogo />
+          </NavLink>
+
+          <HamburgerMenu
+            isMenuOpen={isMenuOpen}
+            onMenuVisibilityChange={handleMenuVisibility}
+          />
+        </div>
+
+        <MobileNav
+          isMenuOpen={isMenuOpen}
+          onMenuVisibilityChange={handleMenuVisibility}
+        />
+      </motion.div>
+      {isLandingPage && <MobileHeaderTitle />}
+    </div>
   );
 };

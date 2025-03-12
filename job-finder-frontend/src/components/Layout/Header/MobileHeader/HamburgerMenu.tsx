@@ -2,18 +2,21 @@ import { motion } from "framer-motion";
 
 type Props = {
   isMenuOpen: boolean;
-  onOpenMenu: () => void;
+  onMenuVisibilityChange: () => void;
 };
 
-export const HamburgerMenu = ({ isMenuOpen, onOpenMenu }: Props) => {
-  const handleOpenMenu = () => {
-    onOpenMenu();
+export const HamburgerMenu = ({
+  isMenuOpen,
+  onMenuVisibilityChange,
+}: Props) => {
+  const handleMenuVisibility = () => {
+    onMenuVisibilityChange();
   };
 
   return (
     <button
       className="h-[50px] w-[50px] flex flex-col justify-center items-center gap-2 rounded-lg bg-gradient-to-r from-[#E74AF5] to-[#8E17FC]"
-      onClick={handleOpenMenu}
+      onClick={handleMenuVisibility}
     >
       <motion.span
         className="h-[3px] w-[30px] bg-white rounded-lg"

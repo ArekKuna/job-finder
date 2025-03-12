@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme {
+  --font-main: "Geologica", sans-serif;
+  --font-header: "Sen", "sans-serif";
+}
+
 html {
   padding: 0;
   margin: 0;
@@ -8,7 +13,7 @@ html {
 body {
   padding: 0;
   margin: 0;
-  padding-top: 71px;
+  padding-top: 70px;
   box-sizing: border-box;
   position: relative;
 }

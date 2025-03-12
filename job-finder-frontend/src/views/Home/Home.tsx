@@ -1,3 +1,3 @@
 export const Home = () => {
-  return <div className="bg-[#F2F2F2] min-h-screen">LandingPage</div>;
+  return <div className="min-h-screen bg-[#F2F2F2]">LandingPage</div>;
 };

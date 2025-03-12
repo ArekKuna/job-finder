@@ -356,6 +356,16 @@
     "@eslint/core" "^0.10.0"
     levn "^0.4.1"
 
+"@fontsource/geologica@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/geologica/-/geologica-5.2.5.tgz#98130d302810139c7ba5035e311dfec5ca023480"
+  integrity sha512-KmOYZ1jT4cINhxA1uShmXBs/2FFHMQJrOnAXTSm24XHmJiOq7VQ/NxQ6dS0gkQhaTPCwC9SO/tuDzpRAVKL9PQ==
+
+"@fontsource/sen@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/sen/-/sen-5.2.5.tgz#55190d001e65f7b079dfd721cb3e20af27723a00"
+  integrity sha512-M8kOJq34A6mxriWD41ZvuE9dj/uS8ETQXhmQtbo7BXaRmRlGR5NUvFseOez8GQHiL5opJqdfIbPvKPoYiyrE+w==
+
 "@humanfs/core@^0.19.1":
   version "0.19.1"
   resolved "https://registry.yarnpkg.com/@humanfs/core/-/core-0.19.1.tgz#17c55ca7d426733fe3c561906b8173c336b40a77"

@@ -8,7 +8,7 @@ export const JobFinderLogo = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <rect y="2" width="200" height="50" rx="8" fill="#FBF3D9" />
-      <g clip-path="url(#clip0_19_76)">
+      <g clipPath="url(#clip0_19_76)">
         <path
           d="M34.0615 35.233L29.872 31.0435C29.5585 30.73 29.1405 30.59 28.7295 30.6125L26.9695 28.8525C27.9315 27.475 28.5 25.804 28.5 24C28.5 19.313 24.687 15.4995 19.9995 15.4995C15.312 15.4995 11.5 19.313 11.5 24.0005C11.5 28.688 15.313 32.501 20.0005 32.501C21.8045 32.501 23.4755 31.932 24.853 30.9705L26.613 32.7305C26.591 33.1415 26.7305 33.5595 27.044 33.8725L31.2335 38.062C31.526 38.3545 31.91 38.5005 32.2945 38.5005C32.679 38.5005 33.0625 38.3545 33.355 38.062L34.062 37.355C34.647 36.7705 34.647 35.8185 34.062 35.2335L34.0615 35.233ZM12.5 24.0005C12.5 19.865 15.8645 16.5005 20 16.5005C24.1355 16.5005 27.5 19.865 27.5 24.0005C27.5 28.136 24.1355 31.5005 20 31.5005C15.8645 31.5005 12.5 28.136 12.5 24.0005ZM26.343 29.64L27.7485 31.0455L27.0455 31.7485L25.64 30.343C25.888 30.1225 26.1225 29.888 26.343 29.64ZM33.354 36.647L32.647 37.354C32.452 37.5485 32.1345 37.5485 31.9395 37.354L27.75 33.1645C27.555 32.9695 27.555 32.6525 27.75 32.457L28.457 31.75C28.5545 31.6525 28.6825 31.604 28.8105 31.604C28.9385 31.604 29.067 31.653 29.1645 31.75L33.354 35.9395C33.549 36.1345 33.549 36.4515 33.354 36.647Z"
           fill="url(#paint0_linear_19_76)"
@@ -35,8 +35,8 @@ export const JobFinderLogo = () => {
           y2="38.5005"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#8E17FC" />
-          <stop offset="1" stop-color="#E74AF5" />
+          <stop stopColor="#8E17FC" />
+          <stop offset="1" stopColor="#E74AF5" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_19_76"
@@ -46,8 +46,8 @@ export const JobFinderLogo = () => {
           y2="30.5"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#8E17FC" />
-          <stop offset="1" stop-color="#E74AF5" />
+          <stop stopColor="#8E17FC" />
+          <stop offset="1" stopColor="#E74AF5" />
         </linearGradient>
         <linearGradient
           id="paint2_linear_19_76"
@@ -57,8 +57,8 @@ export const JobFinderLogo = () => {
           y2="27"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#8E17FC" />
-          <stop offset="1" stop-color="#E74AF5" />
+          <stop stopColor="#8E17FC" />
+          <stop offset="1" stopColor="#E74AF5" />
         </linearGradient>
         <linearGradient
           id="paint3_linear_19_76"
@@ -68,8 +68,8 @@ export const JobFinderLogo = () => {
           y2="27"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#8E17FC" />
-          <stop offset="1" stop-color="#E74AF5" />
+          <stop stopColor="#8E17FC" />
+          <stop offset="1" stopColor="#E74AF5" />
         </linearGradient>
         <clipPath id="clip0_19_76">
           <rect
