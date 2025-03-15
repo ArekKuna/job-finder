@@ -5,6 +5,7 @@ import { HamburgerMenu } from "components/Layout/Header/MobileHeader/HamburgerMe
 import { JobFinderLogo } from "components/Layout/JobFinderLogo/JobFinderLogo";
 import { MobileHeaderTitle } from "components/Layout/Header/MobileHeader/MobileHeaderTitle";
 import { MobileNav } from "components/Layout/Header/MobileHeader/MobileNav";
+import { Search } from "components/Layout/Header/MobileHeader/Search";
 
 export const MobileHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,7 +41,13 @@ export const MobileHeader = () => {
           onMenuVisibilityChange={handleMenuVisibility}
         />
       </motion.div>
-      {isLandingPage && <MobileHeaderTitle />}
+
+      {isLandingPage && (
+        <>
+          <MobileHeaderTitle />
+          <Search />
+        </>
+      )}
     </div>
   );
 };

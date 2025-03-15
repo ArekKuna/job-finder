@@ -14,19 +14,21 @@ export const MobileNav = ({ isMenuOpen, onMenuVisibilityChange }: Props) => {
 
   return (
     <motion.nav
-      className="h-full w-full flex flex-col gap-2 justify-center items-center font-main font-extrabold overflow-hidden"
+      className="h-full w-full flex flex-col gap-2 justify-center items-center font-jf-paragraph"
       animate={{ opacity: isMenuOpen ? 100 : 0 }}
       transition={{ duration: isMenuOpen ? 0.9 : 0.9 }}
     >
       {routes.map((route) => (
         <motion.li
-          className={`text-xl ${
-            route.color ? route.color : "text-[#E74AF5]"
-          } list-none`}
+          key={route.id}
           animate={{ opacity: isMenuOpen ? 100 : 0 }}
-          transition={{ duration: isMenuOpen ? 1.3 : 0.9 }}
+          initial={{ opacity: 0 }}
+          transition={{ duration: 1.2 }}
+          className={`text-xl ${
+            route.color ? route.color : "text-jf-purple-400"
+          } list-none`}
         >
-          <NavLink key={route.id} to={route.to} onClick={handleMenuVisibility}>
+          <NavLink to={route.to} onClick={handleMenuVisibility}>
             {route.value.toUpperCase()}
           </NavLink>
         </motion.li>

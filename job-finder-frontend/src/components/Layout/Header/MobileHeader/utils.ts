@@ -30,6 +30,6 @@ export const routes: Route[] = [
     id: 5,
     to: "/for-employers",
     value: "For employers",
-    color: "text-[#8E17FC]",
+    color: "text-jf-purple-700",
   },
 ];
