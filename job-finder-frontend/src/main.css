@@ -1,12 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sen:wght@800&display=swap");
+
 @import "tailwindcss";
 
-html {
-  padding: 0;
-  margin: 0;
+@theme {
+  /* ###################  COLORS  ################### */
+
+  /* PURPLE */
+
+  --color-jf-purple-50: #fde7fe;
+  --color-jf-purple-100: #facffa;
+  --color-jf-purple-200: #f6a8f5;
+  --color-jf-purple-300: #f180f0;
+  --color-jf-purple-400: #e74af5;
+  --color-jf-purple-500: #c83ef8;
+  --color-jf-purple-600: #a530fc;
+  --color-jf-purple-700: #8e17fc;
+  --color-jf-purple-800: #6b0ec4;
+  --color-jf-purple-900: #4c088a;
+
+  /* WARM-GRAY */
+
+  --color-jf-warm-gray-50: #f9f6f6;
+  --color-jf-warm-gray-100: #f5f0f0;
+  --color-jf-warm-gray-200: #e4e2e2;
+  --color-jf-warm-gray-300: #c9c6c5;
+  --color-jf-warm-gray-400: #afacac;
+  --color-jf-warm-gray-500: #8c8a8a;
+  --color-jf-warm-gray-600: #787878;
+  --color-jf-warm-gray-700: #545454;
+  --color-jf-warm-gray-800: #3d3d3d;
+  --color-jf-warm-gray-900: #2e2e2e;
+
+  /* LIGHT-GRAY */
+
+  --color-jf-gray-50: #f9fafb;
+  --color-jf-gray-100: #f3f4f6;
+  --color-jf-gray-200: #e5e7eb;
+  --color-jf-gray-300: #d1d5db;
+  --color-jf-gray-400: #9ca3af;
+  --color-jf-gray-500: #6b7280;
+  --color-jf-gray-600: #4b5563;
+  --color-jf-gray-700: #374151;
+  --color-jf-gray-800: #1f2937;
+  --color-jf-gray-900: #111827;
 }
 
-body {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+@layer base {
+  html {
+    @apply p-0 m-0;
+  }
+
+  body {
+    @apply p-0 m-0 pt-[70px] box-border relative bg-jf-gray-50;
+    font-family: "Geologica", sans-serif;
+  }
+
+  .font-jf-paragraph {
+    @apply text-base font-normal leading-5 text-black;
+  }
+
+  .font-jf-header {
+    @apply text-[40px] font-extrabold leading-10 tracking-tighter text-black;
+    font-family: "Sen", sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-jf-geologica {
+    @apply font-sans text-base font-normal leading-5 text-black;
+    font-family: "Geologica", sans-serif;
+  }
+
+  .text-jf-geologica-white {
+    @apply font-sans text-base font-normal leading-5 text-white;
+    font-family: "Geologica", sans-serif;
+  }
 }

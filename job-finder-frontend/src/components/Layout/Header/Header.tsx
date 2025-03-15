@@ -1,3 +1,9 @@
+import { MobileHeader } from "components/Layout/Header/MobileHeader";
+
 export const Header = () => {
-  return <div>Header </div>;
+  return (
+    <header className="w-full">
+      <MobileHeader />
+    </header>
+  );
 };

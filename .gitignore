@@ -86,3 +86,4 @@ job-finder-frontend/*.sw?
 
 #####GLOBAL
 .DS_STORE
+.vscode
