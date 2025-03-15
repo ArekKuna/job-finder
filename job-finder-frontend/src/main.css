@@ -44,6 +44,19 @@
   --color-jf-gray-700: #374151;
   --color-jf-gray-800: #1f2937;
   --color-jf-gray-900: #111827;
+
+  /* ROSE */
+
+  --color-jf-rose-50: #fcf8f7;
+  --color-jf-rose-100: #ffeceb;
+  --color-jf-rose-200: #fce1de;
+  --color-jf-rose-300: #fabfba;
+  --color-jf-rose-400: #ff9d94;
+  --color-jf-rose-500: #e35d56;
+  --color-jf-rose-600: #db4942;
+  --color-jf-rose-700: #c43c35;
+  --color-jf-rose-800: #a60000;
+  --color-jf-rose-900: #7a0c0c;
 }
 
 @layer base {

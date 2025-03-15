@@ -23,7 +23,7 @@ export const MobileNav = ({ isMenuOpen, onMenuVisibilityChange }: Props) => {
           key={route.id}
           animate={{ opacity: isMenuOpen ? 100 : 0 }}
           initial={{ opacity: 0 }}
-          transition={{ duration: 1.2 }}
+          transition={{ duration: isMenuOpen ? 1.2 : 0.8 }}
           className={`text-xl ${
             route.color ? route.color : "text-jf-purple-400"
           } list-none`}

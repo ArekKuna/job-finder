@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { Input } from "components/Input/Input";
 import { LocationIcon } from "assets/Icons/LocationIcon";
 import { SearchIcon } from "assets/Icons/SearchIcon";
@@ -8,7 +8,7 @@ export const Search = () => {
 
   const handleInputValueChange = (
     e: ChangeEvent<HTMLInputElement>,
-    setterFn: Dispatch<React.SetStateAction<string>>
+    setterFn: Dispatch<SetStateAction<string>>
   ) => {
     setterFn(e.target.value);
   };

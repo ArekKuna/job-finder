@@ -23,7 +23,7 @@ export const routes: Route[] = [
   },
   {
     id: 4,
-    to: "/register",
+    to: "/employee-registration",
     value: "Register",
   },
   {

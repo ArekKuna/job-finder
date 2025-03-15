@@ -19,8 +19,12 @@ const getStyles = tv({
   base: "w-full h-10 px-4 flex gap-2 outline-none ring-0 bg-jf-gray-50 has-[:disabled]:bg-jf-warm-gray-100",
   variants: {
     border: {
-      primary: "border border-black rounded-lg",
+      primary:
+        "border border-black rounded-lg has-[:focus]:border-jf-purple-700",
       secondary: "border-b border-black has-[:focus]:border-jf-purple-700",
+    },
+    error: {
+      true: " outline outline-offset-0 outline-2 border-jf-rose-600",
     },
   },
 });
@@ -44,6 +48,7 @@ export const Input = (props: Props) => {
 
   const styles = getStyles({
     border: border,
+    error: Boolean(error),
   });
 
   const showErrorMessage = typeof error === "string";
@@ -80,13 +85,15 @@ export const Input = (props: Props) => {
 
               onChange(e);
             }}
-            className="w-full p-0 flex-grow text-jf-geologica border-none placeholder:text-jf-warm-gray-500 focus:border-transparent focus:outline-none focus:ring-0 disabled:bg-jf-warm-gray-100"
+            className="w-full p-0 flex-grow text-jf-geologica border-none placeholder:text-sm placeholder:text-jf-warm-gray-500 focus:border-transparent focus:outline-none focus:ring-0 disabled:bg-jf-warm-gray-100"
           />
 
           {sideElement && <div>{sideElement}</div>}
         </div>
       </div>
-      {showErrorMessage && <span className="text-red-500">{error}</span>}
+      {showErrorMessage && (
+        <span className="text-red-500 text-sm">{error}</span>
+      )}
     </div>
   );
 };
