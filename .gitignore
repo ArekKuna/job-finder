@@ -43,6 +43,7 @@ job-finder-backend/.env.development
 job-finder-backend/.env.test
 job-finder-backend/.env.production.local
 job-finder-backend/.env.local
+job-finder-frontend/.env
 
 # temp directory
 job-finder-backend/.temp

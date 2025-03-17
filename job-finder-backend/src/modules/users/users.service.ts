@@ -26,7 +26,7 @@ export class UsersService {
     const existingUser = await this.findUserByEmail(email);
 
     if (existingUser) {
-      throw new BadRequestException('Bad user input');
+      throw new BadRequestException();
     }
 
     const hashedPassword = await this.authService.securePassword(
@@ -52,7 +52,7 @@ export class UsersService {
     const existingUser = await this.findUserByEmail(email);
 
     if (existingUser) {
-      throw new BadRequestException('Bad user input');
+      throw new BadRequestException();
     }
 
     const hashedPassword = await this.authService.securePassword(password);

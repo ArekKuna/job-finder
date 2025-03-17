@@ -22,7 +22,7 @@ export class AuthService {
     const validatedUser = await this.validateUser(input);
 
     if (!validatedUser) {
-      throw new BadRequestException('Bad user input');
+      throw new BadRequestException();
     }
 
     return await this.signIn(validatedUser);

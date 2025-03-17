@@ -55,9 +55,9 @@ export const Input = (props: Props) => {
   const inputKeyboardType = type === "number" ? "numeric" : inputMode;
 
   return (
-    <div className="w-full flex flex-col gap-1 text-jf-geologica">
+    <div className="w-full flex flex-col gap-1 text-jf-geologica-base">
       {label && (
-        <label htmlFor={name} className="font-jf-paragraph">
+        <label htmlFor={name} className="text-jf-geologica-sm">
           {label}
         </label>
       )}
@@ -85,7 +85,7 @@ export const Input = (props: Props) => {
 
               onChange(e);
             }}
-            className="w-full p-0 flex-grow text-jf-geologica border-none placeholder:text-sm placeholder:text-jf-warm-gray-500 focus:border-transparent focus:outline-none focus:ring-0 disabled:bg-jf-warm-gray-100"
+            className="w-full p-0 flex-grow border-none text-jf-geologica-extralight placeholder:text-sm placeholder:text-jf-warm-gray-500 focus:border-transparent focus:outline-none focus:ring-0 disabled:bg-jf-warm-gray-100"
           />
 
           {sideElement && <div>{sideElement}</div>}

@@ -28,7 +28,11 @@ export const MobileNav = ({ isMenuOpen, onMenuVisibilityChange }: Props) => {
             route.color ? route.color : "text-jf-purple-400"
           } list-none`}
         >
-          <NavLink to={route.to} onClick={handleMenuVisibility}>
+          <NavLink
+            to={route.to}
+            onClick={handleMenuVisibility}
+            className={`${!isMenuOpen && "pointer-events-none"}`}
+          >
             {route.value.toUpperCase()}
           </NavLink>
         </motion.li>
