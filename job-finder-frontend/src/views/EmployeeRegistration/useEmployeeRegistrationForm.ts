@@ -5,13 +5,15 @@ import {
   employeeRegistrationSchema,
   employeeRegistrationSchemaType,
 } from "views/EmployeeRegistration/utils";
-import { useCustomMutation } from "hooks/useCustomMutation";
+import { useCustomMutation } from "hooks/useCustomMutation/useCustomMutation";
+import { useNavigate } from "react-router-dom";
 
 export const useEmployeeRegistrationForm = () => {
-  const url = "http://localhost:3000/users/employee/signup";
+  const url = "http://192.168.1.32:3000/users/employee/signup";
+
+  const navigate = useNavigate();
 
   const {
-    data,
     isPending: mutationLoading,
     isError,
     error: mutationError,
@@ -35,14 +37,15 @@ export const useEmployeeRegistrationForm = () => {
   });
 
   const onSubmit = async (formData: employeeRegistrationSchemaType) => {
-    await mutateAsync(formData);
+    const response = await mutateAsync(formData);
 
-    if (!data) {
+    if (!response) {
       return;
     }
-
-    const { jwtToken } = data;
+    const { jwtToken } = response;
     Cookies.set("JWT", jwtToken);
+
+    return navigate("/");
   };
 
   return {

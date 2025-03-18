@@ -6,11 +6,15 @@ import { JobFinderLogo } from "components/Layout/JobFinderLogo/JobFinderLogo";
 import { MobileHeaderTitle } from "components/Layout/Header/MobileHeader/MobileHeaderTitle";
 import { MobileNav } from "components/Layout/Header/MobileHeader/MobileNav";
 import { Search } from "components/Layout/Header/MobileHeader/Search";
+import { useAtom } from "jotai";
+import { authStatusAtom } from "hooks/useAuthorization/authAtom";
+import { AvatarIcon } from "assets/Icons/AvatarIcon";
 
 export const MobileHeader = () => {
+  const [authStatus] = useAtom(authStatusAtom);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleMenuVisibility = () => {
+  const handleNavOptionClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
@@ -25,20 +29,27 @@ export const MobileHeader = () => {
         initial={{ height: "70px" }}
         transition={{ duration: 0.9, ease: "circInOut" }}
       >
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <NavLink to="/">
             <JobFinderLogo />
           </NavLink>
 
-          <HamburgerMenu
-            isMenuOpen={isMenuOpen}
-            onMenuVisibilityChange={handleMenuVisibility}
-          />
+          {authStatus === "AUTHORIZED" ? (
+            <div onClick={handleNavOptionClick}>
+              <AvatarIcon />
+            </div>
+          ) : (
+            <HamburgerMenu
+              isMenuOpen={isMenuOpen}
+              onNavOptionClick={handleNavOptionClick}
+            />
+          )}
         </div>
 
         <MobileNav
           isMenuOpen={isMenuOpen}
-          onMenuVisibilityChange={handleMenuVisibility}
+          authStatus={authStatus}
+          onNavOptionClick={handleNavOptionClick}
         />
       </motion.div>
 

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Cookies from "js-cookie";
-import { MutationRequestMethod } from "hooks/types";
+import { MutationRequestMethod } from "hooks/useCustomMutation/types";
 
 const fetchDataFn = async <TBody>(
   url: string,
@@ -40,7 +40,7 @@ export const useCustomMutation = <TResponse, TBody>({
 }) => {
   const queryClient = useQueryClient();
 
-  const { data, isPending, isError, error, mutateAsync } = useMutation<
+  const { isPending, isError, error, mutateAsync } = useMutation<
     TResponse,
     Error,
     TBody
@@ -50,5 +50,5 @@ export const useCustomMutation = <TResponse, TBody>({
     onSuccess: () => queryClient.invalidateQueries({ queryKey: key }),
   });
 
-  return { data, isPending, isError, error, mutateAsync };
+  return { isPending, isError, error, mutateAsync };
 };

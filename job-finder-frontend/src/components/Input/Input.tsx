@@ -1,4 +1,4 @@
-import { Maybe } from "common/types";
+import { Maybe } from "common/types/types";
 import {
   HTMLInputProps,
   TextOnlyVariantProps,
@@ -24,7 +24,7 @@ const getStyles = tv({
       secondary: "border-b border-black has-[:focus]:border-jf-purple-700",
     },
     error: {
-      true: " outline outline-offset-0 outline-2 border-jf-rose-600",
+      true: "outline outline-offset-0 outline-2 border-jf-rose-600",
     },
   },
 });
@@ -42,7 +42,7 @@ export const Input = (props: Props) => {
     maxLength,
     type,
     sideElement,
-    sideElementPosition,
+    sideElementPosition = "start",
     onChange,
   } = props;
 
@@ -65,11 +65,10 @@ export const Input = (props: Props) => {
       <div className={styles}>
         <div
           className={`w-full flex justify-center items-center gap-2 ${
-            sideElementPosition === "start" && "flex-row-reverse"
+            sideElementPosition === "start" ? "flex-row-reverse" : ""
           }`}
         >
           <input
-            {...props}
             id={name}
             name={name}
             placeholder={placeholder}

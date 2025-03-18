@@ -1,7 +1,7 @@
 import { Controller } from "react-hook-form";
 import { Input } from "components/Input/Input";
 import { useEmployeeRegistrationForm } from "views/EmployeeRegistration/useEmployeeRegistrationForm";
-import { httpErrorFallback, httpErrorMap } from "common/error-map";
+import { httpErrorFallback, httpErrorMap } from "common/errorMap/errorMap";
 
 export const EmployeeRegistration = () => {
   const {

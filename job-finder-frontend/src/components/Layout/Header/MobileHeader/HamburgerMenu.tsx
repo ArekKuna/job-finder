@@ -2,21 +2,18 @@ import { motion } from "framer-motion";
 
 type Props = {
   isMenuOpen: boolean;
-  onMenuVisibilityChange: () => void;
+  onNavOptionClick: () => void;
 };
 
-export const HamburgerMenu = ({
-  isMenuOpen,
-  onMenuVisibilityChange,
-}: Props) => {
-  const handleMenuVisibility = () => {
-    onMenuVisibilityChange();
+export const HamburgerMenu = ({ isMenuOpen, onNavOptionClick }: Props) => {
+  const handleOnNavOptionClick = () => {
+    onNavOptionClick();
   };
 
   return (
     <button
       className="h-[50px] w-[50px] flex flex-col justify-center items-center gap-2 rounded-lg bg-gradient-to-r from-jf-purple-400 to-jf-purple-700"
-      onClick={handleMenuVisibility}
+      onClick={handleOnNavOptionClick}
     >
       <motion.span
         animate={{ y: isMenuOpen ? 11 : 0, rotate: isMenuOpen ? 45 : 0 }}

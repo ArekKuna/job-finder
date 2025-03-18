@@ -1,15 +1,31 @@
-import { routes } from "components/Layout/Header/MobileHeader/utils";
+import {
+  authorizedRoutes,
+  Route,
+  unauthorizedRoutes,
+} from "components/Layout/Header/MobileHeader/utils";
 import { motion } from "framer-motion";
+import { useLogout } from "hooks/useAuthorization/useAuthorization";
 import { NavLink } from "react-router-dom";
 
 type Props = {
   isMenuOpen: boolean;
-  onMenuVisibilityChange: () => void;
+  authStatus: "AUTHORIZED" | "UNAUTHORIZED";
+  onNavOptionClick: () => void;
 };
 
-export const MobileNav = ({ isMenuOpen, onMenuVisibilityChange }: Props) => {
-  const handleMenuVisibility = () => {
-    onMenuVisibilityChange();
+export const MobileNav = ({
+  isMenuOpen,
+  authStatus,
+  onNavOptionClick,
+}: Props) => {
+  const logout = useLogout();
+
+  const handleNavOptionClick = (route: Route) => {
+    if (route.value === "Logout") {
+      logout();
+    }
+
+    onNavOptionClick();
   };
 
   return (
@@ -18,7 +34,10 @@ export const MobileNav = ({ isMenuOpen, onMenuVisibilityChange }: Props) => {
       animate={{ opacity: isMenuOpen ? 100 : 0 }}
       transition={{ duration: isMenuOpen ? 0.9 : 0.9 }}
     >
-      {routes.map((route) => (
+      {(authStatus === "AUTHORIZED"
+        ? authorizedRoutes
+        : unauthorizedRoutes
+      ).map((route) => (
         <motion.li
           key={route.id}
           animate={{ opacity: isMenuOpen ? 100 : 0 }}
@@ -30,7 +49,7 @@ export const MobileNav = ({ isMenuOpen, onMenuVisibilityChange }: Props) => {
         >
           <NavLink
             to={route.to}
-            onClick={handleMenuVisibility}
+            onClick={() => handleNavOptionClick(route)}
             className={`${!isMenuOpen && "pointer-events-none"}`}
           >
             {route.value.toUpperCase()}
