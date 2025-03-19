@@ -7,6 +7,7 @@ import {
 } from "views/EmployeeRegistration/utils";
 import { useCustomMutation } from "hooks/useCustomMutation/useCustomMutation";
 import { useNavigate } from "react-router-dom";
+import { CreateUserResponseDto, UserDto } from "generated/api-types";
 
 export const useEmployeeRegistrationForm = () => {
   const url = "http://192.168.1.32:3000/users/employee/signup";
@@ -18,7 +19,7 @@ export const useEmployeeRegistrationForm = () => {
     isError,
     error: mutationError,
     mutateAsync,
-  } = useCustomMutation<{ jwtToken: string }, employeeRegistrationSchemaType>({
+  } = useCustomMutation<CreateUserResponseDto, UserDto>({
     url,
     method: "POST",
   });
