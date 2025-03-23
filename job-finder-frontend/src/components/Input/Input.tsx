@@ -16,7 +16,7 @@ type BaseProps = Omit<VariantProps<typeof getStyles>, "error"> &
 type Props = (TextOnlyVariantProps | TextWithIconVariantProps) & BaseProps;
 
 const getStyles = tv({
-  base: "w-full h-10 px-4 flex gap-2 outline-none ring-0 bg-jf-gray-50 has-[:disabled]:bg-jf-warm-gray-100",
+  base: "w-full h-10 px-2 flex justify-center items-center gap-2 outline-none ring-0 bg-jf-gray-50 has-[:disabled]:bg-jf-warm-gray-100",
   variants: {
     border: {
       primary:
@@ -31,19 +31,16 @@ const getStyles = tv({
 
 export const Input = (props: Props) => {
   const {
-    name,
     border,
+    name,
+    type = "text",
     label,
-    value,
-    placeholder,
-    disabled,
     error,
     inputMode,
-    maxLength,
-    type,
     sideElement,
     sideElementPosition = "start",
     onChange,
+    ...restProps
   } = props;
 
   const styles = getStyles({
@@ -65,18 +62,15 @@ export const Input = (props: Props) => {
       <div className={styles}>
         <div
           className={`w-full flex justify-center items-center gap-2 ${
-            sideElementPosition === "start" ? "flex-row-reverse" : ""
+            sideElementPosition === "start" ? "flex-row-reverse" : "flex-row"
           }`}
         >
           <input
+            {...restProps}
             id={name}
             name={name}
-            placeholder={placeholder}
             type={type}
             inputMode={inputKeyboardType}
-            disabled={disabled}
-            maxLength={maxLength}
-            value={value}
             onChange={(e) => {
               if (!onChange) {
                 return;

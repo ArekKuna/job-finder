@@ -1,9 +1,18 @@
+import { useState } from "react";
 import { Controller } from "react-hook-form";
 import { Input } from "components/Input/Input";
 import { useEmployeeRegistrationForm } from "views/EmployeeRegistration/useEmployeeRegistrationForm";
 import { httpErrorFallback, httpErrorMap } from "common/errorMap/errorMap";
+import { EyeOutlineIcon } from "assets/Icons/EyeOutlineIcon";
+import { EyeIcon } from "assets/Icons/EyeIcon";
 
 export const EmployeeRegistration = () => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const handlePasswordIconClick = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
   const {
     control,
     formErrors,
@@ -63,7 +72,15 @@ export const EmployeeRegistration = () => {
               placeholder="password"
               label="Password"
               border="primary"
-              type="password"
+              type={isPasswordVisible ? "text" : "password"}
+              sideElement={
+                isPasswordVisible ? (
+                  <EyeOutlineIcon onClick={handlePasswordIconClick} />
+                ) : (
+                  <EyeIcon onClick={handlePasswordIconClick} />
+                )
+              }
+              sideElementPosition="end"
               error={
                 Boolean(passwordError?.message) || isError ? true : undefined
               }
