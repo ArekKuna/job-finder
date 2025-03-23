@@ -1,15 +1,18 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { useAtom } from "jotai";
 import {
   employeeRegistrationSchema,
   employeeRegistrationSchemaType,
 } from "views/EmployeeRegistration/utils";
 import { useCustomMutation } from "hooks/useCustomMutation/useCustomMutation";
-import { useNavigate } from "react-router-dom";
 import { CreateUserResponseDto, UserDto } from "generated/api-types";
+import { authStatusAtom } from "hooks/useAuthorization/authAtom";
 
 export const useEmployeeRegistrationForm = () => {
+  const [, setAuthStatus] = useAtom(authStatusAtom);
+
   const url = "http://192.168.1.32:3000/users/employee/signup";
 
   const navigate = useNavigate();
@@ -22,6 +25,7 @@ export const useEmployeeRegistrationForm = () => {
   } = useCustomMutation<CreateUserResponseDto, UserDto>({
     url,
     method: "POST",
+    key: ["authStatus"],
   });
 
   const {
@@ -43,8 +47,8 @@ export const useEmployeeRegistrationForm = () => {
     if (!response) {
       return;
     }
-    const { jwtToken } = response;
-    Cookies.set("JWT", jwtToken);
+
+    setAuthStatus("AUTHORIZED");
 
     return navigate("/");
   };

@@ -1,17 +1,33 @@
+import { AuthUserResponseDto } from "generated/api-types";
 import { authStatusAtom } from "hooks/useAuthorization/authAtom";
+import { useCustomQuery } from "hooks/useCustomQuery/useCustomQuery";
 import { useAtom } from "jotai";
 import Cookies from "js-cookie";
+import { useCallback, useEffect, useRef } from "react";
 
-export const useAuthorization = () => {
-  const [, setAuthorizationStatus] = useAtom(authStatusAtom);
+export const useCheckAuthStatus = () => {
+  const [, setAuthStatus] = useAtom(authStatusAtom);
+  const hasRun = useRef(false);
 
   const token = Cookies.get("JWT");
 
-  if (token) {
-    return setAuthorizationStatus("AUTHORIZED");
-  }
+  const url = "http://192.168.1.32:3000/auth/authorize";
 
-  return setAuthorizationStatus("UNAUTHORIZED");
+  const { refetch } = useCustomQuery<AuthUserResponseDto>(url, Boolean(token), [
+    "authStatus",
+  ]);
+
+  const authorizeUser = useCallback(async () => {
+    hasRun.current = true;
+    const { data } = await refetch();
+    setAuthStatus(data ? "AUTHORIZED" : "UNAUTHORIZED");
+  }, [refetch, setAuthStatus]);
+
+  useEffect(() => {
+    if (!hasRun.current) {
+      authorizeUser();
+    }
+  }, [authorizeUser]);
 };
 
 export const useLogout = () => {
@@ -19,7 +35,6 @@ export const useLogout = () => {
 
   const logout = () => {
     Cookies.remove("JWT");
-    Cookies.remove("RT");
     setAuthorizationStatus("UNAUTHORIZED");
   };
 

@@ -1,6 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 import { MutationRequestMethod } from "hooks/useCustomMutation/types";
+import { CreateUserResponseDto } from "generated/api-types";
+
+const isAuthResponse = (data: unknown): data is CreateUserResponseDto => {
+  return typeof data === "object" && data !== null && "jwtToken" in data;
+};
 
 const fetchDataFn = async <TBody>(
   url: string,
@@ -36,7 +41,7 @@ export const useCustomMutation = <TResponse, TBody>({
 }: {
   url: string;
   method: MutationRequestMethod;
-  key?: ReadonlyArray<string>;
+  key?: ReadonlyArray<unknown>;
 }) => {
   const queryClient = useQueryClient();
 
@@ -45,9 +50,17 @@ export const useCustomMutation = <TResponse, TBody>({
     Error,
     TBody
   >({
-    mutationFn: async (body: TBody) =>
-      (await fetchDataFn(url, method, body)) as TResponse,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: key }),
+    mutationFn: async (body: TBody) => await fetchDataFn(url, method, body),
+    onSuccess: async (data) => {
+      if (isAuthResponse(data)) {
+        const token = data.jwtToken as string;
+        Cookies.set("JWT", token);
+      }
+
+      await queryClient.refetchQueries({
+        queryKey: key,
+      });
+    },
   });
 
   return { isPending, isError, error, mutateAsync };

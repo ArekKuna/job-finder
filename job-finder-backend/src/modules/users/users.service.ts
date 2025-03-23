@@ -10,6 +10,7 @@ import { User } from 'modules/users/user.entity';
 import { AuthService } from 'modules/auth/auth.service';
 import { UserCredentials } from 'common/interfaces/user-credentials.interface';
 import { UserRole } from 'common/enums/user-role.enum';
+import { CreateUserResponseDto } from 'modules/users/dtos/create-user-response.dto';
 
 @Injectable()
 export class UsersService {
@@ -20,7 +21,7 @@ export class UsersService {
     private authService: AuthService,
   ) {}
 
-  async signUpEmployee(input: UserCredentials) {
+  async signUpEmployee(input: UserCredentials): Promise<CreateUserResponseDto> {
     const { email, password } = input;
 
     const existingUser = await this.findUserByEmail(email);
@@ -46,7 +47,7 @@ export class UsersService {
     return await this.authService.authenticateUser({ ...newUser, password });
   }
 
-  async signUpEmployer(input: UserCredentials) {
+  async signUpEmployer(input: UserCredentials): Promise<CreateUserResponseDto> {
     const { email, password } = input;
 
     const existingUser = await this.findUserByEmail(email);

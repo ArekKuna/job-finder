@@ -21,9 +21,7 @@ export class UsersController {
     description: 'Bad user input',
   })
   async createEmployee(@Body() body: UserDto): Promise<CreateUserResponseDto> {
-    const user = await this.usersService.signUpEmployee(body);
-
-    return user;
+    return await this.usersService.signUpEmployee(body);
   }
 
   @Post('/employer/signup')
@@ -39,8 +37,6 @@ export class UsersController {
     description: 'Bad user input',
   })
   async createEmployer(@Body() body: UserDto) {
-    const user = await this.usersService.signUpEmployer(body);
-
-    return user;
+    return await this.usersService.signUpEmployer(body);
   }
 }

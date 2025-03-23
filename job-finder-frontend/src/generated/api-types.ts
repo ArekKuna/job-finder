@@ -26,6 +26,13 @@ export interface LoginUserResponseDto {
   jwtToken: string;
 }
 
+export interface AuthUserResponseDto {
+  /** User id */
+  id: string;
+  /** User role */
+  role: string;
+}
+
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 
@@ -296,6 +303,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "POST",
         body: data,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags auth
+     * @name AuthControllerAuthorizeUser
+     * @summary Authorize user token
+     * @request GET:/auth/authorize
+     */
+    authControllerAuthorizeUser: (params: RequestParams = {}) =>
+      this.request<AuthUserResponseDto, void>({
+        path: `/auth/authorize`,
+        method: "GET",
         format: "json",
         ...params,
       }),
