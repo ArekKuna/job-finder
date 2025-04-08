@@ -88,11 +88,11 @@ describe('EmployeeSignup', () => {
   });
 
   it('it should fail if password is too short', async () => {
-    const tooShortPassowrd = 'dcfD1!';
+    const tooShortPassword = 'dcfD1!';
 
     const response: request.Response = await request(app.getHttpServer())
       .post(route)
-      .send({ email, password: tooShortPassowrd });
+      .send({ email, password: tooShortPassword });
 
     expect(response.status).toBe(400);
     expect((response.body as FailRequestBody).message).toContain(

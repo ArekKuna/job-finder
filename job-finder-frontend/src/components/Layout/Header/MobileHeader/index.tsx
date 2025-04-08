@@ -22,7 +22,7 @@ export const MobileHeader = () => {
   const isLandingPage = location.pathname === "/";
 
   return (
-    <div>
+    <>
       <motion.div
         className="fixed top-0 left-0 p-2 w-full flex flex-col shadow-md bg-white overflow-hidden z-20"
         animate={{ height: isMenuOpen ? window.innerHeight : "70px" }}
@@ -59,6 +59,6 @@ export const MobileHeader = () => {
           <Search />
         </>
       )}
-    </div>
+    </>
   );
 };
