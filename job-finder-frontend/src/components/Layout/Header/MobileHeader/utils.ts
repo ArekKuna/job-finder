@@ -1,11 +1,11 @@
-type Route = {
+export type Route = {
   id: number;
   to: string;
   value: string;
   color?: string | null;
 };
 
-export const routes: Route[] = [
+export const unauthorizedRoutes: Route[] = [
   {
     id: 1,
     to: "/",
@@ -23,7 +23,7 @@ export const routes: Route[] = [
   },
   {
     id: 4,
-    to: "/register",
+    to: "/employee-registration",
     value: "Register",
   },
   {
@@ -31,5 +31,28 @@ export const routes: Route[] = [
     to: "/for-employers",
     value: "For employers",
     color: "text-jf-purple-700",
+  },
+];
+
+export const authorizedRoutes: Route[] = [
+  {
+    id: 1,
+    to: "/",
+    value: "Home",
+  },
+  {
+    id: 2,
+    to: "/job-board",
+    value: "Job Board",
+  },
+  {
+    id: 3,
+    to: "/profile",
+    value: "Profile",
+  },
+  {
+    id: 4,
+    to: "/",
+    value: "Logout",
   },
 ];

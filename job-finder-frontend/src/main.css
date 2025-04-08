@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@200;400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sen:wght@800&display=swap");
 
 @import "tailwindcss";
@@ -44,6 +44,19 @@
   --color-jf-gray-700: #374151;
   --color-jf-gray-800: #1f2937;
   --color-jf-gray-900: #111827;
+
+  /* ROSE */
+
+  --color-jf-rose-50: #fcf8f7;
+  --color-jf-rose-100: #ffeceb;
+  --color-jf-rose-200: #fce1de;
+  --color-jf-rose-300: #fabfba;
+  --color-jf-rose-400: #ff9d94;
+  --color-jf-rose-500: #e35d56;
+  --color-jf-rose-600: #db4942;
+  --color-jf-rose-700: #c43c35;
+  --color-jf-rose-800: #a60000;
+  --color-jf-rose-900: #7a0c0c;
 }
 
 @layer base {
@@ -52,28 +65,34 @@
   }
 
   body {
-    @apply p-0 m-0 pt-[70px] box-border relative bg-jf-gray-50;
+    @apply p-0 m-0 pt-[70px] box-border relative text-base font-normal leading-5 text-jf-warm-gray-800 bg-jf-gray-50;
     font-family: "Geologica", sans-serif;
-  }
-
-  .font-jf-paragraph {
-    @apply text-base font-normal leading-5 text-black;
-  }
-
-  .font-jf-header {
-    @apply text-[40px] font-extrabold leading-10 tracking-tighter text-black;
-    font-family: "Sen", sans-serif;
   }
 }
 
 @layer utilities {
-  .text-jf-geologica {
-    @apply font-sans text-base font-normal leading-5 text-black;
+  .text-jf-geologica-base {
+    @apply font-sans text-base font-normal leading-5 text-jf-warm-gray-800;
+    font-family: "Geologica", sans-serif;
+  }
+
+  .text-jf-geologica-extralight {
+    @apply font-sans text-base font-extralight leading-5 text-jf-warm-gray-800;
+    font-family: "Geologica", sans-serif;
+  }
+
+  .text-jf-geologica-sm {
+    @apply font-sans text-sm font-normal leading-5 text-jf-warm-gray-800;
     font-family: "Geologica", sans-serif;
   }
 
   .text-jf-geologica-white {
     @apply font-sans text-base font-normal leading-5 text-white;
     font-family: "Geologica", sans-serif;
+  }
+
+  .text-jf-header {
+    @apply text-[40px] font-extrabold leading-10 tracking-tighter text-black;
+    font-family: "Sen", sans-serif;
   }
 }
