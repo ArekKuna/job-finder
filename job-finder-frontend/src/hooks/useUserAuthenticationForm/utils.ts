@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const employeeRegistrationSchema = z.object({
+export const userAuthenticationSchema = z.object({
   email: z
     .string()
     .email({ message: "Enter valid email" })
@@ -12,6 +12,6 @@ export const employeeRegistrationSchema = z.object({
     .regex(/[\W_]/, "Password must contain at least one special character"),
 });
 
-export type employeeRegistrationSchemaType = z.infer<
-  typeof employeeRegistrationSchema
+export type userAuthenticationSchemaType = z.infer<
+  typeof userAuthenticationSchema
 >;

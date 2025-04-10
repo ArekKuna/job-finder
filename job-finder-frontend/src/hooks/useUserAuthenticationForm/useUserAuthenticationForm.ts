@@ -3,17 +3,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import {
-  employeeRegistrationSchema,
-  employeeRegistrationSchemaType,
-} from "views/EmployeeRegistration/utils";
+  userAuthenticationSchema,
+  userAuthenticationSchemaType,
+} from "hooks/useUserAuthenticationForm/utils";
 import { useCustomMutation } from "hooks/useCustomMutation/useCustomMutation";
-import { CreateUserResponseDto, UserDto } from "generated/api-types";
 import { authStatusAtom } from "hooks/useAuthorization/authAtom";
+import {
+  UserAuthenticationResponseDto,
+  UserCredentialsDto,
+} from "generated/api-types";
+import { httpErrorFallback, httpErrorMap } from "common/errorMap/errorMap";
 
-export const useEmployeeRegistrationForm = () => {
+type Props = {
+  url: string;
+};
+
+export const useUserAuthenticationForm = ({ url }: Props) => {
   const [, setAuthStatus] = useAtom(authStatusAtom);
-
-  const url = "http://192.168.1.32:3000/users/employee/signup";
 
   const navigate = useNavigate();
 
@@ -22,7 +28,7 @@ export const useEmployeeRegistrationForm = () => {
     isError,
     error: mutationError,
     mutateAsync,
-  } = useCustomMutation<CreateUserResponseDto, UserDto>({
+  } = useCustomMutation<UserAuthenticationResponseDto, UserCredentialsDto>({
     url,
     method: "POST",
     key: ["authStatus"],
@@ -32,8 +38,8 @@ export const useEmployeeRegistrationForm = () => {
     control,
     formState: { errors: formErrors },
     handleSubmit,
-  } = useForm<employeeRegistrationSchemaType>({
-    resolver: zodResolver(employeeRegistrationSchema),
+  } = useForm<userAuthenticationSchemaType>({
+    resolver: zodResolver(userAuthenticationSchema),
     mode: "onSubmit",
     defaultValues: {
       email: "",
@@ -41,7 +47,14 @@ export const useEmployeeRegistrationForm = () => {
     },
   });
 
-  const onSubmit = async (formData: employeeRegistrationSchemaType) => {
+  const { email: emailError, password: passwordError } = formErrors;
+
+  const errorMessage =
+    httpErrorMap[mutationError?.message ?? httpErrorFallback] ||
+    emailError?.message ||
+    passwordError?.message;
+
+  const onSubmit = async (formData: userAuthenticationSchemaType) => {
     const response = await mutateAsync(formData);
 
     if (!response) {
@@ -58,7 +71,7 @@ export const useEmployeeRegistrationForm = () => {
     formErrors,
     mutationLoading,
     isError,
-    mutationError,
+    errorMessage,
     handleSubmit,
     onSubmit,
   };
