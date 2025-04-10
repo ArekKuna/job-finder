@@ -92,7 +92,7 @@
   }
 
   .text-jf-header {
-    @apply text-[40px] font-extrabold leading-10 tracking-tighter text-black;
+    @apply text-[40px] font-extrabold leading-10 tracking-tight text-black;
     font-family: "Sen", sans-serif;
   }
 }

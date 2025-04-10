@@ -1,9 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 import { MutationRequestMethod } from "hooks/useCustomMutation/types";
-import { CreateUserResponseDto } from "generated/api-types";
+import { UserAuthenticationResponseDto } from "generated/api-types";
 
-const isAuthResponse = (data: unknown): data is CreateUserResponseDto => {
+const isAuthResponse = (
+  data: unknown
+): data is UserAuthenticationResponseDto => {
   return typeof data === "object" && data !== null && "jwtToken" in data;
 };
 

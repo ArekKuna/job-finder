@@ -8,9 +8,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'modules/users/user.entity';
 import { AuthService } from 'modules/auth/auth.service';
-import { UserCredentials } from 'common/interfaces/user-credentials.interface';
 import { UserRole } from 'common/enums/user-role.enum';
-import { CreateUserResponseDto } from 'modules/users/dtos/create-user-response.dto';
+import { UserAuthenticationResponseDto } from 'modules/auth/dtos/user-authentication-response.dto';
+import { UserCredentialsDto } from 'common/dtos/user-credentials.dto';
 
 @Injectable()
 export class UsersService {
@@ -21,7 +21,9 @@ export class UsersService {
     private authService: AuthService,
   ) {}
 
-  async signUpEmployee(input: UserCredentials): Promise<CreateUserResponseDto> {
+  async signUpEmployee(
+    input: UserCredentialsDto,
+  ): Promise<UserAuthenticationResponseDto> {
     const { email, password } = input;
 
     const existingUser = await this.findUserByEmail(email);
@@ -47,7 +49,9 @@ export class UsersService {
     return await this.authService.authenticateUser({ ...newUser, password });
   }
 
-  async signUpEmployer(input: UserCredentials): Promise<CreateUserResponseDto> {
+  async signUpEmployer(
+    input: UserCredentialsDto,
+  ): Promise<UserAuthenticationResponseDto> {
     const { email, password } = input;
 
     const existingUser = await this.findUserByEmail(email);
@@ -72,8 +76,6 @@ export class UsersService {
   }
 
   async findUserByEmail(email: string): Promise<User | null> {
-    const user = this.usersRepository.findOneBy({ email });
-
-    return user;
+    return this.usersRepository.findOneBy({ email });
   }
 }

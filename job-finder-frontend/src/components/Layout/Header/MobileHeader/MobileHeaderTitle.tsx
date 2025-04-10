@@ -7,11 +7,11 @@ export const MobileHeaderTitle = () => {
         <span className="text-jf-purple-400">That</span>
         <br /> Works for You!
       </h2>
-      <span>
+      <p>
         A streamlined job board to help you find your next career opportunity.
         Explore listings, refine your search, and apply directly through our
         platform.
-      </span>
+      </p>
     </div>
   );
 };

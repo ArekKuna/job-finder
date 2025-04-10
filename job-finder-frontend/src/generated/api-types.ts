@@ -9,28 +9,16 @@
  * ---------------------------------------------------------------
  */
 
-export interface UserDto {
+export interface UserCredentialsDto {
   /** User email */
   email: string;
   /** User password */
   password: string;
 }
 
-export interface CreateUserResponseDto {
+export interface UserAuthenticationResponseDto {
   /** User JWT token */
   jwtToken: string;
-}
-
-export interface LoginUserResponseDto {
-  /** User JWT token */
-  jwtToken: string;
-}
-
-export interface AuthUserResponseDto {
-  /** User id */
-  id: string;
-  /** User role */
-  role: string;
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -260,8 +248,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Create a new employee user
      * @request POST:/users/employee/signup
      */
-    usersControllerCreateEmployee: (data: UserDto, params: RequestParams = {}) =>
-      this.request<CreateUserResponseDto, void>({
+    usersControllerCreateEmployee: (data: UserCredentialsDto, params: RequestParams = {}) =>
+      this.request<UserAuthenticationResponseDto, void>({
         path: `/users/employee/signup`,
         method: "POST",
         body: data,
@@ -278,8 +266,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Create a new employer user
      * @request POST:/users/employer/signup
      */
-    usersControllerCreateEmployer: (data: UserDto, params: RequestParams = {}) =>
-      this.request<CreateUserResponseDto, void>({
+    usersControllerCreateEmployer: (data: UserCredentialsDto, params: RequestParams = {}) =>
+      this.request<UserAuthenticationResponseDto, void>({
         path: `/users/employer/signup`,
         method: "POST",
         body: data,
@@ -297,8 +285,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Login user to the app
      * @request POST:/auth/login
      */
-    authControllerLogIn: (data: UserDto, params: RequestParams = {}) =>
-      this.request<LoginUserResponseDto, void>({
+    authControllerLogIn: (data: UserCredentialsDto, params: RequestParams = {}) =>
+      this.request<UserAuthenticationResponseDto, void>({
         path: `/auth/login`,
         method: "POST",
         body: data,
@@ -316,7 +304,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/auth/authorize
      */
     authControllerAuthorizeUser: (params: RequestParams = {}) =>
-      this.request<AuthUserResponseDto, void>({
+      this.request<UserAuthenticationResponseDto, void>({
         path: `/auth/authorize`,
         method: "GET",
         format: "json",

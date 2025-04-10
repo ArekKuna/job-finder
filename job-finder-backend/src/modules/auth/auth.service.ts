@@ -8,10 +8,10 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { compare, genSalt, hash } from 'bcrypt';
 import { UsersService } from 'modules/users/users.service';
-import { UserCredentials } from 'common/interfaces/user-credentials.interface';
-import { ValidatedUser } from 'modules/auth/shared/interfaces/validated-user';
-import { JwtPayload } from 'modules/auth/shared/interfaces/jwt-payload.interface';
-import { CreateUserResponseDto } from 'modules/users/dtos/create-user-response.dto';
+import { UserAuthenticationResponseDto } from 'modules/auth/dtos/user-authentication-response.dto';
+import { ValidatedUser } from 'modules/auth/interfaces/validated-user';
+import { JwtPayload } from 'modules/auth/interfaces/jwt-payload.interface';
+import { UserCredentialsDto } from 'common/dtos/user-credentials.dto';
 
 @Injectable()
 export class AuthService {
@@ -21,7 +21,9 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async authenticateUser(input: UserCredentials) {
+  async authenticateUser(
+    input: UserCredentialsDto,
+  ): Promise<UserAuthenticationResponseDto> {
     const validatedUser = await this.validateUser(input);
 
     if (!validatedUser) {
@@ -31,29 +33,33 @@ export class AuthService {
     return await this.signIn(validatedUser);
   }
 
-  async validateUser(input: UserCredentials) {
+  async validateUser(input: UserCredentialsDto): Promise<ValidatedUser> {
     const user = await this.usersService.findUserByEmail(input.email);
 
     if (!user) {
-      return null;
+      throw new BadRequestException();
     }
 
     const isPasswordValid = await compare(input.password, user.password);
 
     if (!isPasswordValid) {
-      return null;
+      throw new BadRequestException();
     }
 
     return { userId: user.id, userRole: user.role };
   }
 
-  async signIn(validatedUser: ValidatedUser): Promise<CreateUserResponseDto> {
+  async signIn(
+    validatedUser: ValidatedUser,
+  ): Promise<UserAuthenticationResponseDto> {
     const tokenPayload = {
       sub: validatedUser.userId,
       userRole: validatedUser.userRole,
     };
 
-    const jwtToken = await this.jwtService.signAsync(tokenPayload);
+    const jwtToken = await this.jwtService.signAsync(tokenPayload, {
+      algorithm: 'HS256',
+    });
 
     return { jwtToken };
   }
@@ -61,7 +67,9 @@ export class AuthService {
   authorizeUser(authHeader: string) {
     const [, jwt] = authHeader.split(' ');
 
-    const decoded = this.jwtService.verify<JwtPayload>(jwt);
+    const decoded = this.jwtService.verify<JwtPayload>(jwt, {
+      algorithms: ['HS256'],
+    });
 
     if (!decoded) {
       throw new UnauthorizedException();
