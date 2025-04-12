@@ -21,6 +21,25 @@ export interface UserAuthenticationResponseDto {
   jwtToken: string;
 }
 
+export interface GetMeResponseDto {
+  /** User id */
+  id: string;
+  /** User e-mail */
+  email: string;
+  /** User role */
+  role: string;
+  /**
+   * User creation date
+   * @format date-time
+   */
+  created_at: string;
+  /**
+   * User last update date
+   * @format date-time
+   */
+  updated_at: string;
+}
+
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 
@@ -272,6 +291,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "POST",
         body: data,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags users
+     * @name UsersControllerGetMe
+     * @summary Get logged in user data
+     * @request GET:/users/me
+     */
+    usersControllerGetMe: (params: RequestParams = {}) =>
+      this.request<GetMeResponseDto, void>({
+        path: `/users/me`,
+        method: "GET",
         format: "json",
         ...params,
       }),

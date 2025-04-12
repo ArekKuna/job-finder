@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import { EmployeeRegistration } from "views/EmployeeRegistration/EmployeeRegistration";
 import { Home } from "views/Home/Home";
 import { Login } from "views/Login/Login";
+import { MyProfile } from "views/MyProfile";
 
 export const AppRoutes = () => {
   return (
@@ -15,6 +16,7 @@ export const AppRoutes = () => {
             element={<EmployeeRegistration />}
           />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<MyProfile />} />
         </Routes>
       </RouteWrapper>
     </BrowserRouter>

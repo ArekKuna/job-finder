@@ -2,8 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  Headers,
   Post,
-  Req,
   UnauthorizedException,
 } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -45,9 +45,7 @@ export class AuthController {
     status: 401,
     description: 'User not authorized',
   })
-  authorizeUser(@Req() request: Request) {
-    const authHeader = request.headers['authorization'] as string;
-
+  authorizeUser(@Headers('authorization') authHeader: string) {
     if (!authHeader) {
       throw new UnauthorizedException();
     }
