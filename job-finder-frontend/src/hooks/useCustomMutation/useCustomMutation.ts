@@ -16,13 +16,15 @@ const fetchDataFn = async <TBody>(
 ) => {
   const token = Cookies.get("JWT");
 
+  const isFormData = body instanceof FormData;
+
   const options: RequestInit = {
     method,
     headers: {
-      "Content-Type": "application/json",
-      Authorization: token ? `Bearer ${token}` : "",
+      ...(isFormData ? {} : { "Content-Type": "application/json" }),
+      ...(token ? { Authorization: `Bearer ${token}` } : ""),
     },
-    body: JSON.stringify(body),
+    body: isFormData ? (body as FormData) : JSON.stringify(body),
   };
 
   const response = await fetch(url, options);

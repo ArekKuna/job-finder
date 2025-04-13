@@ -7,6 +7,7 @@ import { UsersModule } from 'modules/users/users.module';
 import { AuthModule } from 'modules/auth/auth.module';
 import { DatabaseConfig } from 'config/database.config';
 import { TypeormDatabaseConnectionService } from 'common/database/typeorm-database-connection.service';
+import { CloudinaryModule } from 'modules/cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { TypeormDatabaseConnectionService } from 'common/database/typeorm-databa
     UsersModule,
     AuthModule,
     JwtModule,
+    CloudinaryModule,
   ],
   controllers: [],
   providers: [

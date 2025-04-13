@@ -42,6 +42,13 @@ export interface GetMeResponseDto {
   updatedAt: string;
 }
 
+export type File = object;
+
+export interface UploadUserAvatarDto {
+  /** Avatar file */
+  file: File;
+}
+
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 
@@ -345,6 +352,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/auth/authorize`,
         method: "GET",
         format: "json",
+        ...params,
+      }),
+  };
+  fileUpload = {
+    /**
+     * No description
+     *
+     * @tags file-upload
+     * @name CloudinaryControllerUploadUserAvatar
+     * @summary Uploads user avatar
+     * @request POST:/file-upload/user-avatar
+     */
+    cloudinaryControllerUploadUserAvatar: (data: UploadUserAvatarDto, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/file-upload/user-avatar`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
         ...params,
       }),
   };
