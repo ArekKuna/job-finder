@@ -1,6 +1,6 @@
 import { EyeIcon } from "assets/Icons/EyeIcon";
 import { EyeOutlineIcon } from "assets/Icons/EyeOutlineIcon";
-import { Input } from "components/Input/Input";
+import { Input } from "components/UI/Input/Input";
 import { useUserAuthenticationForm } from "hooks/useUserAuthenticationForm/useUserAuthenticationForm";
 import { useState } from "react";
 import { Controller } from "react-hook-form";

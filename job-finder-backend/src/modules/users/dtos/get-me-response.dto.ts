@@ -11,9 +11,12 @@ export class GetMeResponseDto {
   @ApiProperty({ description: 'User role' })
   role: UserRole;
 
+  @ApiProperty({ description: 'User avatar image reference', nullable: true })
+  avatarReferenceId?: string;
+
   @ApiProperty({ description: 'User creation date' })
-  created_at: Date;
+  createdAt: Date;
 
   @ApiProperty({ description: 'User last update date' })
-  updated_at: Date;
+  updatedAt: Date;
 }

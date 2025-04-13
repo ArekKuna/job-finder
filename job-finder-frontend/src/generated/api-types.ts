@@ -28,16 +28,18 @@ export interface GetMeResponseDto {
   email: string;
   /** User role */
   role: string;
+  /** User avatar image reference */
+  avatarReferenceId: string | null;
   /**
    * User creation date
    * @format date-time
    */
-  created_at: string;
+  createdAt: string;
   /**
    * User last update date
    * @format date-time
    */
-  updated_at: string;
+  updatedAt: string;
 }
 
 export type QueryParamsType = Record<string | number, any>;

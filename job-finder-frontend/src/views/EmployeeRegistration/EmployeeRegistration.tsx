@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Controller } from "react-hook-form";
-import { Input } from "components/Input/Input";
 import { EyeOutlineIcon } from "assets/Icons/EyeOutlineIcon";
 import { EyeIcon } from "assets/Icons/EyeIcon";
 import { useUserAuthenticationForm } from "hooks/useUserAuthenticationForm/useUserAuthenticationForm";
+import { Input } from "components/UI/Input/Input";
 
 export const EmployeeRegistration = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);

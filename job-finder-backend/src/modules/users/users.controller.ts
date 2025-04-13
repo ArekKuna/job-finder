@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { UsersService } from 'modules/users/users.service';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserAuthenticationResponseDto } from 'modules/auth/dtos/user-authentication-response.dto';
@@ -58,11 +65,15 @@ export class UsersController {
     status: 401,
     description: 'User not authorized',
   })
+  @ApiResponse({
+    status: 404,
+    description: 'User not found',
+  })
   async getMe(@UserId() id: string): Promise<Record<string, any> | null> {
     const user = await this.usersService.findUserById(id);
 
     if (!user) {
-      return null;
+      throw new NotFoundException();
     }
 
     return instanceToPlain(user);

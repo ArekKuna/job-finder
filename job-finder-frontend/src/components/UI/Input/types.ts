@@ -30,4 +30,5 @@ export type HTMLInputProps = Pick<
   | "onBlur"
   | "onPaste"
   | "type"
+  | "accept"
 >;

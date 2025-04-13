@@ -15,13 +15,13 @@ export const UserId = createParamDecorator(
     const authHeaders = request.headers['authorization'] as string;
 
     if (!authHeaders) {
-      return new UnauthorizedException();
+      throw new UnauthorizedException();
     }
 
     const [, jwtToken] = authHeaders.split(' ');
 
     if (!jwtToken) {
-      return new UnauthorizedException();
+      throw new UnauthorizedException();
     }
 
     const decodedToken = jwtService.decode<JwtPayload>(jwtToken);
