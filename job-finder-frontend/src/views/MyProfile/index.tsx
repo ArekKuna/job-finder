@@ -1,9 +1,9 @@
+import { useRef } from "react";
 import { AvatarIcon } from "assets/Icons/AvatarIcon";
 import { Input } from "components/UI/Input/Input";
 import { GetMeResponseDto } from "generated/api-types";
 import { useCustomMutation } from "hooks/useCustomMutation/useCustomMutation";
 import { useCustomQuery } from "hooks/useCustomQuery/useCustomQuery";
-import { useRef } from "react";
 
 export const MyProfile = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -24,6 +24,8 @@ export const MyProfile = () => {
     return null;
   }
 
+  const { avatarReferenceId, id } = data;
+
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || !e.target.files[0]) {
       return;
@@ -31,11 +33,10 @@ export const MyProfile = () => {
 
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
+    formData.append("userId", id);
 
     await mutateAsync(formData);
   };
-
-  const { avatarReferenceId } = data;
 
   return (
     <div className="pt-4">

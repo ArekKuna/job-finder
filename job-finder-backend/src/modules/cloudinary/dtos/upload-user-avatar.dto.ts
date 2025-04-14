@@ -1,10 +1,12 @@
+import { IsUUID } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UploadUserAvatarDto {
   @ApiProperty({
-    type: 'string',
-    format: 'binary',
-    description: 'Avatar file to upload',
+    description: 'User ID (UUID)',
+    type: String,
+    format: 'uuid',
   })
-  file: any;
+  @IsUUID()
+  userId: string;
 }
