@@ -63,6 +63,7 @@ describe('EmployerSignup', () => {
       role: UserRole.EMPLOYER,
       created_at: new Date(),
       updated_at: new Date(),
+      avatar_url: null,
     };
 
     await databaseConnectionService.insert('users', existingUser);

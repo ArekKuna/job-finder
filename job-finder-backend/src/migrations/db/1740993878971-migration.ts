@@ -11,7 +11,7 @@ export class Db1740956670526 implements MigrationInterface {
           id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
           email VARCHAR NOT NULL UNIQUE,
           password VARCHAR NOT NULL,
-          avatar_reference_id VARCHAR DEFAULT NULL,
+          avatar_url VARCHAR DEFAULT NULL,
           role role_enum NOT NULL DEFAULT 'EMPLOYEE',
           created_at TIMESTAMP NOT NULL,
           updated_at TIMESTAMP NOT NULL

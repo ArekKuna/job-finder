@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { AvatarIcon } from "assets/Icons/AvatarIcon";
+import { AvatarPlaceholderIcon } from "assets/Icons/AvatarPlaceholderIcon";
 import { Input } from "components/UI/Input/Input";
 import { GetMeResponseDto } from "generated/api-types";
 import { useCustomMutation } from "hooks/useCustomMutation/useCustomMutation";
@@ -18,13 +18,14 @@ export const MyProfile = () => {
   const { mutateAsync } = useCustomMutation<{ success: boolean }, FormData>({
     url: uploadAvatarRoute,
     method: "POST",
+    key: ["getMe"],
   });
 
   if (!data) {
     return null;
   }
 
-  const { avatarReferenceId, id } = data;
+  const { avatarUrl, id } = data;
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || !e.target.files[0]) {
@@ -41,7 +42,11 @@ export const MyProfile = () => {
   return (
     <div className="pt-4">
       <div className="flex flex-col gap-2 items-center">
-        {avatarReferenceId ? "avatar" : <AvatarIcon />}
+        {avatarUrl ? (
+          <img className="w-16 h-16 rounded-full" src={avatarUrl} alt="" />
+        ) : (
+          <AvatarPlaceholderIcon />
+        )}
 
         <button onClick={() => fileInputRef.current?.click()}>
           Click here to add avatar

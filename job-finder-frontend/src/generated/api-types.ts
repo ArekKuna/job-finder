@@ -29,7 +29,7 @@ export interface GetMeResponseDto {
   /** User role */
   role: string;
   /** User avatar image reference */
-  avatarReferenceId: string | null;
+  avatarUrl: string | null;
   /**
    * User creation date
    * @format date-time
@@ -42,11 +42,12 @@ export interface GetMeResponseDto {
   updatedAt: string;
 }
 
-export type File = object;
-
 export interface UploadUserAvatarDto {
-  /** Avatar file */
-  file: File;
+  /**
+   * User ID (UUID)
+   * @format uuid
+   */
+  userId: string;
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -369,7 +370,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/file-upload/user-avatar`,
         method: "POST",
         body: data,
-        type: ContentType.Json,
+        type: ContentType.FormData,
         ...params,
       }),
   };

@@ -17,15 +17,15 @@ export class User {
   @Column({ type: 'enum', enum: UserRole, default: UserRole.EMPLOYEE })
   role: UserRole;
 
-  @Expose({ name: 'avatarReferenceId' })
-  @Column({ nullable: true })
-  avatar_reference_id: string;
+  @Expose({ name: 'avatarUrl' })
+  @Column({ type: 'varchar', nullable: true })
+  avatar_url: string | null;
 
   @Expose({ name: 'createdAt' })
   @Column()
   created_at: Date;
 
-  @Expose({ name: 'updateAt' })
+  @Expose({ name: 'updatedAt' })
   @Column()
   updated_at: Date;
 }

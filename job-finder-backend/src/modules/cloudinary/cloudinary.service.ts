@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Readable } from 'stream';
 import { v2 as cloudinary, UploadApiResponse } from 'cloudinary';
 import { UsersService } from 'modules/users/users.service';
+import { BooleanResponseDto } from 'common/dtos/boolean-resposne.dto';
 @Injectable()
 export class CloudinaryService {
   constructor(
@@ -16,7 +17,10 @@ export class CloudinaryService {
     });
   }
 
-  async uploadUserAvatar(file: Express.Multer.File, userId: string) {
+  async uploadUserAvatar(
+    file: Express.Multer.File,
+    userId: string,
+  ): Promise<BooleanResponseDto> {
     const user = await this.usersService.findUserById(userId);
 
     const uploadedResource = await this.findResourcedByPublicId(
@@ -53,20 +57,27 @@ export class CloudinaryService {
       });
     };
 
-    await streamUpload(file.buffer);
+    const result = await streamUpload(file.buffer);
+
+    await this.usersService.updateUser(userId, {
+      avatar_url: result.secure_url,
+    });
+
     return { success: true };
   }
 
   async deleteResource(
     resourceFolder: 'avatars',
     publicId: string,
-  ): Promise<void> {
-    const result = (await cloudinary.uploader.destroy(
-      `${resourceFolder}/${publicId}`,
-    )) as UploadApiResponse;
+  ): Promise<BooleanResponseDto> {
+    try {
+      (await cloudinary.uploader.destroy(
+        `${resourceFolder}/${publicId}`,
+      )) as UploadApiResponse;
 
-    if (result.result !== 'ok') {
-      throw new Error('Failed to delete avatar from Cloudinary.');
+      return { success: true };
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -75,19 +86,17 @@ export class CloudinaryService {
     publicId: string,
   ): Promise<UploadApiResponse | null> {
     try {
-      const result = (await cloudinary.api.resource(
+      const resource = (await cloudinary.api.resource(
         `${resourceFolder}/${publicId}`,
       )) as UploadApiResponse;
 
-      return result;
+      return resource;
     } catch (err: any) {
       if (err?.error?.http_code === 404 || err?.http_code === 404) {
         return null;
       }
 
-      throw new Error(
-        `Cloudinary resource fetch failed: ${err?.error?.message || 'Unknown error'}`,
-      );
+      throw new NotFoundException();
     }
   }
 }

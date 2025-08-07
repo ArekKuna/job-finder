@@ -12,7 +12,7 @@ export class GetMeResponseDto {
   role: UserRole;
 
   @ApiProperty({ description: 'User avatar image reference', nullable: true })
-  avatarReferenceId?: string;
+  avatarUrl?: string;
 
   @ApiProperty({ description: 'User creation date' })
   createdAt: Date;
