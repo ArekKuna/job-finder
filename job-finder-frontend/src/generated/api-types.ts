@@ -50,6 +50,11 @@ export interface UploadUserAvatarDto {
   userId: string;
 }
 
+export interface BooleanResponseDto {
+  /** Response result */
+  success: boolean;
+}
+
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 
@@ -366,11 +371,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/file-upload/user-avatar
      */
     cloudinaryControllerUploadUserAvatar: (data: UploadUserAvatarDto, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<BooleanResponseDto, any>({
         path: `/file-upload/user-avatar`,
         method: "POST",
         body: data,
         type: ContentType.FormData,
+        format: "json",
         ...params,
       }),
   };

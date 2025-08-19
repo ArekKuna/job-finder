@@ -1,9 +1,11 @@
-import { AuthUserResponseDto } from "generated/api-types";
+import { UserAuthenticationResponseDto } from "generated/api-types";
 import { authStatusAtom } from "hooks/useAuthorization/authAtom";
 import { useCustomQuery } from "hooks/useCustomQuery/useCustomQuery";
 import { useAtom } from "jotai";
 import Cookies from "js-cookie";
 import { useCallback, useEffect, useRef } from "react";
+
+const AUTHORIZE_URL = "auth/authorize";
 
 export const useCheckAuthStatus = () => {
   const [, setAuthStatus] = useAtom(authStatusAtom);
@@ -11,11 +13,11 @@ export const useCheckAuthStatus = () => {
 
   const token = Cookies.get("JWT");
 
-  const url = "http://192.168.1.32:3000/auth/authorize";
-
-  const { refetch } = useCustomQuery<AuthUserResponseDto>(url, Boolean(token), [
-    "authStatus",
-  ]);
+  const { refetch } = useCustomQuery<UserAuthenticationResponseDto>(
+    AUTHORIZE_URL,
+    Boolean(token),
+    ["authStatus"]
+  );
 
   const authorizeUser = useCallback(async () => {
     hasRun.current = true;

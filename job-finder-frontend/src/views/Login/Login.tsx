@@ -5,14 +5,14 @@ import { useUserAuthenticationForm } from "hooks/useUserAuthenticationForm/useUs
 import { useState } from "react";
 import { Controller } from "react-hook-form";
 
+const LOGIN_URL = "auth/login";
+
 export const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const handlePasswordIconClick = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
-
-  const url = "http://192.168.1.32:3000/auth/login";
 
   const {
     control,
@@ -22,7 +22,7 @@ export const Login = () => {
     errorMessage,
     handleSubmit,
     onSubmit,
-  } = useUserAuthenticationForm({ url });
+  } = useUserAuthenticationForm({ route: LOGIN_URL });
 
   const { email: emailError, password: passwordError } = formErrors;
 

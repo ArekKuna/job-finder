@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const fetchDataFn = async <TResponse>(
   url: string,
   params?: Record<string, string>
@@ -29,11 +31,13 @@ const fetchDataFn = async <TResponse>(
 };
 
 export const useCustomQuery = <TResponse>(
-  url: string,
+  route: string,
   enabled: boolean,
   key: string[],
   params?: Record<string, string>
 ) => {
+  const url = `${BASE_URL}/${route}`;
+
   return useQuery<TResponse>({
     enabled: enabled,
     queryKey: key,

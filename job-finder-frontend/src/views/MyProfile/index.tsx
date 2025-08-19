@@ -5,18 +5,18 @@ import { GetMeResponseDto } from "generated/api-types";
 import { useCustomMutation } from "hooks/useCustomMutation/useCustomMutation";
 import { useCustomQuery } from "hooks/useCustomQuery/useCustomQuery";
 
+const GET_ME_URL = "users/me";
+const UPLOAD_AVATAR_URL = "file-upload/user-avatar";
+
 export const MyProfile = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const getMeRoute = "http://192.168.1.32:3000/users/me";
-  const uploadAvatarRoute = "http://192.168.1.32:3000/file-upload/user-avatar";
-
-  const { data } = useCustomQuery<GetMeResponseDto>(getMeRoute, true, [
+  const { data } = useCustomQuery<GetMeResponseDto>(GET_ME_URL, true, [
     "getMe",
   ]);
 
   const { mutateAsync } = useCustomMutation<{ success: boolean }, FormData>({
-    url: uploadAvatarRoute,
+    route: UPLOAD_AVATAR_URL,
     method: "POST",
     key: ["getMe"],
   });
@@ -43,12 +43,19 @@ export const MyProfile = () => {
     <div className="pt-4">
       <div className="flex flex-col gap-2 items-center">
         {avatarUrl ? (
-          <img className="w-16 h-16 rounded-full" src={avatarUrl} alt="" />
+          <img
+            className="w-48 h-48 rounded-full"
+            src={avatarUrl}
+            alt="user avatar"
+          />
         ) : (
           <AvatarPlaceholderIcon />
         )}
 
-        <button onClick={() => fileInputRef.current?.click()}>
+        <button
+          className="text-jf-purple-400"
+          onClick={() => fileInputRef.current?.click()}
+        >
           Click here to add avatar
         </button>
 

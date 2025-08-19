@@ -23,80 +23,56 @@ export class CloudinaryService {
   ): Promise<BooleanResponseDto> {
     const user = await this.usersService.findUserById(userId);
 
-    const uploadedResource = await this.findResourcedByPublicId(
-      'avatars',
-      userId,
-    );
-
-    if (uploadedResource) {
-      await this.deleteResource('avatars', userId);
+    if (!user) {
+      throw new NotFoundException();
     }
 
-    const streamUpload = (fileBuffer: Buffer): Promise<UploadApiResponse> => {
-      return new Promise((resolve, reject) => {
-        const stream = cloudinary.uploader.upload_stream(
-          {
-            folder: 'avatars',
-            public_id: user?.id,
-            resource_type: 'image',
-          },
-          (error, result) => {
-            if (error || !result) {
-              return reject(
-                new Error(
-                  error?.message || 'Something went wrong during file upload.',
-                ),
-              );
-            }
+    const result = await this.streamUpload(file.buffer, user.id);
 
-            resolve(result);
-          },
-        );
-
-        Readable.from(fileBuffer).pipe(stream);
-      });
-    };
-
-    const result = await streamUpload(file.buffer);
+    const optimizedUrl = cloudinary.url(result.public_id, {
+      width: 800,
+      height: 800,
+      crop: 'fill',
+      quality: 'auto:good',
+      secure: true,
+      version: result.version,
+    });
 
     await this.usersService.updateUser(userId, {
-      avatar_url: result.secure_url,
+      avatar_url: optimizedUrl,
     });
 
     return { success: true };
   }
 
-  async deleteResource(
-    resourceFolder: 'avatars',
-    publicId: string,
-  ): Promise<BooleanResponseDto> {
-    try {
-      (await cloudinary.uploader.destroy(
-        `${resourceFolder}/${publicId}`,
-      )) as UploadApiResponse;
+  private streamUpload(
+    fileBuffer: Buffer,
+    userId: string,
+  ): Promise<UploadApiResponse> {
+    return new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        {
+          folder: 'avatars',
+          public_id: userId,
+          resource_type: 'image',
+          format: 'webp',
+          overwrite: true,
+          invalidate: true,
+        },
+        (error, result) => {
+          if (error || !result) {
+            return reject(
+              new Error(
+                error?.message || 'Something went wrong during file upload.',
+              ),
+            );
+          }
 
-      return { success: true };
-    } catch {
-      throw new NotFoundException();
-    }
-  }
+          resolve(result);
+        },
+      );
 
-  async findResourcedByPublicId(
-    resourceFolder: 'avatars',
-    publicId: string,
-  ): Promise<UploadApiResponse | null> {
-    try {
-      const resource = (await cloudinary.api.resource(
-        `${resourceFolder}/${publicId}`,
-      )) as UploadApiResponse;
-
-      return resource;
-    } catch (err: any) {
-      if (err?.error?.http_code === 404 || err?.http_code === 404) {
-        return null;
-      }
-
-      throw new NotFoundException();
-    }
+      Readable.from(fileBuffer).pipe(stream);
+    });
   }
 }
