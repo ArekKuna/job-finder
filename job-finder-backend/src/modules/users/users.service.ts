@@ -3,6 +3,7 @@ import {
   forwardRef,
   Inject,
   Injectable,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -77,5 +78,21 @@ export class UsersService {
 
   async findUserByEmail(email: string): Promise<User | null> {
     return this.usersRepository.findOneBy({ email });
+  }
+
+  async findUserById(id: string): Promise<User | null> {
+    return this.usersRepository.findOneBy({ id });
+  }
+
+  async updateUser(id: string, attrs: Partial<User>) {
+    const user = await this.findUserById(id);
+
+    if (!user) {
+      throw new NotFoundException();
+    }
+
+    Object.assign(user, attrs);
+
+    return this.usersRepository.save(user);
   }
 }

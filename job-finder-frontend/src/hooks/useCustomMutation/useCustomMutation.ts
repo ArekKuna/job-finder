@@ -3,6 +3,8 @@ import Cookies from "js-cookie";
 import { MutationRequestMethod } from "hooks/useCustomMutation/types";
 import { UserAuthenticationResponseDto } from "generated/api-types";
 
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const isAuthResponse = (
   data: unknown
 ): data is UserAuthenticationResponseDto => {
@@ -16,13 +18,15 @@ const fetchDataFn = async <TBody>(
 ) => {
   const token = Cookies.get("JWT");
 
+  const isFormData = body instanceof FormData;
+
   const options: RequestInit = {
     method,
     headers: {
-      "Content-Type": "application/json",
-      Authorization: token ? `Bearer ${token}` : "",
+      ...(isFormData ? {} : { "Content-Type": "application/json" }),
+      ...(token ? { Authorization: `Bearer ${token}` } : ""),
     },
-    body: JSON.stringify(body),
+    body: isFormData ? (body as FormData) : JSON.stringify(body),
   };
 
   const response = await fetch(url, options);
@@ -37,15 +41,17 @@ const fetchDataFn = async <TBody>(
 };
 
 export const useCustomMutation = <TResponse, TBody>({
-  url,
+  route,
   method,
   key,
 }: {
-  url: string;
+  route: string;
   method: MutationRequestMethod;
   key?: ReadonlyArray<unknown>;
 }) => {
   const queryClient = useQueryClient();
+
+  const url = `${BASE_URL}/${route}`;
 
   const { isPending, isError, error, mutateAsync } = useMutation<
     TResponse,

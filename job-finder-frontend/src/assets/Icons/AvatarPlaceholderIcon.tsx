@@ -1,4 +1,4 @@
-export const AvatarIcon = () => {
+export const AvatarPlaceholderIcon = () => {
   return (
     <svg
       width="50"

@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Controller } from "react-hook-form";
-import { Input } from "components/Input/Input";
 import { EyeOutlineIcon } from "assets/Icons/EyeOutlineIcon";
 import { EyeIcon } from "assets/Icons/EyeIcon";
 import { useUserAuthenticationForm } from "hooks/useUserAuthenticationForm/useUserAuthenticationForm";
+import { Input } from "components/UI/Input/Input";
+
+const SIGNUP_URL = "users/employee/signup";
 
 export const EmployeeRegistration = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -11,8 +13,6 @@ export const EmployeeRegistration = () => {
   const handlePasswordIconClick = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
-
-  const url = "http://192.168.1.32:3000/users/employee/signup";
 
   const {
     control,
@@ -22,7 +22,7 @@ export const EmployeeRegistration = () => {
     errorMessage,
     handleSubmit,
     onSubmit,
-  } = useUserAuthenticationForm({ url });
+  } = useUserAuthenticationForm({ route: SIGNUP_URL });
 
   const { email: emailError, password: passwordError } = formErrors;
 

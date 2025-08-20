@@ -3,13 +3,15 @@ import {
   HTMLInputProps,
   TextOnlyVariantProps,
   TextWithIconVariantProps,
-} from "components/Input/types";
+} from "components/UI/Input/types";
+import { Ref } from "react";
 import { tv, VariantProps } from "tailwind-variants";
 
 type BaseProps = Omit<VariantProps<typeof getStyles>, "error"> &
   HTMLInputProps & {
     value: string | number;
     label?: string;
+    ref?: Ref<HTMLInputElement>;
     error?: Maybe<string | boolean>;
   };
 

@@ -15,10 +15,10 @@ import {
 import { httpErrorFallback, httpErrorMap } from "common/errorMap/errorMap";
 
 type Props = {
-  url: string;
+  route: string;
 };
 
-export const useUserAuthenticationForm = ({ url }: Props) => {
+export const useUserAuthenticationForm = ({ route }: Props) => {
   const [, setAuthStatus] = useAtom(authStatusAtom);
 
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export const useUserAuthenticationForm = ({ url }: Props) => {
     error: mutationError,
     mutateAsync,
   } = useCustomMutation<UserAuthenticationResponseDto, UserCredentialsDto>({
-    url,
+    route,
     method: "POST",
     key: ["authStatus"],
   });

@@ -1,9 +1,11 @@
 import { EyeIcon } from "assets/Icons/EyeIcon";
 import { EyeOutlineIcon } from "assets/Icons/EyeOutlineIcon";
-import { Input } from "components/Input/Input";
+import { Input } from "components/UI/Input/Input";
 import { useUserAuthenticationForm } from "hooks/useUserAuthenticationForm/useUserAuthenticationForm";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
+
+const LOGIN_URL = "auth/login";
 
 export const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -11,8 +13,6 @@ export const Login = () => {
   const handlePasswordIconClick = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
-
-  const url = "http://192.168.1.32:3000/auth/login";
 
   const {
     control,
@@ -22,7 +22,7 @@ export const Login = () => {
     errorMessage,
     handleSubmit,
     onSubmit,
-  } = useUserAuthenticationForm({ url });
+  } = useUserAuthenticationForm({ route: LOGIN_URL });
 
   const { email: emailError, password: passwordError } = formErrors;
 

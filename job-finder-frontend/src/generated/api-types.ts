@@ -21,6 +21,40 @@ export interface UserAuthenticationResponseDto {
   jwtToken: string;
 }
 
+export interface GetMeResponseDto {
+  /** User id */
+  id: string;
+  /** User e-mail */
+  email: string;
+  /** User role */
+  role: string;
+  /** User avatar image reference */
+  avatarUrl: string | null;
+  /**
+   * User creation date
+   * @format date-time
+   */
+  createdAt: string;
+  /**
+   * User last update date
+   * @format date-time
+   */
+  updatedAt: string;
+}
+
+export interface UploadUserAvatarDto {
+  /**
+   * User ID (UUID)
+   * @format uuid
+   */
+  userId: string;
+}
+
+export interface BooleanResponseDto {
+  /** Response result */
+  success: boolean;
+}
+
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 
@@ -275,6 +309,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: "json",
         ...params,
       }),
+
+    /**
+     * No description
+     *
+     * @tags users
+     * @name UsersControllerGetMe
+     * @summary Get logged in user data
+     * @request GET:/users/me
+     */
+    usersControllerGetMe: (params: RequestParams = {}) =>
+      this.request<GetMeResponseDto, void>({
+        path: `/users/me`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
   };
   auth = {
     /**
@@ -307,6 +357,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<UserAuthenticationResponseDto, void>({
         path: `/auth/authorize`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+  };
+  fileUpload = {
+    /**
+     * No description
+     *
+     * @tags file-upload
+     * @name CloudinaryControllerUploadUserAvatar
+     * @summary Uploads user avatar
+     * @request POST:/file-upload/user-avatar
+     */
+    cloudinaryControllerUploadUserAvatar: (data: UploadUserAvatarDto, params: RequestParams = {}) =>
+      this.request<BooleanResponseDto, any>({
+        path: `/file-upload/user-avatar`,
+        method: "POST",
+        body: data,
+        type: ContentType.FormData,
         format: "json",
         ...params,
       }),

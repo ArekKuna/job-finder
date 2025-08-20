@@ -8,7 +8,7 @@ import { MobileNav } from "components/Layout/Header/MobileHeader/MobileNav";
 import { Search } from "components/Layout/Header/MobileHeader/Search";
 import { useAtom } from "jotai";
 import { authStatusAtom } from "hooks/useAuthorization/authAtom";
-import { AvatarIcon } from "assets/Icons/AvatarIcon";
+import { AvatarPlaceholderIcon } from "assets/Icons/AvatarPlaceholderIcon";
 
 export const MobileHeader = () => {
   const [authStatus] = useAtom(authStatusAtom);
@@ -36,7 +36,7 @@ export const MobileHeader = () => {
 
           {authStatus === "AUTHORIZED" ? (
             <div onClick={handleNavOptionClick}>
-              <AvatarIcon />
+              <AvatarPlaceholderIcon />
             </div>
           ) : (
             <HamburgerMenu

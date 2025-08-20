@@ -30,7 +30,7 @@ export const MobileNav = ({
 
   return (
     <motion.nav
-      className="h-full w-full flex flex-col gap-2 justify-center items-center font-jf-paragraph"
+      className="h-full overflow-hidden w-full flex flex-col gap-2 justify-center items-center font-jf-paragraph"
       animate={{ opacity: isMenuOpen ? 100 : 0 }}
       transition={{ duration: isMenuOpen ? 0.9 : 0.9 }}
     >

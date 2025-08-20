@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
-import { Input } from "components/Input/Input";
 import { LocationIcon } from "assets/Icons/LocationIcon";
 import { SearchIcon } from "assets/Icons/SearchIcon";
+import { Input } from "components/UI/Input/Input";
 
 export const Search = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -21,7 +21,9 @@ export const Search = () => {
         sideElementPosition="start"
         value={searchInput}
         placeholder="company, location, etc..."
-        onChange={(e) => handleInputValueChange(e, setSearchInput)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          handleInputValueChange(e, setSearchInput)
+        }
       />
       <Input
         border="secondary"
@@ -29,7 +31,9 @@ export const Search = () => {
         sideElementPosition="start"
         value={searchInput}
         placeholder="find your city"
-        onChange={(e) => handleInputValueChange(e, setSearchInput)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          handleInputValueChange(e, setSearchInput)
+        }
       />
       <button className="w-full h-10 flex justify-center items-center rounded-lg text-jf-geologica-white bg-jf-purple-700">
         Search

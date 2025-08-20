@@ -20,6 +20,7 @@ describe('UserLogin', () => {
     role: UserRole.EMPLOYEE,
     created_at: new Date(),
     updated_at: new Date(),
+    avatar_url: null,
   };
   const password = 'StrongPassword12@';
 
