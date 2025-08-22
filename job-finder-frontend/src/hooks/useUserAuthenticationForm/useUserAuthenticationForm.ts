@@ -7,12 +7,12 @@ import {
   userAuthenticationSchemaType,
 } from "hooks/useUserAuthenticationForm/utils";
 import { useCustomMutation } from "hooks/useCustomMutation/useCustomMutation";
-import { authStatusAtom } from "hooks/useAuthorization/authAtom";
 import {
   UserAuthenticationResponseDto,
   UserCredentialsDto,
 } from "generated/api-types";
 import { httpErrorFallback, httpErrorMap } from "common/errorMap/errorMap";
+import { authStatusAtom } from "hooks/useAuthorization/authAtom";
 
 type Props = {
   route: string;
