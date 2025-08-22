@@ -1,36 +1,48 @@
-@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@200;400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Sen:wght@800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap");
 
 @import "tailwindcss";
 
 @theme {
   /* ###################  COLORS  ################### */
 
-  /* PURPLE */
+  /* Black */
 
-  --color-jf-purple-50: #fde7fe;
-  --color-jf-purple-100: #facffa;
-  --color-jf-purple-200: #f6a8f5;
-  --color-jf-purple-300: #f180f0;
-  --color-jf-purple-400: #e74af5;
-  --color-jf-purple-500: #c83ef8;
-  --color-jf-purple-600: #a530fc;
-  --color-jf-purple-700: #8e17fc;
-  --color-jf-purple-800: #6b0ec4;
-  --color-jf-purple-900: #4c088a;
+  --color-jf-black-50: #f5f6fa;
+  --color-jf-black-100: #e4e6ed;
+  --color-jf-black-200: #c6c9d6;
+  --color-jf-black-300: #a2a7b8;
+  --color-jf-black-400: #6f748c;
+  --color-jf-black-500: #020817;
+  --color-jf-black-600: #010614;
+  --color-jf-black-700: #010511;
+  --color-jf-black-800: #00040e;
+  --color-jf-black-900: #00030b;
+
+  /* Blue */
+
+  --color-jf-blue-50: #ececff;
+  --color-jf-blue-100: #dadaff;
+  --color-jf-blue-200: #b7b8fa;
+  --color-jf-blue-300: #999af7;
+  --color-jf-blue-400: #7d7ef4;
+  --color-jf-blue-500: #6467f2;
+  --color-jf-blue-600: #4d50e0;
+  --color-jf-blue-700: #3c3fc0;
+  --color-jf-blue-800: #2f3198;
+  --color-jf-blue-900: #26276e;
 
   /* WARM-GRAY */
 
-  --color-jf-warm-gray-50: #f9f6f6;
-  --color-jf-warm-gray-100: #f5f0f0;
-  --color-jf-warm-gray-200: #e4e2e2;
-  --color-jf-warm-gray-300: #c9c6c5;
-  --color-jf-warm-gray-400: #afacac;
-  --color-jf-warm-gray-500: #8c8a8a;
-  --color-jf-warm-gray-600: #787878;
-  --color-jf-warm-gray-700: #545454;
-  --color-jf-warm-gray-800: #3d3d3d;
-  --color-jf-warm-gray-900: #2e2e2e;
+  --color-jf-warm-gray-50: #faf9f9;
+  --color-jf-warm-gray-100: #f2f0f0;
+  --color-jf-warm-gray-200: #dddada;
+  --color-jf-warm-gray-300: #c5c2c2;
+  --color-jf-warm-gray-400: #a9a6a6;
+  --color-jf-warm-gray-500: #71717a;
+  --color-jf-warm-gray-600: #5f5f66;
+  --color-jf-warm-gray-700: #49494e;
+  --color-jf-warm-gray-800: #353538;
+  --color-jf-warm-gray-900: #262628;
 
   /* LIGHT-GRAY */
 
@@ -65,34 +77,54 @@
   }
 
   body {
-    @apply p-0 m-0 pt-[70px] box-border relative text-base font-normal leading-5 text-jf-warm-gray-800 bg-jf-gray-50;
-    font-family: "Geologica", sans-serif;
+    @apply p-0 m-0 box-border text-base font-normal leading-5 text-jf-black-500;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-variation-settings:
+      "slnt" 0,
+      "CRSV" 1,
+      "SHRP" 25;
   }
 }
 
 @layer utilities {
-  .text-jf-geologica-base {
-    @apply font-sans text-base font-normal leading-5 text-jf-warm-gray-800;
-    font-family: "Geologica", sans-serif;
+  .font-paragraph-1 {
+    @apply text-lg font-normal leading-5 text-jf-black-500;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-variation-settings:
+      "slnt" 0,
+      "CRSV" 1,
+      "SHRP" 25;
   }
 
-  .text-jf-geologica-extralight {
-    @apply font-sans text-base font-extralight leading-5 text-jf-warm-gray-800;
-    font-family: "Geologica", sans-serif;
+  .font-paragraph-2 {
+    @apply text-base font-normal leading-5 text-jf-black-500;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-variation-settings:
+      "slnt" 0,
+      "CRSV" 1,
+      "SHRP" 25;
   }
 
-  .text-jf-geologica-sm {
-    @apply font-sans text-sm font-normal leading-5 text-jf-warm-gray-800;
-    font-family: "Geologica", sans-serif;
+  .font-paragraph-3 {
+    @apply text-sm font-normal leading-5 text-jf-black-500;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-variation-settings:
+      "slnt" 0,
+      "CRSV" 1,
+      "SHRP" 25;
   }
 
-  .text-jf-geologica-white {
-    @apply font-sans text-base font-normal leading-5 text-white;
-    font-family: "Geologica", sans-serif;
-  }
-
-  .text-jf-header {
-    @apply text-[40px] font-extrabold leading-10 tracking-tight text-black;
-    font-family: "Sen", sans-serif;
+  .font-caption {
+    @apply text-xs font-normal leading-5 text-jf-black-500;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-variation-settings:
+      "slnt" 0,
+      "CRSV" 1,
+      "SHRP" 25;
   }
 }

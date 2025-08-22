@@ -3,7 +3,7 @@ import {
   HTMLInputProps,
   TextOnlyVariantProps,
   TextWithIconVariantProps,
-} from "components/UI/Input/types";
+} from "components/ui/Input/types";
 import { Ref } from "react";
 import { tv, VariantProps } from "tailwind-variants";
 

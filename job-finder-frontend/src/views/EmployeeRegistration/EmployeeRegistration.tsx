@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Controller } from "react-hook-form";
-import { EyeOutlineIcon } from "assets/Icons/EyeOutlineIcon";
-import { EyeIcon } from "assets/Icons/EyeIcon";
+import { EyeOffIcon } from "assets/Icons/EyeOffIcon";
+import { EyeOnIcon } from "assets/Icons/EyeOnIcon";
 import { useUserAuthenticationForm } from "hooks/useUserAuthenticationForm/useUserAuthenticationForm";
-import { Input } from "components/UI/Input/Input";
+import { Input } from "components/ui/Input/Input";
 
 const SIGNUP_URL = "users/employee/signup";
 
@@ -72,9 +72,9 @@ export const EmployeeRegistration = () => {
               type={isPasswordVisible ? "text" : "password"}
               sideElement={
                 isPasswordVisible ? (
-                  <EyeOutlineIcon onClick={handlePasswordIconClick} />
+                  <EyeOffIcon onClick={handlePasswordIconClick} />
                 ) : (
-                  <EyeIcon onClick={handlePasswordIconClick} />
+                  <EyeOnIcon onClick={handlePasswordIconClick} />
                 )
               }
               sideElementPosition="end"

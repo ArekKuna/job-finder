@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import { AvatarPlaceholderIcon } from "assets/Icons/AvatarPlaceholderIcon";
-import { Input } from "components/UI/Input/Input";
+import { ProfileIcon } from "assets/Icons/ProfileIcon";
+import { Input } from "components/ui/Input/Input";
 import { GetMeResponseDto } from "generated/api-types";
 import { useCustomMutation } from "hooks/useCustomMutation/useCustomMutation";
 import { useCustomQuery } from "hooks/useCustomQuery/useCustomQuery";
@@ -49,7 +49,7 @@ export const MyProfile = () => {
             alt="user avatar"
           />
         ) : (
-          <AvatarPlaceholderIcon />
+          <ProfileIcon />
         )}
 
         <button
