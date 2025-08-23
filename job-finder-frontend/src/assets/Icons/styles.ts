@@ -14,6 +14,4 @@ export const getIconStyles = tv({
   },
 });
 
-export type IconStylesProps = VariantProps<typeof getIconStyles> & {
-  onClick?: () => void;
-};
+export type IconStylesProps = VariantProps<typeof getIconStyles>;
