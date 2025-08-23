@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export const MobileHeader = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   return (
     <>
       <Hamburger onClick={() => setIsDrawerOpen(true)} />

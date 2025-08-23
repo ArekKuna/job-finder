@@ -1,3 +1,3 @@
 export const About = () => {
-  return <div>ABOUT</div>;
+  return <div className="pt-[72px]">ABOUT</div>;
 };
