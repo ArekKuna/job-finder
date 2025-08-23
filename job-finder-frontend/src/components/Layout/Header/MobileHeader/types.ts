@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import { ReactNode } from "react";
 
 export type BasicRoute = {
   id: number;
@@ -10,5 +10,5 @@ export type UserRoute = {
   id: number;
   to: string;
   value: string;
-  icon: JSX.Element;
+  icon: ReactNode;
 };

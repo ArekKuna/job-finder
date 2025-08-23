@@ -29,12 +29,14 @@ export const MobileMenu = ({ onClose }: Props) => {
 
   return (
     <div className="p-4 relative">
-      <button
-        className="absolute top-4 right-4 cursor-pointer"
-        onClick={onClose}
-      >
-        <CloseIcon size="sm"  />
-      </button>
+      <div className="absolute top-4 right-4 cursor-pointer">
+        <Button
+          label="close-icon"
+          icon={<CloseIcon size="sm" />}
+          variant="ghost"
+          onClick={onClose}
+        />
+      </div>
 
       {isUserAuthorized && (
         <div className="flex flex-col gap-1 py-6 border-b border-b-jf-warm-gray-200">
@@ -92,7 +94,7 @@ export const MobileMenu = ({ onClose }: Props) => {
       ) : (
         <div className="flex flex-col gap-2 py-6">
           <Button
-            title="Sign In"
+            text="Sign In"
             variant="ghost"
             onClick={() => {
               onClose();
@@ -100,7 +102,7 @@ export const MobileMenu = ({ onClose }: Props) => {
             }}
           />
           <Button
-            title="Get Started"
+            text="Get Started"
             onClick={() => {
               onClose();
               navigate("/get-started");

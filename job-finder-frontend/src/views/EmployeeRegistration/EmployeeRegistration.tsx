@@ -72,9 +72,13 @@ export const EmployeeRegistration = () => {
               type={isPasswordVisible ? "text" : "password"}
               sideElement={
                 isPasswordVisible ? (
-                  <EyeOffIcon onClick={handlePasswordIconClick} />
+                  <div onClick={handlePasswordIconClick}>
+                    <EyeOffIcon />
+                  </div>
                 ) : (
-                  <EyeOnIcon onClick={handlePasswordIconClick} />
+                  <div onClick={handlePasswordIconClick}>
+                    <EyeOnIcon />
+                  </div>
                 )
               }
               sideElementPosition="end"
