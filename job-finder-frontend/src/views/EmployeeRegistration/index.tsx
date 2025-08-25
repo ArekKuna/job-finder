@@ -1,11 +1,13 @@
-import { useState } from "react";
-import { Controller } from "react-hook-form";
-import { EyeOffIcon } from "assets/Icons/EyeOffIcon";
-import { EyeOnIcon } from "assets/Icons/EyeOnIcon";
-import { useUserAuthenticationForm } from "hooks/useUserAuthenticationForm/useUserAuthenticationForm";
-import { Input } from "components/ui/Input/Input";
+import { useState } from 'react';
 
-const SIGNUP_URL = "users/employee/signup";
+import { Controller } from 'react-hook-form';
+
+import { EyeOffIcon } from 'assets/Icons/EyeOffIcon';
+import { EyeOnIcon } from 'assets/Icons/EyeOnIcon';
+import { Input } from 'components/ui/Input/Input';
+import { useUserAuthenticationForm } from 'hooks/useUserAuthenticationForm/useUserAuthenticationForm';
+
+const SIGNUP_URL = 'users/employee/signup';
 
 export const EmployeeRegistration = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -14,15 +16,8 @@ export const EmployeeRegistration = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  const {
-    control,
-    mutationLoading,
-    formErrors,
-    isError,
-    errorMessage,
-    handleSubmit,
-    onSubmit,
-  } = useUserAuthenticationForm({ route: SIGNUP_URL });
+  const { control, mutationLoading, formErrors, isError, errorMessage, handleSubmit, onSubmit } =
+    useUserAuthenticationForm({ route: SIGNUP_URL });
 
   const { email: emailError, password: passwordError } = formErrors;
 
@@ -30,18 +25,12 @@ export const EmployeeRegistration = () => {
 
   return (
     <div>
-      <div className="pt-4 px-2 flex flex-col gap-4">
+      <div className="flex flex-col gap-4 px-2 pt-4">
         <h1 className="text-jf-header">Start Your Career Journey</h1>
-        <p>
-          Start your journey by creating an account to access exciting career
-          opportunities.
-        </p>
+        <p>Start your journey by creating an account to access exciting career opportunities.</p>
       </div>
 
-      <form
-        onSubmit={handleSubmit((data) => onSubmit(data))}
-        className="p-4 flex flex-col gap-2"
-      >
+      <form onSubmit={handleSubmit((data) => onSubmit(data))} className="flex flex-col gap-2 p-4">
         <Controller
           name="email"
           control={control}
@@ -69,7 +58,7 @@ export const EmployeeRegistration = () => {
               placeholder="password"
               label="Password"
               border="primary"
-              type={isPasswordVisible ? "text" : "password"}
+              type={isPasswordVisible ? 'text' : 'password'}
               sideElement={
                 isPasswordVisible ? (
                   <div onClick={handlePasswordIconClick}>
@@ -82,9 +71,7 @@ export const EmployeeRegistration = () => {
                 )
               }
               sideElementPosition="end"
-              error={
-                Boolean(passwordError?.message) || isError ? true : undefined
-              }
+              error={Boolean(passwordError?.message) || isError ? true : undefined}
               value={value}
               onChange={onChange}
             />
@@ -92,15 +79,13 @@ export const EmployeeRegistration = () => {
         />
         <button
           disabled={mutationLoading}
-          className="w-full h-10 flex justify-center items-center rounded-lg text-jf-geologica-white bg-jf-purple-700"
+          className="text-jf-geologica-white bg-jf-purple-700 flex h-10 w-full items-center justify-center rounded-lg"
         >
           Register
         </button>
 
         {formHasError && (
-          <span className="text-center text-jf-rose-700 text-xs">
-            {errorMessage}
-          </span>
+          <span className="text-jf-rose-700 text-center text-xs">{errorMessage}</span>
         )}
       </form>
     </div>

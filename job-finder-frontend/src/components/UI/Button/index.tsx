@@ -1,11 +1,11 @@
-import { getStyles } from "components/ui/Button/styles";
+import { getStyles } from 'components/ui/Button/styles';
 import {
   BaseProps,
   ButtonVariants,
   IconVariantProps,
   TextVariantProps,
   TextWithIconVariantProps,
-} from "components/ui/Button/types";
+} from 'components/ui/Button/types';
 
 type Props = (TextVariantProps | IconVariantProps | TextWithIconVariantProps) &
   ButtonVariants &
@@ -17,12 +17,12 @@ export const Button = ({
   iconPosition,
   loading,
   full,
-  justify = "center",
+  justify = 'center',
   onClick,
   ...props
 }: Props) => {
-  const textVariant = "text" in props;
-  const iconVariant = "icon" in props;
+  const textVariant = 'text' in props;
+  const iconVariant = 'icon' in props;
 
   const icon = iconVariant ? props.icon : undefined;
   const text = textVariant ? props.text : undefined;

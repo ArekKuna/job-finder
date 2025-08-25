@@ -1,1 +1,1 @@
-export type MutationRequestMethod = "POST" | "PUT" | "DELETE";
+export type MutationRequestMethod = 'POST' | 'PUT' | 'DELETE';

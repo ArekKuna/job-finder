@@ -1,18 +1,16 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
-import { useAtom } from "jotai";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useAtom } from 'jotai';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+
+import { httpErrorFallback, httpErrorMap } from 'common/errorMap/errorMap';
+import { UserAuthenticationResponseDto, UserCredentialsDto } from 'generated/api-types';
+import { authStatusAtom } from 'hooks/useAuthorization/authAtom';
+import { useCustomMutation } from 'hooks/useCustomMutation/useCustomMutation';
 import {
   userAuthenticationSchema,
   userAuthenticationSchemaType,
-} from "hooks/useUserAuthenticationForm/utils";
-import { useCustomMutation } from "hooks/useCustomMutation/useCustomMutation";
-import {
-  UserAuthenticationResponseDto,
-  UserCredentialsDto,
-} from "generated/api-types";
-import { httpErrorFallback, httpErrorMap } from "common/errorMap/errorMap";
-import { authStatusAtom } from "hooks/useAuthorization/authAtom";
+} from 'hooks/useUserAuthenticationForm/utils';
 
 type Props = {
   route: string;
@@ -30,8 +28,8 @@ export const useUserAuthenticationForm = ({ route }: Props) => {
     mutateAsync,
   } = useCustomMutation<UserAuthenticationResponseDto, UserCredentialsDto>({
     route,
-    method: "POST",
-    key: ["authStatus"],
+    method: 'POST',
+    key: ['authStatus'],
   });
 
   const {
@@ -40,10 +38,10 @@ export const useUserAuthenticationForm = ({ route }: Props) => {
     handleSubmit,
   } = useForm<userAuthenticationSchemaType>({
     resolver: zodResolver(userAuthenticationSchema),
-    mode: "onSubmit",
+    mode: 'onSubmit',
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
 
@@ -61,9 +59,9 @@ export const useUserAuthenticationForm = ({ route }: Props) => {
       return;
     }
 
-    setAuthStatus("AUTHORIZED");
+    setAuthStatus('AUTHORIZED');
 
-    return navigate("/");
+    return navigate('/');
   };
 
   return {

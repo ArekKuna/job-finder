@@ -1,8 +1,10 @@
-import { MobileHeader } from "components/Layout/Header/MobileHeader";
-import { JobFinderLogo } from "components/Layout/JobFinderLogo/JobFinderLogo";
-import { Link } from "react-router-dom";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react';
+
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { Link } from 'react-router-dom';
+
+import { MobileHeader } from 'components/Layout/Header/MobileHeader';
+import { JobFinderLogo } from 'components/Layout/JobFinderLogo/JobFinderLogo';
 
 export const Header = () => {
   const [hidden, setHidden] = useState(false);
@@ -10,7 +12,7 @@ export const Header = () => {
   const { scrollY } = useScroll();
   const lastScrollY = useRef(0);
 
-  useMotionValueEvent(scrollY, "change", (currentY) => {
+  useMotionValueEvent(scrollY, 'change', (currentY) => {
     if (currentY > lastScrollY.current && currentY > 50) {
       setHidden(true);
     } else {
@@ -23,15 +25,17 @@ export const Header = () => {
     <motion.header
       initial={false}
       animate={{
-        y: hidden ? "-100%" : "0%",
+        y: hidden ? '-100%' : '0%',
       }}
-      transition={{ duration: 0.1 }} // ease-in-out}
-      className="fixed top-0 z-50 w-full flex justify-between p-2 items-center bg-white shadow transition-all"
+      transition={{ duration: 0.1 }}
+      className="fixed top-0 z-50 w-full border p-2 transition-all"
     >
-      <Link to="/">
-        <JobFinderLogo />
-      </Link>
-      <MobileHeader />
+      <nav className="flex items-center justify-between">
+        <Link to="/">
+          <JobFinderLogo />
+        </Link>
+        <MobileHeader />
+      </nav>
     </motion.header>
   );
 };

@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
 
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* ###################  COLORS  ################### */
@@ -73,68 +73,68 @@
 
 @layer base {
   html {
-    @apply p-0 m-0;
+    @apply m-0 p-0;
   }
 
   body {
-    @apply p-0 m-0 box-border text-base font-normal leading-5 text-jf-black-500;
-    font-family: "Inter", sans-serif;
+    @apply text-jf-black-500 m-0 box-border p-0 text-base leading-5 font-normal;
+    font-family: 'Inter', sans-serif;
     font-optical-sizing: auto;
     font-variation-settings:
-      "slnt" 0,
-      "CRSV" 1,
-      "SHRP" 25;
+      'slnt' 0,
+      'CRSV' 1,
+      'SHRP' 25;
   }
 }
 
 @layer utilities {
   .font-paragraph-1 {
-    @apply text-lg font-normal leading-5 text-jf-black-500;
-    font-family: "Inter", sans-serif;
+    @apply text-jf-black-500 text-lg leading-5 font-normal;
+    font-family: 'Inter', sans-serif;
     font-optical-sizing: auto;
     font-variation-settings:
-      "slnt" 0,
-      "CRSV" 1,
-      "SHRP" 25;
+      'slnt' 0,
+      'CRSV' 1,
+      'SHRP' 25;
   }
 
   .font-paragraph-2 {
-    @apply text-base font-normal leading-5 text-jf-black-500;
-    font-family: "Inter", sans-serif;
+    @apply text-jf-black-500 text-base leading-5 font-normal;
+    font-family: 'Inter', sans-serif;
     font-optical-sizing: auto;
     font-variation-settings:
-      "slnt" 0,
-      "CRSV" 1,
-      "SHRP" 25;
+      'slnt' 0,
+      'CRSV' 1,
+      'SHRP' 25;
   }
 
   .font-paragraph-3 {
-    @apply text-sm font-normal leading-5 text-jf-black-500;
-    font-family: "Inter", sans-serif;
+    @apply text-jf-black-500 text-sm leading-5 font-normal;
+    font-family: 'Inter', sans-serif;
     font-optical-sizing: auto;
     font-variation-settings:
-      "slnt" 0,
-      "CRSV" 1,
-      "SHRP" 25;
+      'slnt' 0,
+      'CRSV' 1,
+      'SHRP' 25;
   }
 
   .font-caption {
-    @apply text-xs font-normal leading-5 text-jf-black-500;
-    font-family: "Inter", sans-serif;
+    @apply text-jf-black-500 text-xs leading-5 font-normal;
+    font-family: 'Inter', sans-serif;
     font-optical-sizing: auto;
     font-variation-settings:
-      "slnt" 0,
-      "CRSV" 1,
-      "SHRP" 25;
+      'slnt' 0,
+      'CRSV' 1,
+      'SHRP' 25;
   }
 
   .font-label {
-    @apply text-base font-medium leading-5 text-jf-black-500;
-    font-family: "Inter", sans-serif;
+    @apply text-jf-black-500 text-base leading-5 font-medium;
+    font-family: 'Inter', sans-serif;
     font-optical-sizing: auto;
     font-variation-settings:
-      "slnt" 0,
-      "CRSV" 1,
-      "SHRP" 25;
+      'slnt' 0,
+      'CRSV' 1,
+      'SHRP' 25;
   }
 }
