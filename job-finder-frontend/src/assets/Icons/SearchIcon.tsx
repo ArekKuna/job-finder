@@ -1,4 +1,4 @@
-import { getIconStyles, IconStylesProps } from "assets/Icons/styles";
+import { getIconStyles, IconStylesProps } from 'assets/Icons/styles';
 
 export const SearchIcon = (props: IconStylesProps) => (
   <svg

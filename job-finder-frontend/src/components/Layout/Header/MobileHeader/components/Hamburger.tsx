@@ -1,5 +1,5 @@
-import { HamburgerIcon } from "assets/Icons/HamburgerIcon";
-import { Button } from "components/ui/Button";
+import { HamburgerIcon } from 'assets/Icons/HamburgerIcon';
+import { Button } from 'components/ui/Button';
 
 type Props = {
   onClick: () => void;

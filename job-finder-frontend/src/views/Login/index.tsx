@@ -1,11 +1,13 @@
-import { EyeOnIcon } from "assets/Icons/EyeOnIcon";
-import { EyeOffIcon } from "assets/Icons/EyeOffIcon";
-import { Input } from "components/ui/Input/Input";
-import { useUserAuthenticationForm } from "hooks/useUserAuthenticationForm/useUserAuthenticationForm";
-import { useState } from "react";
-import { Controller } from "react-hook-form";
+import { useState } from 'react';
 
-const LOGIN_URL = "auth/login";
+import { Controller } from 'react-hook-form';
+
+import { EyeOffIcon } from 'assets/Icons/EyeOffIcon';
+import { EyeOnIcon } from 'assets/Icons/EyeOnIcon';
+import { Input } from 'components/ui/Input/Input';
+import { useUserAuthenticationForm } from 'hooks/useUserAuthenticationForm/useUserAuthenticationForm';
+
+const LOGIN_URL = 'auth/login';
 
 export const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -14,15 +16,8 @@ export const Login = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  const {
-    control,
-    mutationLoading,
-    formErrors,
-    isError,
-    errorMessage,
-    handleSubmit,
-    onSubmit,
-  } = useUserAuthenticationForm({ route: LOGIN_URL });
+  const { control, mutationLoading, formErrors, isError, errorMessage, handleSubmit, onSubmit } =
+    useUserAuthenticationForm({ route: LOGIN_URL });
 
   const { email: emailError, password: passwordError } = formErrors;
 
@@ -30,15 +25,12 @@ export const Login = () => {
 
   return (
     <div>
-      <div className="pt-4 px-2 flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-4 px-2 pt-4">
         <h1 className="text-jf-header">Welcome Back!</h1>
         <p>New jobs are waiting—let’s go get ’em!</p>
       </div>
 
-      <form
-        onSubmit={handleSubmit((data) => onSubmit(data))}
-        className="p-4 flex flex-col gap-2"
-      >
+      <form onSubmit={handleSubmit((data) => onSubmit(data))} className="flex flex-col gap-2 p-4">
         <Controller
           name="email"
           control={control}
@@ -66,7 +58,7 @@ export const Login = () => {
               placeholder="password"
               label="Password"
               border="primary"
-              type={isPasswordVisible ? "text" : "password"}
+              type={isPasswordVisible ? 'text' : 'password'}
               sideElement={
                 isPasswordVisible ? (
                   <EyeOffIcon onClick={handlePasswordIconClick} />
@@ -75,9 +67,7 @@ export const Login = () => {
                 )
               }
               sideElementPosition="end"
-              error={
-                Boolean(passwordError?.message) || isError ? true : undefined
-              }
+              error={Boolean(passwordError?.message) || isError ? true : undefined}
               value={value}
               onChange={onChange}
             />
@@ -85,16 +75,12 @@ export const Login = () => {
         />
         <button
           disabled={mutationLoading}
-          className="w-full h-10 flex justify-center items-center rounded-lg text-jf-geologica-white bg-jf-purple-700"
+          className="text-jf-geologica-white bg-jf-purple-700 flex h-10 w-full items-center justify-center rounded-lg"
         >
           login
         </button>
 
-        {hasError && (
-          <span className="text-center text-jf-rose-700 text-xs">
-            {errorMessage}
-          </span>
-        )}
+        {hasError && <span className="text-jf-rose-700 text-center text-xs">{errorMessage}</span>}
       </form>
     </div>
   );

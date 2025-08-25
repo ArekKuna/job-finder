@@ -1,5 +1,6 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AppRoutes } from "views/Router";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { AppRoutes } from 'views/Router';
 
 const queryClient = new QueryClient();
 
