@@ -4,7 +4,7 @@ import { Controller } from 'react-hook-form';
 
 import { EyeOffIcon } from 'assets/Icons/EyeOffIcon';
 import { EyeOnIcon } from 'assets/Icons/EyeOnIcon';
-import { Input } from 'components/ui/Input/Input';
+import { Input } from 'components/ui/Input';
 import { useUserAuthenticationForm } from 'hooks/useUserAuthenticationForm/useUserAuthenticationForm';
 
 const LOGIN_URL = 'auth/login';
@@ -25,7 +25,7 @@ export const Login = () => {
 
   return (
     <div>
-      <div className="flex flex-col items-center gap-4 px-2 pt-4">
+      <div className="flex flex-col items-center gap-4 px-2">
         <h1 className="text-jf-header">Welcome Back!</h1>
         <p>New jobs are waiting—let’s go get ’em!</p>
       </div>
@@ -34,15 +34,14 @@ export const Login = () => {
         <Controller
           name="email"
           control={control}
-          render={({ field: { value, onChange } }) => (
+          render={({ field: { value, onChange }, fieldState: { error } }) => (
             <Input
               name="email"
               placeholder="email"
               label="Email"
-              border="primary"
               type="text"
               inputMode="email"
-              error={Boolean(emailError?.message) || isError ? true : undefined}
+              error={error?.message}
               value={value}
               onChange={onChange}
             />
@@ -52,22 +51,25 @@ export const Login = () => {
         <Controller
           name="password"
           control={control}
-          render={({ field: { value, onChange } }) => (
+          render={({ field: { value, onChange }, fieldState: { error } }) => (
             <Input
               name="password"
               placeholder="password"
               label="Password"
-              border="primary"
               type={isPasswordVisible ? 'text' : 'password'}
               sideElement={
                 isPasswordVisible ? (
-                  <EyeOffIcon onClick={handlePasswordIconClick} />
+                  <div onClick={handlePasswordIconClick}>
+                    <EyeOffIcon />
+                  </div>
                 ) : (
-                  <EyeOnIcon onClick={handlePasswordIconClick} />
+                  <div onClick={handlePasswordIconClick}>
+                    <EyeOnIcon />
+                  </div>
                 )
               }
               sideElementPosition="end"
-              error={Boolean(passwordError?.message) || isError ? true : undefined}
+              error={error?.message}
               value={value}
               onChange={onChange}
             />

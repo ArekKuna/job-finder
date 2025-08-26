@@ -69,15 +69,19 @@
   --color-jf-rose-700: #c43c35;
   --color-jf-rose-800: #a60000;
   --color-jf-rose-900: #7a0c0c;
+
+  --color-background: #ffffff;
+  --color-foreground: #000000;
+
+  --color-primary: #3b83f6;
+  --color-negative: #ef4343;
+  --color-base-font-color: #020817;
+  --color-border: #e4e4e7;
 }
 
 @layer base {
-  html {
-    @apply m-0 p-0;
-  }
-
-  body {
-    @apply text-jf-black-500 m-0 box-border p-0 text-base leading-5 font-normal;
+  * {
+    @apply bg-background border-border text-base-font-color m-0 box-border p-0 text-base leading-5 font-normal;
     font-family: 'Inter', sans-serif;
     font-optical-sizing: auto;
     font-variation-settings:
@@ -89,52 +93,42 @@
 
 @layer utilities {
   .font-paragraph-1 {
-    @apply text-jf-black-500 text-lg leading-5 font-normal;
-    font-family: 'Inter', sans-serif;
-    font-optical-sizing: auto;
-    font-variation-settings:
-      'slnt' 0,
-      'CRSV' 1,
-      'SHRP' 25;
+    @apply text-lg leading-5 font-normal;
   }
 
   .font-paragraph-2 {
-    @apply text-jf-black-500 text-base leading-5 font-normal;
-    font-family: 'Inter', sans-serif;
-    font-optical-sizing: auto;
-    font-variation-settings:
-      'slnt' 0,
-      'CRSV' 1,
-      'SHRP' 25;
+    @apply text-base leading-5 font-normal;
   }
 
   .font-paragraph-3 {
-    @apply text-jf-black-500 text-sm leading-5 font-normal;
-    font-family: 'Inter', sans-serif;
-    font-optical-sizing: auto;
-    font-variation-settings:
-      'slnt' 0,
-      'CRSV' 1,
-      'SHRP' 25;
+    @apply text-sm leading-5 font-normal;
+  }
+
+  .font-heading-1 {
+    @apply text-5xl leading-12 font-bold;
+  }
+
+  .font-heading-2 {
+    @apply text-3xl leading-8 font-bold;
+  }
+
+  .font-heading-3 {
+    @apply text-2xl leading-6 font-bold;
   }
 
   .font-caption {
     @apply text-jf-black-500 text-xs leading-5 font-normal;
-    font-family: 'Inter', sans-serif;
-    font-optical-sizing: auto;
-    font-variation-settings:
-      'slnt' 0,
-      'CRSV' 1,
-      'SHRP' 25;
   }
 
   .font-label {
-    @apply text-jf-black-500 text-base leading-5 font-medium;
-    font-family: 'Inter', sans-serif;
-    font-optical-sizing: auto;
-    font-variation-settings:
-      'slnt' 0,
-      'CRSV' 1,
-      'SHRP' 25;
+    @apply text-sm leading-4 font-medium;
+  }
+
+  .font-error {
+    @apply text-negative text-xs leading-4 font-medium;
+  }
+
+  .placeholder-font::placeholder {
+    @apply text-foreground/50 text-sm;
   }
 }

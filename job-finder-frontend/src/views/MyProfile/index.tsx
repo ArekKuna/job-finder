@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
 import { ProfileIcon } from 'assets/Icons/ProfileIcon';
-import { Input } from 'components/ui/Input/Input';
+import { Input } from 'components/ui/Input';
 import { GetMeResponseDto } from 'generated/api-types';
 import { useCustomMutation } from 'hooks/useCustomMutation/useCustomMutation';
 import { useCustomQuery } from 'hooks/useCustomQuery/useCustomQuery';

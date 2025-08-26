@@ -31,4 +31,5 @@ export type HTMLInputProps = Pick<
   | 'onPaste'
   | 'type'
   | 'accept'
+  | 'value'
 >;
