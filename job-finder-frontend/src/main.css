@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 @import 'tailwindcss';
 
@@ -72,16 +72,17 @@
 
   --color-background: #ffffff;
   --color-foreground: #000000;
-
-  --color-primary: #3b83f6;
+  --color-muted-foreground: #71717a;
+  --color-primary: #6467f2;
   --color-negative: #ef4343;
+
   --color-base-font-color: #020817;
   --color-border: #e4e4e7;
 }
 
 @layer base {
   * {
-    @apply bg-background border-border text-base-font-color m-0 box-border p-0 text-base leading-5 font-normal;
+    @apply bg-background border-border m-0 box-border p-0 text-base leading-5 font-normal;
     font-family: 'Inter', sans-serif;
     font-optical-sizing: auto;
     font-variation-settings:
@@ -93,39 +94,51 @@
 
 @layer utilities {
   .font-paragraph-1 {
-    @apply text-lg leading-5 font-normal;
+    @apply text-base-font-color text-lg leading-6 font-normal tracking-tight;
   }
 
   .font-paragraph-2 {
-    @apply text-base leading-5 font-normal;
+    @apply text-base-font-color text-base leading-5 font-normal tracking-tight;
+  }
+
+  .font-paragraph-2-muted {
+    @apply text-muted-foreground text-base leading-5 font-normal tracking-tight;
   }
 
   .font-paragraph-3 {
-    @apply text-sm leading-5 font-normal;
+    @apply text-base-font-color text-sm leading-4 font-normal tracking-tight;
+  }
+
+  .font-paragraph-3-muted {
+    @apply text-muted-foreground text-sm leading-4 font-normal tracking-tight;
+  }
+
+  .font-paragraph-3-primary {
+    @apply text-primary text-sm leading-4 font-normal tracking-tight;
   }
 
   .font-heading-1 {
-    @apply text-5xl leading-12 font-bold;
+    @apply text-base-font-color text-5xl leading-12 font-semibold tracking-tight;
   }
 
   .font-heading-2 {
-    @apply text-3xl leading-8 font-bold;
+    @apply text-base-font-color text-3xl leading-9 font-semibold tracking-tight;
   }
 
   .font-heading-3 {
-    @apply text-2xl leading-6 font-bold;
+    @apply text-base-font-color text-2xl leading-6 font-semibold tracking-tight;
   }
 
   .font-caption {
-    @apply text-jf-black-500 text-xs leading-5 font-normal;
+    @apply text-base-font-color text-xs leading-3 font-normal tracking-tight;
   }
 
   .font-label {
-    @apply text-sm leading-4 font-medium;
+    @apply text-base-font-color text-sm leading-4 font-medium tracking-tight;
   }
 
   .font-error {
-    @apply text-negative text-xs leading-4 font-medium;
+    @apply text-negative text-xs leading-3 font-medium tracking-tight;
   }
 
   .placeholder-font::placeholder {

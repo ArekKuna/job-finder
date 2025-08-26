@@ -12,7 +12,7 @@ export const Layout = ({ children }: Props) => {
   return (
     <>
       <Header />
-      <div className="min-h-[2000px] pt-[74px]">{children}</div>
+      <div className="pt-[74px]">{children}</div>
       <Footer />
     </>
   );

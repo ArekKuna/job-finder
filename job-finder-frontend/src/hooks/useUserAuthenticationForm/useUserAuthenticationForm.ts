@@ -3,7 +3,6 @@ import { useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { httpErrorFallback, httpErrorMap } from 'common/errorMap/errorMap';
 import { UserAuthenticationResponseDto, UserCredentialsDto } from 'generated/api-types';
 import { authStatusAtom } from 'hooks/useAuthorization/authAtom';
 import { useCustomMutation } from 'hooks/useCustomMutation/useCustomMutation';
@@ -12,31 +11,20 @@ import {
   userAuthenticationSchemaType,
 } from 'hooks/useUserAuthenticationForm/utils';
 
-type Props = {
-  route: string;
-};
+const LOGIN_URL = 'auth/login';
 
-export const useUserAuthenticationForm = ({ route }: Props) => {
+export const useUserAuthenticationForm = () => {
   const [, setAuthStatus] = useAtom(authStatusAtom);
 
   const navigate = useNavigate();
 
-  const {
-    isPending: mutationLoading,
-    isError,
-    error: mutationError,
-    mutateAsync,
-  } = useCustomMutation<UserAuthenticationResponseDto, UserCredentialsDto>({
-    route,
+  const { mutateAsync } = useCustomMutation<UserAuthenticationResponseDto, UserCredentialsDto>({
+    route: LOGIN_URL,
     method: 'POST',
     key: ['authStatus'],
   });
 
-  const {
-    control,
-    formState: { errors: formErrors },
-    handleSubmit,
-  } = useForm<userAuthenticationSchemaType>({
+  const { control, handleSubmit } = useForm<userAuthenticationSchemaType>({
     resolver: zodResolver(userAuthenticationSchema),
     mode: 'onSubmit',
     defaultValues: {
@@ -44,13 +32,6 @@ export const useUserAuthenticationForm = ({ route }: Props) => {
       password: '',
     },
   });
-
-  const { email: emailError, password: passwordError } = formErrors;
-
-  const errorMessage =
-    httpErrorMap[mutationError?.message ?? httpErrorFallback] ||
-    emailError?.message ||
-    passwordError?.message;
 
   const onSubmit = async (formData: userAuthenticationSchemaType) => {
     const response = await mutateAsync(formData);
@@ -66,10 +47,6 @@ export const useUserAuthenticationForm = ({ route }: Props) => {
 
   return {
     control,
-    formErrors,
-    mutationLoading,
-    isError,
-    errorMessage,
     handleSubmit,
     onSubmit,
   };
