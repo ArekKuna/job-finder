@@ -1,5 +1,7 @@
 import { PropsWithChildren } from 'react';
 
+import { Toaster } from 'react-hot-toast';
+
 import { Footer } from 'components/Layout/Footer/Footer';
 import { Header } from 'components/Layout/Header';
 import { useCheckAuthStatus } from 'hooks/useAuthorization/useAuthorization';
@@ -12,7 +14,8 @@ export const Layout = ({ children }: Props) => {
   return (
     <>
       <Header />
-      <div className="min-h-[2000px] pt-[72px]">{children}</div>
+      <Toaster />
+      <div className="pt-[74px]">{children}</div>
       <Footer />
     </>
   );

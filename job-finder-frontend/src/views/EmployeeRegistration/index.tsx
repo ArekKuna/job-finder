@@ -4,8 +4,8 @@ import { Controller } from 'react-hook-form';
 
 import { EyeOffIcon } from 'assets/Icons/EyeOffIcon';
 import { EyeOnIcon } from 'assets/Icons/EyeOnIcon';
-import { Input } from 'components/ui/Input/Input';
-import { useUserAuthenticationForm } from 'hooks/useUserAuthenticationForm/useUserAuthenticationForm';
+import { Input } from 'components/ui/Input';
+import { useUserAuthenticationForm } from 'views/Login/hooks/useUserAuthenticationForm';
 
 const SIGNUP_URL = 'users/employee/signup';
 
@@ -39,7 +39,6 @@ export const EmployeeRegistration = () => {
               name="email"
               placeholder="email"
               label="Email"
-              border="primary"
               type="text"
               inputMode="email"
               error={Boolean(emailError?.message) || isError ? true : undefined}
@@ -57,7 +56,6 @@ export const EmployeeRegistration = () => {
               name="password"
               placeholder="password"
               label="Password"
-              border="primary"
               type={isPasswordVisible ? 'text' : 'password'}
               sideElement={
                 isPasswordVisible ? (

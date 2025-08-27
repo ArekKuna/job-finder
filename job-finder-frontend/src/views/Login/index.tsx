@@ -1,13 +1,15 @@
 import { useState } from 'react';
 
 import { Controller } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
+import { BriefcaseIcon } from 'assets/Icons/BriefcaseIcon';
 import { EyeOffIcon } from 'assets/Icons/EyeOffIcon';
 import { EyeOnIcon } from 'assets/Icons/EyeOnIcon';
-import { Input } from 'components/ui/Input/Input';
-import { useUserAuthenticationForm } from 'hooks/useUserAuthenticationForm/useUserAuthenticationForm';
-
-const LOGIN_URL = 'auth/login';
+import { Button } from 'components/ui/Button';
+import { Card } from 'components/ui/Card';
+import { Input } from 'components/ui/Input';
+import { useUserAuthenticationForm } from 'views/Login/hooks/useUserAuthenticationForm';
 
 export const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -16,72 +18,90 @@ export const Login = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  const { control, mutationLoading, formErrors, isError, errorMessage, handleSubmit, onSubmit } =
-    useUserAuthenticationForm({ route: LOGIN_URL });
-
-  const { email: emailError, password: passwordError } = formErrors;
-
-  const hasError = isError || Boolean(emailError || passwordError);
+  const { control, handleSubmit, onSubmit } = useUserAuthenticationForm();
 
   return (
-    <div>
-      <div className="flex flex-col items-center gap-4 px-2 pt-4">
-        <h1 className="text-jf-header">Welcome Back!</h1>
-        <p>New jobs are waiting—let’s go get ’em!</p>
-      </div>
+    <div className="px-6 py-14">
+      <section>
+        <Card>
+          <div className="flex flex-col items-center gap-4">
+            <BriefcaseIcon />
+            <div className="flex flex-col items-center gap-2 text-center">
+              <h1 className="font-heading-2">Welcome Back</h1>
+              <p className="font-paragraph-2-muted">Sign in to your JobFinder account</p>
+            </div>
+          </div>
 
-      <form onSubmit={handleSubmit((data) => onSubmit(data))} className="flex flex-col gap-2 p-4">
-        <Controller
-          name="email"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <Input
+          <form onSubmit={handleSubmit((data) => onSubmit(data))} className="flex flex-col gap-4">
+            <Controller
               name="email"
-              placeholder="email"
-              label="Email"
-              border="primary"
-              type="text"
-              inputMode="email"
-              error={Boolean(emailError?.message) || isError ? true : undefined}
-              value={value}
-              onChange={onChange}
+              control={control}
+              render={({ field: { value, onChange }, fieldState: { error } }) => (
+                <Input
+                  name="email"
+                  placeholder="email"
+                  label="Email"
+                  type="email"
+                  inputMode="email"
+                  autoCapitalize="none"
+                  value={value}
+                  error={error?.message}
+                  onChange={(e) => onChange(e.target.value.trim())}
+                />
+              )}
             />
-          )}
-        />
 
-        <Controller
-          name="password"
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <Input
+            <Controller
               name="password"
-              placeholder="password"
-              label="Password"
-              border="primary"
-              type={isPasswordVisible ? 'text' : 'password'}
-              sideElement={
-                isPasswordVisible ? (
-                  <EyeOffIcon onClick={handlePasswordIconClick} />
-                ) : (
-                  <EyeOnIcon onClick={handlePasswordIconClick} />
-                )
-              }
-              sideElementPosition="end"
-              error={Boolean(passwordError?.message) || isError ? true : undefined}
-              value={value}
-              onChange={onChange}
+              control={control}
+              render={({ field: { value, onChange }, fieldState: { error } }) => (
+                <Input
+                  name="password"
+                  placeholder="password"
+                  label="Password"
+                  type={isPasswordVisible ? 'text' : 'password'}
+                  sideElement={
+                    isPasswordVisible ? (
+                      <div className="text-primary h-full w-full" onClick={handlePasswordIconClick}>
+                        <EyeOffIcon />
+                      </div>
+                    ) : (
+                      <div className="text-primary h-full w-full" onClick={handlePasswordIconClick}>
+                        <EyeOnIcon />
+                      </div>
+                    )
+                  }
+                  sideElementPosition="end"
+                  value={value}
+                  error={error?.message}
+                  onChange={onChange}
+                />
+              )}
             />
-          )}
-        />
-        <button
-          disabled={mutationLoading}
-          className="text-jf-geologica-white bg-jf-purple-700 flex h-10 w-full items-center justify-center rounded-lg"
-        >
-          login
-        </button>
 
-        {hasError && <span className="text-jf-rose-700 text-center text-xs">{errorMessage}</span>}
-      </form>
+            <Link to="/password-recovery">
+              <p className="font-paragraph-3-primary text-center hover:underline">
+                Forgot password?
+              </p>
+            </Link>
+
+            <Button text="Sign In" />
+
+            <div className="text-center">
+              <p className="font-paragraph-3-muted">
+                Don't have an account?
+                <Link
+                  className="font-paragraph-3-primary font-medium! hover:underline"
+                  to="/get-started"
+                >
+                  {' '}
+                  Create one here
+                </Link>
+              </p>
+            </div>
+          </form>
+        </Card>
+      </section>
     </div>
   );
 };
