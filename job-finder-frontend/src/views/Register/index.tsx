@@ -64,7 +64,7 @@ export const Register = () => {
           <div className="flex flex-col gap-8">
             {activeCard && (
               <Button
-                text={`Continue as ${activeCard}`}
+                text={`Continue as ${activeCard === 'employee' ? 'Job Seeker' : 'Employer'}`}
                 onClick={() =>
                   navigate(
                     `/${activeCard === 'employee' ? 'employee-registration' : 'employer-registration'}`,
