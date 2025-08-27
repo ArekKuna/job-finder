@@ -74,9 +74,9 @@ export const Register = () => {
             )}
 
             <div className="text-center">
-              <p className="font-paragraph-2-muted">
+              <p className="font-paragraph-3-muted">
                 Already have an account?
-                <Link className="font-paragraph-2-primary font-medium! hover:underline" to="/login">
+                <Link className="font-paragraph-3-primary font-medium! hover:underline" to="/login">
                   {' '}
                   Sign in here
                 </Link>

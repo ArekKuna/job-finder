@@ -8,11 +8,11 @@ import { UserAuthenticationResponseDto, UserCredentialsDto } from 'generated/api
 import { authStatusAtom } from 'hooks/useAuthorization/authAtom';
 import { useCustomMutation } from 'hooks/useCustomMutation/useCustomMutation';
 import { useToast } from 'hooks/useToast';
-import { userAuthenticationSchema, userAuthenticationSchemaType } from 'views/Login/hooks/utils';
+import { userLoginSchema, UserLoginSchemaType } from 'views/Login/hooks/utils';
 
 const LOGIN_URL = 'auth/login';
 
-export const useUserAuthenticationForm = () => {
+export const useUserLoginForm = () => {
   const [, setAuthStatus] = useAtom(authStatusAtom);
 
   const navigate = useNavigate();
@@ -26,16 +26,15 @@ export const useUserAuthenticationForm = () => {
     key: ['authStatus'],
   });
 
-  const { control, handleSubmit } = useForm<userAuthenticationSchemaType>({
-    resolver: zodResolver(userAuthenticationSchema),
-    mode: 'onSubmit',
+  const { control, handleSubmit } = useForm<UserLoginSchemaType>({
+    resolver: zodResolver(userLoginSchema),
     defaultValues: {
       email: '',
       password: '',
     },
   });
 
-  const onSubmit = async (formData: userAuthenticationSchemaType) => {
+  const onSubmit = async (formData: UserLoginSchemaType) => {
     await promise(mutateAsync(formData), {
       error: (err: unknown) => {
         const error = err as Error;
