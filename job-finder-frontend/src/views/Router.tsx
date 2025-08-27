@@ -7,6 +7,7 @@ import { JobBoard } from 'views/JobBoard';
 import { Login } from 'views/Login';
 import { UserSettings } from 'views/UserSettings';
 
+import { ScrollToTop } from 'common/ScrollToTop';
 import { RouteWrapper } from 'components/RouteWrapper/RouteWrapper';
 import { Home } from 'views/Home';
 import { MyProfile } from 'views/MyProfile';
@@ -16,6 +17,7 @@ import { Register } from 'views/Register';
 export const AppRoutes = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <RouteWrapper>
         <Routes>
           <Route index element={<Home />} />
