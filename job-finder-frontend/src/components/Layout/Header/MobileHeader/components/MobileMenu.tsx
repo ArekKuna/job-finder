@@ -92,7 +92,7 @@ export const MobileMenu = ({ onClose }: Props) => {
             text="Get Started"
             onClick={() => {
               onClose();
-              navigate('/get-started');
+              navigate('/register');
             }}
           />
         </div>
