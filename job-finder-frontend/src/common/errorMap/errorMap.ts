@@ -6,7 +6,7 @@ export const httpErrorMap: Record<string, string> = {
   '409': 'Conflict. The request could not be completed due to a conflict',
   '500': 'Internal server error. Please try again later',
   '503': 'Service unavailable. Please try again later',
-  'Failed to fetch': 'Error occurred. Check your internet connection',
+  'Failed to fetch': 'Something went wrong',
 };
 
 export const httpErrorFallback = 'An unexpected error occurred. Please try again';

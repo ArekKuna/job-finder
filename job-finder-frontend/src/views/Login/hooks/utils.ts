@@ -4,7 +4,8 @@ export const userAuthenticationSchema = z.object({
   email: z
     .string()
     .email({ message: 'Enter valid email' })
-    .min(1, { message: 'This field is required' }),
+    .min(1, { message: 'This field is required' })
+    .trim(),
   password: z
     .string()
     .min(8, 'Password must be at least 8 characters')

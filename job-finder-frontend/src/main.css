@@ -74,7 +74,9 @@
   --color-foreground: #000000;
   --color-muted-foreground: #71717a;
   --color-primary: #6467f2;
+  --color-success: #21c45d;
   --color-negative: #ef4343;
+  --color-warn: #ecc94b;
 
   --color-base-font-color: #020817;
   --color-border: #e4e4e7;
@@ -82,7 +84,7 @@
 
 @layer base {
   * {
-    @apply bg-background border-border m-0 box-border p-0 text-base leading-5 font-normal;
+    @apply border-border m-0 box-border p-0 text-base leading-5 font-normal;
     font-family: 'Inter', sans-serif;
     font-optical-sizing: auto;
     font-variation-settings:

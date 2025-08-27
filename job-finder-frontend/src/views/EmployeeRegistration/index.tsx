@@ -5,7 +5,7 @@ import { Controller } from 'react-hook-form';
 import { EyeOffIcon } from 'assets/Icons/EyeOffIcon';
 import { EyeOnIcon } from 'assets/Icons/EyeOnIcon';
 import { Input } from 'components/ui/Input';
-import { useUserAuthenticationForm } from 'hooks/useUserAuthenticationForm/useUserAuthenticationForm';
+import { useUserAuthenticationForm } from 'views/Login/hooks/useUserAuthenticationForm';
 
 const SIGNUP_URL = 'users/employee/signup';
 

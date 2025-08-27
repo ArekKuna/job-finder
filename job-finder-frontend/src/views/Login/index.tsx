@@ -9,7 +9,7 @@ import { EyeOnIcon } from 'assets/Icons/EyeOnIcon';
 import { Button } from 'components/ui/Button';
 import { Card } from 'components/ui/Card';
 import { Input } from 'components/ui/Input';
-import { useUserAuthenticationForm } from 'hooks/useUserAuthenticationForm/useUserAuthenticationForm';
+import { useUserAuthenticationForm } from 'views/Login/hooks/useUserAuthenticationForm';
 
 export const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -41,11 +41,12 @@ export const Login = () => {
                   name="email"
                   placeholder="email"
                   label="Email"
-                  type="text"
+                  type="email"
                   inputMode="email"
+                  autoCapitalize="none"
                   value={value}
                   error={error?.message}
-                  onChange={onChange}
+                  onChange={(e) => onChange(e.target.value.trim())}
                 />
               )}
             />
@@ -88,11 +89,12 @@ export const Login = () => {
 
             <div className="text-center">
               <p className="font-paragraph-3-muted">
-                Don't have an account?{' '}
+                Don't have an account?
                 <Link
                   className="font-paragraph-3-primary font-medium! hover:underline"
                   to="/get-started"
                 >
+                  {' '}
                   Create one here
                 </Link>
               </p>

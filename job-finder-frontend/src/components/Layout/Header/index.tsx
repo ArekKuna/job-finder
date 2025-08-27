@@ -28,7 +28,7 @@ export const Header = () => {
         y: hidden ? '-100%' : '0%',
       }}
       transition={{ duration: 0.1 }}
-      className="fixed top-0 z-50 w-full border p-2 transition-all"
+      className="bg-background fixed top-0 z-50 w-full border p-2 transition-all"
     >
       <nav className="flex items-center justify-between">
         <Link to="/">
