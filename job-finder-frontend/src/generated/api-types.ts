@@ -9,11 +9,26 @@
  * ---------------------------------------------------------------
  */
 
-export interface UserCredentialsDto {
-  /** User email */
+export interface RegisterEmployeeDto {
+  /** User first name */
+  firstName: string;
+  /** User last name */
+  lastName: string;
+  /** User e-mail */
   email: string;
   /** User password */
   password: string;
+  /** User phone number */
+  phoneNumber: string;
+  /** User location */
+  location: string;
+  /** User professional title */
+  professionalTitle: string;
+  /**
+   * User bio
+   * @default null
+   */
+  bio?: string | null;
 }
 
 export interface UserAuthenticationResponseDto {
@@ -40,6 +55,13 @@ export interface GetMeResponseDto {
    * @format date-time
    */
   updatedAt: string;
+}
+
+export interface UserCredentialsDto {
+  /** User email */
+  email: string;
+  /** User password */
+  password: string;
 }
 
 export interface UploadUserAvatarDto {
@@ -292,29 +314,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags users
      * @name UsersControllerCreateEmployee
      * @summary Create a new employee user
-     * @request POST:/users/employee/signup
+     * @request POST:/users/register/employee
      */
-    usersControllerCreateEmployee: (data: UserCredentialsDto, params: RequestParams = {}) =>
+    usersControllerCreateEmployee: (data: RegisterEmployeeDto, params: RequestParams = {}) =>
       this.request<UserAuthenticationResponseDto, void>({
-        path: `/users/employee/signup`,
-        method: 'POST',
-        body: data,
-        type: ContentType.Json,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags users
-     * @name UsersControllerCreateEmployer
-     * @summary Create a new employer user
-     * @request POST:/users/employer/signup
-     */
-    usersControllerCreateEmployer: (data: UserCredentialsDto, params: RequestParams = {}) =>
-      this.request<UserAuthenticationResponseDto, void>({
-        path: `/users/employer/signup`,
+        path: `/users/register/employee`,
         method: 'POST',
         body: data,
         type: ContentType.Json,

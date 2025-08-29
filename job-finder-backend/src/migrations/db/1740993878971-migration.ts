@@ -9,6 +9,12 @@ export class Db1740956670526 implements MigrationInterface {
 
         CREATE TABLE users (
           id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+          first_name VARCHAR NOT NULL,
+          last_name VARCHAR NOT NULL,
+          phone_number VARCHAR NOT NULL,
+          location VARCHAR NOT NULL,
+          professional_title VARCHAR NOT NULL,
+          bio VARCHAR DEFAULT NULL,
           email VARCHAR NOT NULL UNIQUE,
           password VARCHAR NOT NULL,
           avatar_url VARCHAR DEFAULT NULL,

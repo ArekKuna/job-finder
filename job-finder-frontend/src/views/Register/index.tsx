@@ -13,7 +13,7 @@ export const Register = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="px-6 py-16">
+    <section className="mx-auto max-w-2xl px-6 py-16">
       <div className="flex flex-col gap-12">
         <div className="flex flex-col gap-4 text-center">
           <h1 className="font-heading-1">Join JobFinder</h1>

@@ -21,7 +21,7 @@ export const Login = () => {
   const { control, handleSubmit, onSubmit } = useUserLoginForm();
 
   return (
-    <section className="px-6 py-16">
+    <section className="mx-auto max-w-md px-6 py-16">
       <Card>
         <div className="flex flex-col items-center gap-4">
           <BriefcaseIcon />
@@ -32,7 +32,7 @@ export const Login = () => {
         </div>
 
         <form onSubmit={handleSubmit((data) => onSubmit(data))} className="flex flex-col gap-6">
-          <div className="flex flex-col gap-4"> 
+          <div className="flex flex-col gap-4">
             <Controller
               name="email"
               control={control}

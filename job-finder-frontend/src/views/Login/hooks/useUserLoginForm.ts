@@ -15,16 +15,17 @@ const LOGIN_URL = 'auth/login';
 export const useUserLoginForm = () => {
   const [, setAuthStatus] = useAtom(authStatusAtom);
 
-  const navigate = useNavigate();
-  const {
-    toaster: { promise },
-  } = useToast();
-
   const { mutateAsync } = useCustomMutation<UserAuthenticationResponseDto, UserCredentialsDto>({
     route: LOGIN_URL,
     method: 'POST',
     key: ['authStatus'],
   });
+
+  const navigate = useNavigate();
+
+  const {
+    toaster: { promise },
+  } = useToast();
 
   const { control, handleSubmit } = useForm<UserLoginSchemaType>({
     resolver: zodResolver(userLoginSchema),
@@ -39,7 +40,7 @@ export const useUserLoginForm = () => {
       error: (err: unknown) => {
         const error = err as Error;
 
-        return httpErrorMap[error.message ?? 'Failed to fetch'];
+        return httpErrorMap[error.message];
       },
       loading: 'Signing in',
       success: () => {

@@ -34,7 +34,7 @@ export const EmployeeRegistration = () => {
   }, [confirmPassword, password, trigger]);
 
   return (
-    <section className="px-6 py-16">
+    <section className="mx-auto max-w-2xl px-6 py-16">
       <Card>
         <div className="flex justify-center">
           <PeopleIcon />
@@ -47,7 +47,7 @@ export const EmployeeRegistration = () => {
           </p>
         </div>
 
-        <form className="flex flex-col gap-6" onSubmit={handleSubmit((data) => onSubmit(data))}>
+        <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-4">
             <Controller
               name="firstName"
@@ -56,7 +56,7 @@ export const EmployeeRegistration = () => {
                 <Input
                   name="firstName"
                   placeholder="first name"
-                  label="First name"
+                  label="First name*"
                   type="text"
                   inputMode="text"
                   value={value}
@@ -73,7 +73,7 @@ export const EmployeeRegistration = () => {
                 <Input
                   name="lastName"
                   placeholder="last name"
-                  label="Last name"
+                  label="Last name*"
                   type="text"
                   inputMode="text"
                   value={value}
@@ -90,8 +90,8 @@ export const EmployeeRegistration = () => {
                 <Input
                   name="email"
                   placeholder="email"
-                  label="Email"
-                  type="email"
+                  label="Email*"
+                  type="text"
                   inputMode="email"
                   value={value}
                   error={error?.message}
@@ -107,7 +107,7 @@ export const EmployeeRegistration = () => {
                 <Input
                   name="password"
                   placeholder="password"
-                  label="Password"
+                  label="Password*"
                   type={isPasswordVisible ? 'text' : 'password'}
                   sideElement={
                     isPasswordVisible ? (
@@ -138,7 +138,7 @@ export const EmployeeRegistration = () => {
                 <Input
                   name="confirmPassword"
                   placeholder="password"
-                  label="Confirm password"
+                  label="Confirm password*"
                   type={isConfirmPasswordVisible ? 'text' : 'password'}
                   sideElement={
                     isConfirmPasswordVisible ? (
@@ -175,7 +175,7 @@ export const EmployeeRegistration = () => {
                 <Input
                   name="phoneNumber"
                   placeholder="phone number"
-                  label="Phone number"
+                  label="Phone number*"
                   type="number"
                   inputMode="tel"
                   value={value}
@@ -191,8 +191,8 @@ export const EmployeeRegistration = () => {
               render={({ field: { value, onChange }, fieldState: { error } }) => (
                 <Input
                   name="location"
-                  placeholder="city, state"
-                  label="Location"
+                  placeholder="city, state, country"
+                  label="Location*"
                   type="text"
                   inputMode="text"
                   value={value}
@@ -209,26 +209,9 @@ export const EmployeeRegistration = () => {
                 <Input
                   name="professionalTitle"
                   placeholder="e.g. Frontend Developer"
-                  label="Professional title"
+                  label="Professional title*"
                   type="text"
                   inputMode="text"
-                  value={value}
-                  error={error?.message}
-                  onChange={onChange}
-                />
-              )}
-            />
-
-            <Controller
-              name="experience"
-              control={control}
-              render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
-                  name="experience"
-                  placeholder="e.g. 3-5 years"
-                  label="Years of experience"
-                  type="number"
-                  inputMode="numeric"
                   value={value}
                   error={error?.message}
                   onChange={onChange}
@@ -246,7 +229,7 @@ export const EmployeeRegistration = () => {
                   label="Bio"
                   type="text"
                   inputMode="text"
-                  value={value}
+                  value={value ?? ''}
                   error={error?.message}
                   onChange={onChange}
                 />

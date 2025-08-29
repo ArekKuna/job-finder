@@ -22,8 +22,7 @@ export const employeeRegistrationSchema = z
     phoneNumber: z.string().min(1, { message: 'This field is required' }),
     location: z.string().min(1, { message: 'This field is required' }),
     professionalTitle: z.string().min(1, { message: 'This field is required' }),
-    experience: z.string().min(1, { message: 'This field is required' }),
-    bio: z.string().min(1, { message: 'This field is required' }),
+    bio: z.string().nullable(),
   })
   .superRefine(({ password, confirmPassword }, ctx) => {
     if (password !== confirmPassword) {
@@ -49,7 +48,6 @@ export const employeeRegistrationFormDefaults: EmployeeRegistrationSchemaType = 
   phoneNumber: '',
   location: '',
   professionalTitle: '',
-  experience: '',
   bio: '',
 };
 

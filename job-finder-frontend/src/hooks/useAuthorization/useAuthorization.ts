@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef } from 'react';
 
 import { useAtom } from 'jotai';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 import { UserAuthenticationResponseDto } from 'generated/api-types';
 import { authStatusAtom } from 'hooks/useAuthorization/authAtom';
@@ -35,9 +36,12 @@ export const useCheckAuthStatus = () => {
 export const useLogout = () => {
   const [, setAuthorizationStatus] = useAtom(authStatusAtom);
 
+  const navigate = useNavigate();
+
   const logout = () => {
     Cookies.remove('JWT');
     setAuthorizationStatus('UNAUTHORIZED');
+    navigate('/');
   };
 
   return logout;
