@@ -25,15 +25,46 @@ export interface RegisterEmployeeDto {
   /** User professional title */
   professionalTitle: string;
   /**
-   * User bio
+   * User short description
    * @default null
    */
-  bio?: string | null;
+  description?: string | null;
 }
 
 export interface UserAuthenticationResponseDto {
   /** User JWT token */
   jwtToken: string;
+}
+
+export interface RegisterEmployerDto {
+  /** User first name */
+  firstName: string;
+  /** User last name */
+  lastName: string;
+  /** User e-mail */
+  email: string;
+  /** User password */
+  password: string;
+  /** User company name */
+  companyName: string;
+  /**
+   * User company size
+   * @example "SMALL"
+   */
+  companySize: 'MIKRO' | 'SMALL' | 'MEDIUM' | 'LARGE' | 'EXTRA_LARGE' | 'CORPORATE';
+  /** User company main industry */
+  industry: string;
+  /** User company main website address */
+  companyWebsite: string;
+  /** User phone number */
+  phoneNumber: string;
+  /** User company location */
+  location: string;
+  /**
+   * User company description
+   * @default null
+   */
+  description?: string | null;
 }
 
 export interface GetMeResponseDto {
@@ -319,6 +350,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     usersControllerCreateEmployee: (data: RegisterEmployeeDto, params: RequestParams = {}) =>
       this.request<UserAuthenticationResponseDto, void>({
         path: `/users/register/employee`,
+        method: 'POST',
+        body: data,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags users
+     * @name UsersControllerCreateEmployer
+     * @summary Create a new employer user
+     * @request POST:/users/register/employer
+     */
+    usersControllerCreateEmployer: (data: RegisterEmployerDto, params: RequestParams = {}) =>
+      this.request<UserAuthenticationResponseDto, void>({
+        path: `/users/register/employer`,
         method: 'POST',
         body: data,
         type: ContentType.Json,

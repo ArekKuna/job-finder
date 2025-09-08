@@ -1,6 +1,10 @@
 import { z } from 'zod';
 
-export const employeeRegistrationSchema = z
+const companySizeEnum = z.enum(['MIKRO', 'SMALL', 'MEDIUM', 'LARGE', 'EXTRA_LARGE', 'CORPORATE'], {
+  message: 'Choose one of specified options',
+});
+
+export const employerRegistrationSchema = z
   .object({
     firstName: z.string().min(1, { message: 'This field is required' }),
     lastName: z.string().min(1, { message: 'This field is required' }),
@@ -19,9 +23,12 @@ export const employeeRegistrationSchema = z
       .min(8, 'Password must be at least 8 characters')
       .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
       .regex(/[\W_]/, 'Password must contain at least one special character'),
+    companyName: z.string().min(1, { message: 'This field is required' }),
+    companySize: companySizeEnum,
+    industry: z.string().min(1, { message: 'This field is required' }),
+    companyWebsite: z.string().min(1, { message: 'This field is required' }),
     phoneNumber: z.string().min(1, { message: 'This field is required' }),
     location: z.string().min(1, { message: 'This field is required' }),
-    professionalTitle: z.string().min(1, { message: 'This field is required' }),
     description: z.string().nullable(),
   })
   .superRefine(({ password, confirmPassword }, ctx) => {
@@ -39,16 +46,19 @@ export const employeeRegistrationSchema = z
     }
   });
 
-export const employeeRegistrationFormDefaults: EmployeeRegistrationSchemaType = {
+export const employerRegistrationFormDefaults: EmployerRegistrationSchemaType = {
   firstName: '',
   lastName: '',
   email: '',
   password: '',
   confirmPassword: '',
+  companyName: '',
+  companySize: 'MEDIUM',
+  industry: '',
+  companyWebsite: '',
   phoneNumber: '',
   location: '',
-  professionalTitle: '',
   description: '',
 };
 
-export type EmployeeRegistrationSchemaType = z.infer<typeof employeeRegistrationSchema>;
+export type EmployerRegistrationSchemaType = z.infer<typeof employerRegistrationSchema>;

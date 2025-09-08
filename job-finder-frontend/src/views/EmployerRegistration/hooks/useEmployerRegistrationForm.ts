@@ -4,30 +4,30 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { httpErrorMap } from 'common/errorMap/errorMap';
-import { RegisterEmployeeDto, UserAuthenticationResponseDto } from 'generated/api-types';
+import { RegisterEmployerDto, UserAuthenticationResponseDto } from 'generated/api-types';
 import { authStatusAtom } from 'hooks/useAuthorization/authAtom';
 import { useCustomMutation } from 'hooks/useCustomMutation/useCustomMutation';
 import { useToast } from 'hooks/useToast';
 import {
-  employeeRegistrationFormDefaults,
-  employeeRegistrationSchema,
-  EmployeeRegistrationSchemaType,
-} from 'views/EmployeeRegistration/hooks/utils';
+  employerRegistrationFormDefaults,
+  employerRegistrationSchema,
+  EmployerRegistrationSchemaType,
+} from 'views/EmployerRegistration/hooks/utils';
 
-const EMPLOYEE_REGISTRATION_ROUTE = 'users/register/employee';
+const EMPLOYER_REGISTRATION_ROUTE = 'users/register/employer';
 
-export const useEmployeeRegistrationForm = () => {
+export const useEmployerRegistrationForm = () => {
   const [, setAuthStatus] = useAtom(authStatusAtom);
 
-  const { mutateAsync } = useCustomMutation<UserAuthenticationResponseDto, RegisterEmployeeDto>({
-    route: EMPLOYEE_REGISTRATION_ROUTE,
+  const { mutateAsync } = useCustomMutation<UserAuthenticationResponseDto, RegisterEmployerDto>({
+    route: EMPLOYER_REGISTRATION_ROUTE,
     method: 'POST',
     key: ['authStatus'],
   });
 
-  const { control, handleSubmit, trigger, watch } = useForm<EmployeeRegistrationSchemaType>({
-    resolver: zodResolver(employeeRegistrationSchema),
-    defaultValues: employeeRegistrationFormDefaults,
+  const { control, handleSubmit, trigger, watch } = useForm<EmployerRegistrationSchemaType>({
+    resolver: zodResolver(employerRegistrationSchema),
+    defaultValues: employerRegistrationFormDefaults,
   });
 
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export const useEmployeeRegistrationForm = () => {
     toaster: { promise },
   } = useToast();
 
-  const onSubmit = async (formData: EmployeeRegistrationSchemaType) => {
+  const onSubmit = async (formData: EmployerRegistrationSchemaType) => {
     await promise(mutateAsync(formData), {
       error: (err: unknown) => {
         const error = err as Error;

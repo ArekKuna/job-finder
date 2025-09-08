@@ -12,6 +12,7 @@ import { UserId } from 'common/decorators/user-id.decorator';
 import { UserAuthenticationResponseDto } from 'modules/auth/dtos/user-authentication-response.dto';
 import { AuthGuard } from 'modules/auth/guards/auth.guard';
 import { GetMeResponseDto } from 'modules/users/dtos/get-me-response.dto';
+import { RegisterEmployerDto } from 'modules/users/dtos/register-employer.dto';
 import { RegisterEmployeeDto } from 'modules/users/dtos/register-emplyee.dto';
 import { UsersService } from 'modules/users/users.service';
 @ApiTags('users')
@@ -37,21 +38,21 @@ export class UsersController {
     return await this.usersService.signUpEmployee(body);
   }
 
-  // @Post('register/employer')
-  // @ApiOperation({ summary: 'Create a new employer user' })
-  // @ApiBody({ type: UserCredentialsDto })
-  // @ApiResponse({
-  //   status: 201,
-  //   description: 'Employer user has been successfully created',
-  //   type: UserAuthenticationResponseDto,
-  // })
-  // @ApiResponse({
-  //   status: 400,
-  //   description: 'Bad user input',
-  // })
-  // async createEmployer(@Body() body: UserCredentialsDto) {
-  //   return await this.usersService.signUpEmployer(body);
-  // }
+  @Post('register/employer')
+  @ApiOperation({ summary: 'Create a new employer user' })
+  @ApiBody({ type: RegisterEmployerDto })
+  @ApiResponse({
+    status: 201,
+    description: 'Employer user has been successfully created',
+    type: UserAuthenticationResponseDto,
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad user input',
+  })
+  async createEmployer(@Body() body: RegisterEmployerDto) {
+    return await this.usersService.signUpEmployer(body);
+  }
 
   @Get('/me')
   @UseGuards(AuthGuard)

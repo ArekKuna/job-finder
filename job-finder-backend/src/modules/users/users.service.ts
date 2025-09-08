@@ -9,6 +9,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserRole } from 'common/enums/user-role.enum';
 import { AuthService } from 'modules/auth/auth.service';
 import { UserAuthenticationResponseDto } from 'modules/auth/dtos/user-authentication-response.dto';
+import { RegisterEmployerDto } from 'modules/users/dtos/register-employer.dto';
 import { RegisterEmployeeDto } from 'modules/users/dtos/register-emplyee.dto';
 import { User } from 'modules/users/user.entity';
 import { Repository } from 'typeorm';
@@ -40,31 +41,23 @@ export class UsersService {
     return await this.authService.authenticateUser({ email, password });
   }
 
-  // async signUpEmployer(
-  //   input: UserCredentialsDto,
-  // ): Promise<UserAuthenticationResponseDto> {
-  //   const { email, password } = input;
+  async signUpEmployer(
+    input: RegisterEmployerDto,
+  ): Promise<UserAuthenticationResponseDto> {
+    const { email, password } = input;
 
-  //   const existingUser = await this.findUserByEmail(email);
+    const existingUser = await this.findUserByEmail(email);
 
-  //   if (existingUser) {
-  //     throw new BadRequestException();
-  //   }
+    if (existingUser) {
+      throw new BadRequestException();
+    }
 
-  //   const hashedPassword = await this.authService.securePassword(password);
+    const newEmployer = await this.createEmployer(input);
 
-  //   const newUser = this.usersRepository.create({
-  //     email,
-  //     password: hashedPassword,
-  //     role: UserRole.EMPLOYER,
-  //     created_at: new Date(),
-  //     updated_at: new Date(),
-  //   });
+    await this.usersRepository.save(newEmployer);
 
-  //   await this.usersRepository.save(newUser);
-
-  //   return await this.authService.authenticateUser({ ...newUser, password });
-  // }
+    return await this.authService.authenticateUser({ email, password });
+  }
 
   async findUserByEmail(email: string): Promise<User | null> {
     return this.usersRepository.findOneBy({ email });
@@ -96,6 +89,21 @@ export class UsersService {
       createdAt: new Date(),
       updatedAt: new Date(),
       role: UserRole.EMPLOYEE,
+    });
+
+    return newUser;
+  }
+
+  private async createEmployer(user: RegisterEmployerDto): Promise<User> {
+    const hashedPassword = await this.authService.securePassword(user.password);
+
+    const newUser = this.usersRepository.create({
+      ...user,
+      password: hashedPassword,
+      avatarUrl: null,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      role: UserRole.EMPLOYER,
     });
 
     return newUser;

@@ -89,8 +89,8 @@ export const EmployeeRegistration = () => {
               render={({ field: { value, onChange }, fieldState: { error } }) => (
                 <Input
                   name="email"
-                  placeholder="email"
-                  label="Email*"
+                  placeholder="email address"
+                  label="Email address*"
                   type="text"
                   inputMode="email"
                   value={value}
@@ -220,19 +220,23 @@ export const EmployeeRegistration = () => {
             />
 
             <Controller
-              name="bio"
+              name="description"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
-                  name="bio"
-                  placeholder="bio"
-                  label="Bio"
-                  type="text"
-                  inputMode="text"
-                  value={value ?? ''}
-                  error={error?.message}
-                  onChange={onChange}
-                />
+                <div className="flex flex-col gap-1">
+                  <label htmlFor="description" className="font-label">
+                    Bio
+                  </label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    placeholder="Say something about yourself..."
+                    value={value ?? ''}
+                    onChange={onChange}
+                    className="rounded-md border"
+                  />
+                  {error && <p className="font-error">{error.message}</p>}
+                </div>
               )}
             />
           </div>

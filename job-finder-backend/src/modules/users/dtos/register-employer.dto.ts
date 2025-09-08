@@ -1,13 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEmail,
+  IsEnum,
   IsOptional,
   IsString,
   Matches,
   MinLength,
 } from 'class-validator';
+import { CompanySize } from 'modules/users/enums/company-size.enum';
 
-export class RegisterEmployeeDto {
+export class RegisterEmployerDto {
   @ApiProperty({ description: 'User first name' })
   @IsString()
   @MinLength(1, { message: 'First name is required' })
@@ -37,23 +39,43 @@ export class RegisterEmployeeDto {
   })
   password: string;
 
+  @ApiProperty({ description: 'User company name' })
+  @IsString()
+  @MinLength(1, { message: 'Company name is required' })
+  companyName: string;
+
+  @ApiProperty({
+    description: 'User company size',
+    enum: CompanySize,
+    example: CompanySize.SMALL,
+  })
+  @IsEnum(CompanySize, {
+    message: 'Company size must be one of the defined values',
+  })
+  companySize: CompanySize;
+
+  @ApiProperty({ description: 'User company main industry' })
+  @IsString()
+  @MinLength(1, { message: 'Company industry is required' })
+  industry: string;
+
+  @ApiProperty({ description: 'User company main website address' })
+  @IsString()
+  @MinLength(1, { message: 'Company website address is required' })
+  companyWebsite: string;
+
   @ApiProperty({ description: 'User phone number' })
   @IsString()
   @MinLength(1, { message: 'Phone number is required' })
   phoneNumber: string;
 
-  @ApiProperty({ description: 'User location' })
+  @ApiProperty({ description: 'User company location' })
   @IsString()
-  @MinLength(1, { message: 'Location is required' })
+  @MinLength(1, { message: 'Company location is required' })
   location: string;
 
-  @ApiProperty({ description: 'User professional title' })
-  @IsString()
-  @MinLength(1, { message: 'Professional title is required' })
-  professionalTitle: string;
-
   @ApiProperty({
-    description: 'User short description',
+    description: 'User company description',
     type: String,
     required: false,
     nullable: true,

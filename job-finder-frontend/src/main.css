@@ -139,6 +139,10 @@
     @apply text-base-font-color text-2xl leading-6 font-semibold tracking-tight;
   }
 
+  .font-heading-4 {
+    @apply text-base-font-color text-lg leading-6 font-semibold tracking-tight;
+  }
+
   .font-caption {
     @apply text-base-font-color text-xs leading-3 font-normal tracking-tight;
   }
