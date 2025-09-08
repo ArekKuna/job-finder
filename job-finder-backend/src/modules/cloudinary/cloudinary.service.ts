@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Readable } from 'stream';
 import { v2 as cloudinary, UploadApiResponse } from 'cloudinary';
-import { UsersService } from 'modules/users/users.service';
 import { BooleanResponseDto } from 'common/dtos/boolean-resposne.dto';
+import { UsersService } from 'modules/users/users.service';
+import { Readable } from 'stream';
 @Injectable()
 export class CloudinaryService {
   constructor(
@@ -39,7 +39,7 @@ export class CloudinaryService {
     });
 
     await this.usersService.updateUser(userId, {
-      avatar_url: optimizedUrl,
+      avatarUrl: optimizedUrl,
     });
 
     return { success: true };

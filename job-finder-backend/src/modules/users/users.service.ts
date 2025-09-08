@@ -6,12 +6,13 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { User } from 'modules/users/user.entity';
-import { AuthService } from 'modules/auth/auth.service';
 import { UserRole } from 'common/enums/user-role.enum';
+import { AuthService } from 'modules/auth/auth.service';
 import { UserAuthenticationResponseDto } from 'modules/auth/dtos/user-authentication-response.dto';
-import { UserCredentialsDto } from 'common/dtos/user-credentials.dto';
+import { RegisterEmployerDto } from 'modules/users/dtos/register-employer.dto';
+import { RegisterEmployeeDto } from 'modules/users/dtos/register-emplyee.dto';
+import { User } from 'modules/users/user.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
@@ -23,7 +24,7 @@ export class UsersService {
   ) {}
 
   async signUpEmployee(
-    input: UserCredentialsDto,
+    input: RegisterEmployeeDto,
   ): Promise<UserAuthenticationResponseDto> {
     const { email, password } = input;
 
@@ -33,25 +34,15 @@ export class UsersService {
       throw new BadRequestException();
     }
 
-    const hashedPassword = await this.authService.securePassword(
-      input.password,
-    );
+    const newEmployee = await this.createEmployee(input);
 
-    const newUser = this.usersRepository.create({
-      email,
-      password: hashedPassword,
-      role: UserRole.EMPLOYEE,
-      created_at: new Date(),
-      updated_at: new Date(),
-    });
+    await this.usersRepository.save(newEmployee);
 
-    await this.usersRepository.save(newUser);
-
-    return await this.authService.authenticateUser({ ...newUser, password });
+    return await this.authService.authenticateUser({ email, password });
   }
 
   async signUpEmployer(
-    input: UserCredentialsDto,
+    input: RegisterEmployerDto,
   ): Promise<UserAuthenticationResponseDto> {
     const { email, password } = input;
 
@@ -61,19 +52,11 @@ export class UsersService {
       throw new BadRequestException();
     }
 
-    const hashedPassword = await this.authService.securePassword(password);
+    const newEmployer = await this.createEmployer(input);
 
-    const newUser = this.usersRepository.create({
-      email,
-      password: hashedPassword,
-      role: UserRole.EMPLOYER,
-      created_at: new Date(),
-      updated_at: new Date(),
-    });
+    await this.usersRepository.save(newEmployer);
 
-    await this.usersRepository.save(newUser);
-
-    return await this.authService.authenticateUser({ ...newUser, password });
+    return await this.authService.authenticateUser({ email, password });
   }
 
   async findUserByEmail(email: string): Promise<User | null> {
@@ -94,5 +77,35 @@ export class UsersService {
     Object.assign(user, attrs);
 
     return this.usersRepository.save(user);
+  }
+
+  private async createEmployee(user: RegisterEmployeeDto): Promise<User> {
+    const hashedPassword = await this.authService.securePassword(user.password);
+
+    const newUser = this.usersRepository.create({
+      ...user,
+      password: hashedPassword,
+      avatarUrl: null,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      role: UserRole.EMPLOYEE,
+    });
+
+    return newUser;
+  }
+
+  private async createEmployer(user: RegisterEmployerDto): Promise<User> {
+    const hashedPassword = await this.authService.securePassword(user.password);
+
+    const newUser = this.usersRepository.create({
+      ...user,
+      password: hashedPassword,
+      avatarUrl: null,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      role: UserRole.EMPLOYER,
+    });
+
+    return newUser;
   }
 }
