@@ -73,11 +73,12 @@
   --color-background: #ffffff;
   --color-foreground: #000000;
   --color-muted-foreground: #71717a;
+
   --color-primary: #6467f2;
   --color-success: #21c45d;
   --color-negative: #ef4343;
   --color-warn: #ecc94b;
-
+  --color-accent: #f4f4f5;
   --color-base-font-color: #020817;
   --color-border: #e4e4e7;
 }
@@ -149,6 +150,10 @@
 
   .font-label {
     @apply text-base-font-color text-sm leading-4 font-medium tracking-tight;
+  }
+
+  .font-label-white {
+    @apply text-sm leading-4 font-medium tracking-tight text-white;
   }
 
   .font-error {

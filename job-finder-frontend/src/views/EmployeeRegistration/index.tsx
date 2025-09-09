@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { EyeOffIcon } from 'assets/Icons/EyeOffIcon';
 import { EyeOnIcon } from 'assets/Icons/EyeOnIcon';
 import { PeopleIcon } from 'assets/Icons/PeopleIcon';
-import { Button } from 'components/ui/Button';
+import { ButtonUI } from 'components/ui/Button';
 import { Card } from 'components/ui/Card';
 import { Input } from 'components/ui/Input';
 import { useEmployeeRegistrationForm } from 'views/EmployeeRegistration/hooks/useEmployeeRegistrationForm';
@@ -23,7 +23,8 @@ export const EmployeeRegistration = () => {
     setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
   };
 
-  const { control, handleSubmit, onSubmit, trigger, watch } = useEmployeeRegistrationForm();
+  const { control, registerEmployeeLoading, handleSubmit, onSubmit, trigger, watch } =
+    useEmployeeRegistrationForm();
 
   const { confirmPassword, password } = watch();
 
@@ -241,13 +242,21 @@ export const EmployeeRegistration = () => {
             />
           </div>
 
-          <Button text="Create My Profile" />
+          <ButtonUI
+            text="Create My Profile"
+            loading={registerEmployeeLoading}
+            disabled={registerEmployeeLoading}
+            type="submit"
+          />
         </form>
 
         <div className="text-center">
           <p className="font-paragraph-3-muted">
             Already have an account?
-            <Link className="font-paragraph-3-primary font-medium! hover:underline" to="/login">
+            <Link
+              className="font-paragraph-3-primary font-medium! hover:underline active:underline"
+              to="/login"
+            >
               {' '}
               Sign in here
             </Link>

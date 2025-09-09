@@ -1,23 +1,25 @@
-import { getStyles } from 'components/ui/Button/styles';
+import { Button } from '@headlessui/react';
+
+import { ButtonIcon } from 'components/ui/Button/components/ButtonIcon';
+import { ButtonLoader } from 'components/ui/Button/components/ButtonLoader';
+import { getButtonStyles } from 'components/ui/Button/styles';
 import {
-  BaseProps,
+  BaseButtonProps,
   ButtonVariants,
-  IconVariantProps,
-  TextVariantProps,
-  TextWithIconVariantProps,
+  IconButtonVariantProps,
+  TextButtonVariantProps,
 } from 'components/ui/Button/types';
 
-type Props = (TextVariantProps | IconVariantProps | TextWithIconVariantProps) &
-  ButtonVariants &
-  BaseProps;
+type Props = (TextButtonVariantProps | IconButtonVariantProps) & BaseButtonProps & ButtonVariants;
 
-export const Button = ({
-  size,
-  variant,
-  iconPosition,
-  loading,
+export const ButtonUI = ({
+  disabled,
   full,
-  justify = 'center',
+  id,
+  loading,
+  type,
+  variant,
+  size,
   onClick,
   ...props
 }: Props) => {
@@ -27,28 +29,15 @@ export const Button = ({
   const icon = iconVariant ? props.icon : undefined;
   const text = textVariant ? props.text : undefined;
 
-  const styles = getStyles({
-    size,
-    variant,
-    onlyIcon: !textVariant,
-    loading,
-    iconPosition,
-    full,
-    justify,
-  });
+  const styles = getButtonStyles({ variant, full, loading, size });
 
   return (
-    <button
-      {...props}
-      type={props.type}
-      disabled={props.disabled}
-      autoFocus={false}
-      className={styles}
-      aria-label={!textVariant ? props.label : undefined}
-      onClick={onClick}
-    >
-      {icon && icon}
-      {text}
-    </button>
+    <Button id={id} className={styles} disabled={disabled} type={type} onClick={onClick}>
+      {loading && <ButtonLoader />}
+
+      {!loading && icon && <ButtonIcon icon={icon} />}
+
+      {!loading && text && text}
+    </Button>
   );
 };

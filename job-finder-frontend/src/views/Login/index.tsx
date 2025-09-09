@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { BriefcaseIcon } from 'assets/Icons/BriefcaseIcon';
 import { EyeOffIcon } from 'assets/Icons/EyeOffIcon';
 import { EyeOnIcon } from 'assets/Icons/EyeOnIcon';
-import { Button } from 'components/ui/Button';
+import { ButtonUI } from 'components/ui/Button';
 import { Card } from 'components/ui/Card';
 import { Input } from 'components/ui/Input';
 import { useUserLoginForm } from 'views/Login/hooks/useUserLoginForm';
@@ -18,7 +18,7 @@ export const Login = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  const { control, handleSubmit, onSubmit } = useUserLoginForm();
+  const { control, userLoginLoading, handleSubmit, onSubmit } = useUserLoginForm();
 
   return (
     <section className="mx-auto max-w-md px-6 py-16">
@@ -78,21 +78,31 @@ export const Login = () => {
                 />
               )}
             />
-
-            <Link to="/password-recovery">
-              <p className="font-paragraph-3-primary text-center hover:underline">
-                Forgot password?
-              </p>
-            </Link>
           </div>
 
-          <Button text="Sign In" />
+          <div className="flex flex-col gap-4">
+            <Link
+              className="font-paragraph-3-primary text-center hover:underline active:underline"
+              to="/password-recovery"
+            >
+              <p>Forgot password?</p>
+            </Link>
+            <ButtonUI
+              text="Sign In"
+              loading={userLoginLoading}
+              disabled={userLoginLoading}
+              type="submit"
+            />
+          </div>
         </form>
 
         <div className="text-center">
           <p className="font-paragraph-3-muted">
             Don't have an account?
-            <Link className="font-paragraph-3-primary font-medium! hover:underline" to="/register">
+            <Link
+              className="font-paragraph-3-primary font-medium! hover:underline active:underline"
+              to="/register"
+            >
               {' '}
               Create one here
             </Link>

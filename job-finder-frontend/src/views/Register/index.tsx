@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { HireIcon } from 'assets/Icons/HireIcon';
 import { PeopleIcon } from 'assets/Icons/PeopleIcon';
-import { Button } from 'components/ui/Button';
+import { ButtonUI } from 'components/ui/Button';
 import { Card } from 'components/ui/Card';
 
 export const Register = () => {
@@ -63,7 +63,7 @@ export const Register = () => {
 
           <div className="flex flex-col gap-8">
             {activeCard && (
-              <Button
+              <ButtonUI
                 text={`Continue as ${activeCard === 'employee' ? 'Job Seeker' : 'Employer'}`}
                 onClick={() =>
                   navigate(
@@ -76,7 +76,10 @@ export const Register = () => {
             <div className="text-center">
               <p className="font-paragraph-3-muted">
                 Already have an account?
-                <Link className="font-paragraph-3-primary font-medium! hover:underline" to="/login">
+                <Link
+                  className="font-paragraph-3-primary font-medium! hover:underline active:underline"
+                  to="/login"
+                >
                   {' '}
                   Sign in here
                 </Link>

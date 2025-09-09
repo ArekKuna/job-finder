@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { EyeOffIcon } from 'assets/Icons/EyeOffIcon';
 import { EyeOnIcon } from 'assets/Icons/EyeOnIcon';
 import { HireIcon } from 'assets/Icons/HireIcon';
-import { Button } from 'components/ui/Button';
+import { ButtonUI } from 'components/ui/Button';
 import { Card } from 'components/ui/Card';
 import { Input } from 'components/ui/Input';
 import { useEmployerRegistrationForm } from 'views/EmployerRegistration/hooks/useEmployerRegistrationForm';
@@ -23,7 +23,8 @@ export const EmployerRegistration = () => {
     setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
   };
 
-  const { control, handleSubmit, onSubmit, trigger, watch } = useEmployerRegistrationForm();
+  const { control, registerEmployerLoading, handleSubmit, onSubmit, trigger, watch } =
+    useEmployerRegistrationForm();
 
   const { confirmPassword, password } = watch();
 
@@ -47,7 +48,7 @@ export const EmployerRegistration = () => {
           </p>
         </div>
 
-        <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
+        <form className="flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-4">
             <h2 className="font-heading-4">Personal information</h2>
             <Controller
@@ -168,7 +169,9 @@ export const EmployerRegistration = () => {
                 />
               )}
             />
+          </div>
 
+          <div className="flex flex-col gap-4">
             <h2 className="font-heading-4">Company Information</h2>
 
             <Controller
@@ -306,13 +309,21 @@ export const EmployerRegistration = () => {
             />
           </div>
 
-          <Button text="Create Company Account" />
+          <ButtonUI
+            text="Create Company Account"
+            loading={registerEmployerLoading}
+            disabled={registerEmployerLoading}
+            type="submit"
+          />
         </form>
 
         <div className="text-center">
           <p className="font-paragraph-3-muted">
             Already have an account?
-            <Link className="font-paragraph-3-primary font-medium! hover:underline" to="/login">
+            <Link
+              className="font-paragraph-3-primary font-medium! hover:underline active:underline"
+              to="/login"
+            >
               {' '}
               Sign in here
             </Link>
