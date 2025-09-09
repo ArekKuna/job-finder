@@ -4,7 +4,7 @@ import { getCardStyles } from 'components/ui/Card/styles';
 
 type Props = {
   children: ReactNode;
-  isInteractive: boolean;
+  isInteractive?: boolean;
   isActive?: boolean;
   onClick?: () => void;
 };

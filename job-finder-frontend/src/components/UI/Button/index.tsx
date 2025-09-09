@@ -3,14 +3,7 @@ import { Button } from '@headlessui/react';
 import { ButtonIcon } from 'components/ui/Button/components/ButtonIcon';
 import { ButtonLoader } from 'components/ui/Button/components/ButtonLoader';
 import { getButtonStyles } from 'components/ui/Button/styles';
-import {
-  BaseButtonProps,
-  ButtonVariants,
-  IconButtonVariantProps,
-  TextButtonVariantProps,
-} from 'components/ui/Button/types';
-
-type Props = (TextButtonVariantProps | IconButtonVariantProps) & BaseButtonProps & ButtonVariants;
+import { ButtonProps } from 'components/ui/Button/types';
 
 export const ButtonUI = ({
   disabled,
@@ -22,7 +15,7 @@ export const ButtonUI = ({
   size,
   onClick,
   ...props
-}: Props) => {
+}: ButtonProps) => {
   const textVariant = 'text' in props;
   const iconVariant = 'icon' in props;
 

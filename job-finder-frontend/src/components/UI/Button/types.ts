@@ -19,4 +19,7 @@ export type IconButtonVariantProps = {
   label: string;
 };
 
+export type ButtonProps = (TextButtonVariantProps | IconButtonVariantProps) & BaseButtonProps & ButtonVariants;
+
+
 export type ButtonVariants = VariantProps<typeof getButtonStyles>;

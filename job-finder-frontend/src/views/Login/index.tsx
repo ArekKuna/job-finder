@@ -8,7 +8,7 @@ import { EyeOffIcon } from 'assets/Icons/EyeOffIcon';
 import { EyeOnIcon } from 'assets/Icons/EyeOnIcon';
 import { ButtonUI } from 'components/ui/Button';
 import { Card } from 'components/ui/Card';
-import { Input } from 'components/ui/Input';
+import { InputUI } from 'components/ui/Input';
 import { useUserLoginForm } from 'views/Login/hooks/useUserLoginForm';
 
 export const Login = () => {
@@ -37,7 +37,7 @@ export const Login = () => {
               name="email"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="email"
                   placeholder="email"
                   label="Email"
@@ -55,7 +55,7 @@ export const Login = () => {
               name="password"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="password"
                   placeholder="password"
                   label="Password"

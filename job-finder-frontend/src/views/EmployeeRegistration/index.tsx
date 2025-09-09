@@ -8,7 +8,7 @@ import { EyeOnIcon } from 'assets/Icons/EyeOnIcon';
 import { PeopleIcon } from 'assets/Icons/PeopleIcon';
 import { ButtonUI } from 'components/ui/Button';
 import { Card } from 'components/ui/Card';
-import { Input } from 'components/ui/Input';
+import { InputUI } from 'components/ui/Input';
 import { useEmployeeRegistrationForm } from 'views/EmployeeRegistration/hooks/useEmployeeRegistrationForm';
 
 export const EmployeeRegistration = () => {
@@ -54,7 +54,7 @@ export const EmployeeRegistration = () => {
               name="firstName"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="firstName"
                   placeholder="first name"
                   label="First name*"
@@ -71,7 +71,7 @@ export const EmployeeRegistration = () => {
               name="lastName"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="lastName"
                   placeholder="last name"
                   label="Last name*"
@@ -88,7 +88,7 @@ export const EmployeeRegistration = () => {
               name="email"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="email"
                   placeholder="email address"
                   label="Email address*"
@@ -105,7 +105,7 @@ export const EmployeeRegistration = () => {
               name="password"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="password"
                   placeholder="password"
                   label="Password*"
@@ -136,7 +136,7 @@ export const EmployeeRegistration = () => {
               name="confirmPassword"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="confirmPassword"
                   placeholder="password"
                   label="Confirm password*"
@@ -173,7 +173,7 @@ export const EmployeeRegistration = () => {
               name="phoneNumber"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="phoneNumber"
                   placeholder="phone number"
                   label="Phone number*"
@@ -190,7 +190,7 @@ export const EmployeeRegistration = () => {
               name="location"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="location"
                   placeholder="city, state, country"
                   label="Location*"
@@ -207,7 +207,7 @@ export const EmployeeRegistration = () => {
               name="professionalTitle"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="professionalTitle"
                   placeholder="e.g. Frontend Developer"
                   label="Professional title*"

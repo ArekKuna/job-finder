@@ -8,7 +8,7 @@ import { EyeOnIcon } from 'assets/Icons/EyeOnIcon';
 import { HireIcon } from 'assets/Icons/HireIcon';
 import { ButtonUI } from 'components/ui/Button';
 import { Card } from 'components/ui/Card';
-import { Input } from 'components/ui/Input';
+import { InputUI } from 'components/ui/Input';
 import { useEmployerRegistrationForm } from 'views/EmployerRegistration/hooks/useEmployerRegistrationForm';
 
 export const EmployerRegistration = () => {
@@ -55,7 +55,7 @@ export const EmployerRegistration = () => {
               name="firstName"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="firstName"
                   placeholder="first name"
                   label="First name*"
@@ -72,7 +72,7 @@ export const EmployerRegistration = () => {
               name="lastName"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="lastName"
                   placeholder="last name"
                   label="Last name*"
@@ -89,7 +89,7 @@ export const EmployerRegistration = () => {
               name="email"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="email"
                   placeholder="business email address"
                   label="Business email address*"
@@ -106,7 +106,7 @@ export const EmployerRegistration = () => {
               name="password"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="password"
                   placeholder="password"
                   label="Password*"
@@ -137,7 +137,7 @@ export const EmployerRegistration = () => {
               name="confirmPassword"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="confirmPassword"
                   placeholder="password"
                   label="Confirm password*"
@@ -178,7 +178,7 @@ export const EmployerRegistration = () => {
               name="companyName"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="companyName"
                   placeholder="company name"
                   label="Company name*"
@@ -223,7 +223,7 @@ export const EmployerRegistration = () => {
               name="industry"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="industry"
                   placeholder="industry"
                   label="Industry*"
@@ -240,7 +240,7 @@ export const EmployerRegistration = () => {
               name="companyWebsite"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="companyWebsite"
                   placeholder="www.example.com"
                   label="Company website*"
@@ -257,7 +257,7 @@ export const EmployerRegistration = () => {
               name="phoneNumber"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="phoneNumber"
                   placeholder="phone number"
                   label="Phone number*"
@@ -274,7 +274,7 @@ export const EmployerRegistration = () => {
               name="location"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="location"
                   placeholder="city, state, country"
                   label="Location*"
