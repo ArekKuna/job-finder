@@ -21,7 +21,11 @@ export const Register = () => {
         </div>
 
         <div className="flex flex-col gap-8">
-          <Card active={activeCard === 'employee'} onClick={() => setActiveCard('employee')}>
+          <Card
+            isActive={activeCard === 'employee'}
+            isInteractive
+            onClick={() => setActiveCard('employee')}
+          >
             <div className="flex justify-center">
               <PeopleIcon />
             </div>
@@ -41,7 +45,11 @@ export const Register = () => {
             </ul>
           </Card>
 
-          <Card active={activeCard === 'employer'} onClick={() => setActiveCard('employer')}>
+          <Card
+            isActive={activeCard === 'employer'}
+            isInteractive
+            onClick={() => setActiveCard('employer')}
+          >
             <div className="flex justify-center">
               <HireIcon />
             </div>
