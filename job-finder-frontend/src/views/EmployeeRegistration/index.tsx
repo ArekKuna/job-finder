@@ -9,6 +9,7 @@ import { PeopleIcon } from 'assets/Icons/PeopleIcon';
 import { ButtonUI } from 'components/ui/Button';
 import { Card } from 'components/ui/Card';
 import { InputUI } from 'components/ui/Input';
+import { TextAreaUI } from 'components/ui/TextArea';
 import { useEmployeeRegistrationForm } from 'views/EmployeeRegistration/hooks/useEmployeeRegistrationForm';
 
 export const EmployeeRegistration = () => {
@@ -224,20 +225,16 @@ export const EmployeeRegistration = () => {
               name="description"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <div className="flex flex-col gap-1">
-                  <label htmlFor="description" className="font-label">
-                    Bio
-                  </label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    placeholder="Say something about yourself..."
-                    value={value ?? ''}
-                    onChange={onChange}
-                    className="rounded-md border"
-                  />
-                  {error && <p className="font-error">{error.message}</p>}
-                </div>
+                <TextAreaUI
+                  name="user-bio"
+                  label="Bio"
+                  placeholder="Say something about yourself..."
+                  maxLength={2500}
+                  isResizable={false}
+                  value={value ?? ''}
+                  error={error?.message}
+                  onChange={onChange}
+                />
               )}
             />
           </div>
