@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
 import { ProfileIcon } from 'assets/Icons/ProfileIcon';
-import { Input } from 'components/ui/Input';
+import { InputUI } from 'components/ui/Input';
 import { GetMeResponseDto } from 'generated/api-types';
 import { useCustomMutation } from 'hooks/useCustomMutation/useCustomMutation';
 import { useCustomQuery } from 'hooks/useCustomQuery/useCustomQuery';
@@ -52,7 +52,7 @@ export const MyProfile = () => {
         </button>
 
         <div className="hidden">
-          <Input
+          <InputUI
             ref={fileInputRef}
             type="file"
             accept="image/*"

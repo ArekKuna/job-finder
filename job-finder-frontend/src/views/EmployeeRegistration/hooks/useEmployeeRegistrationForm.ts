@@ -19,7 +19,10 @@ const EMPLOYEE_REGISTRATION_ROUTE = 'users/register/employee';
 export const useEmployeeRegistrationForm = () => {
   const [, setAuthStatus] = useAtom(authStatusAtom);
 
-  const { mutateAsync } = useCustomMutation<UserAuthenticationResponseDto, RegisterEmployeeDto>({
+  const { mutateAsync, isPending: registerEmployeeLoading } = useCustomMutation<
+    UserAuthenticationResponseDto,
+    RegisterEmployeeDto
+  >({
     route: EMPLOYEE_REGISTRATION_ROUTE,
     method: 'POST',
     key: ['authStatus'],
@@ -54,5 +57,5 @@ export const useEmployeeRegistrationForm = () => {
     });
   };
 
-  return { control, handleSubmit, onSubmit, trigger, watch };
+  return { control, registerEmployeeLoading, handleSubmit, onSubmit, trigger, watch };
 };

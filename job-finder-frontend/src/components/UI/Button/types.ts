@@ -2,26 +2,24 @@ import { ButtonHTMLAttributes, ReactNode } from 'react';
 
 import { VariantProps } from 'tailwind-variants';
 
-import { getStyles } from 'components/ui/Button/styles';
+import { getButtonStyles } from 'components/ui/Button/styles';
 
-export type BaseProps = Pick<
+export type BaseButtonProps = Pick<
   ButtonHTMLAttributes<HTMLButtonElement>,
   'id' | 'type' | 'disabled' | 'onClick'
 >;
 
-export type TextVariantProps = {
+export type TextButtonVariantProps = {
   text: string;
 };
 
-export type IconVariantProps = {
+export type IconButtonVariantProps = {
   icon: ReactNode;
   /** aria-label is needed if there is no text param*/
   label: string;
 };
 
-export type TextWithIconVariantProps = {
-  text: string;
-  icon: ReactNode;
-};
+export type ButtonProps = (TextButtonVariantProps | IconButtonVariantProps) & BaseButtonProps & ButtonVariants;
 
-export type ButtonVariants = Omit<VariantProps<typeof getStyles>, 'onlyIcon'>;
+
+export type ButtonVariants = VariantProps<typeof getButtonStyles>;

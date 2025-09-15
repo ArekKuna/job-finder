@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom';
 import { EyeOffIcon } from 'assets/Icons/EyeOffIcon';
 import { EyeOnIcon } from 'assets/Icons/EyeOnIcon';
 import { HireIcon } from 'assets/Icons/HireIcon';
-import { Button } from 'components/ui/Button';
+import { ButtonUI } from 'components/ui/Button';
 import { Card } from 'components/ui/Card';
-import { Input } from 'components/ui/Input';
+import { InputUI } from 'components/ui/Input';
+import { TextAreaUI } from 'components/ui/TextArea';
 import { useEmployerRegistrationForm } from 'views/EmployerRegistration/hooks/useEmployerRegistrationForm';
 
 export const EmployerRegistration = () => {
@@ -23,7 +24,8 @@ export const EmployerRegistration = () => {
     setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
   };
 
-  const { control, handleSubmit, onSubmit, trigger, watch } = useEmployerRegistrationForm();
+  const { control, registerEmployerLoading, handleSubmit, onSubmit, trigger, watch } =
+    useEmployerRegistrationForm();
 
   const { confirmPassword, password } = watch();
 
@@ -47,14 +49,14 @@ export const EmployerRegistration = () => {
           </p>
         </div>
 
-        <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
+        <form className="flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-4">
             <h2 className="font-heading-4">Personal information</h2>
             <Controller
               name="firstName"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="firstName"
                   placeholder="first name"
                   label="First name*"
@@ -71,7 +73,7 @@ export const EmployerRegistration = () => {
               name="lastName"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="lastName"
                   placeholder="last name"
                   label="Last name*"
@@ -88,7 +90,7 @@ export const EmployerRegistration = () => {
               name="email"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="email"
                   placeholder="business email address"
                   label="Business email address*"
@@ -105,7 +107,7 @@ export const EmployerRegistration = () => {
               name="password"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="password"
                   placeholder="password"
                   label="Password*"
@@ -136,7 +138,7 @@ export const EmployerRegistration = () => {
               name="confirmPassword"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="confirmPassword"
                   placeholder="password"
                   label="Confirm password*"
@@ -168,14 +170,16 @@ export const EmployerRegistration = () => {
                 />
               )}
             />
+          </div>
 
+          <div className="flex flex-col gap-4">
             <h2 className="font-heading-4">Company Information</h2>
 
             <Controller
               name="companyName"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="companyName"
                   placeholder="company name"
                   label="Company name*"
@@ -220,7 +224,7 @@ export const EmployerRegistration = () => {
               name="industry"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="industry"
                   placeholder="industry"
                   label="Industry*"
@@ -237,7 +241,7 @@ export const EmployerRegistration = () => {
               name="companyWebsite"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="companyWebsite"
                   placeholder="www.example.com"
                   label="Company website*"
@@ -254,7 +258,7 @@ export const EmployerRegistration = () => {
               name="phoneNumber"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="phoneNumber"
                   placeholder="phone number"
                   label="Phone number*"
@@ -271,7 +275,7 @@ export const EmployerRegistration = () => {
               name="location"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <Input
+                <InputUI
                   name="location"
                   placeholder="city, state, country"
                   label="Location*"
@@ -288,31 +292,35 @@ export const EmployerRegistration = () => {
               name="description"
               control={control}
               render={({ field: { value, onChange }, fieldState: { error } }) => (
-                <div className="flex flex-col gap-1">
-                  <label htmlFor="description" className="font-label">
-                    Bio
-                  </label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    placeholder="tell us about your comapny, culture, and what makes it special..."
-                    value={value ?? ''}
-                    onChange={onChange}
-                    className="rounded-md border"
-                  />
-                  {error && <p className="font-error">{error.message}</p>}
-                </div>
+                <TextAreaUI
+                  name="user-bio"
+                  label="Company description"
+                  placeholder="Say something about your company..."
+                  maxLength={2500}
+                  isResizable={false}
+                  value={value ?? ''}
+                  error={error?.message}
+                  onChange={onChange}
+                />
               )}
             />
           </div>
 
-          <Button text="Create Company Account" />
+          <ButtonUI
+            text="Create Company Account"
+            loading={registerEmployerLoading}
+            disabled={registerEmployerLoading}
+            type="submit"
+          />
         </form>
 
         <div className="text-center">
           <p className="font-paragraph-3-muted">
             Already have an account?
-            <Link className="font-paragraph-3-primary font-medium! hover:underline" to="/login">
+            <Link
+              className="font-paragraph-3-primary font-medium! hover:underline active:underline"
+              to="/login"
+            >
               {' '}
               Sign in here
             </Link>

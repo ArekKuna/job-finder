@@ -1,17 +1,18 @@
 import { ReactNode } from 'react';
 
+import { getCardStyles } from 'components/ui/Card/styles';
+
 type Props = {
   children: ReactNode;
-  active?: boolean;
+  isInteractive?: boolean;
+  isActive?: boolean;
   onClick?: () => void;
 };
 
-export const Card = ({ children, active = false, onClick }: Props) => {
+export const Card = ({ children, isInteractive, isActive = false, onClick }: Props) => {
+  const styles = getCardStyles({ isActive, isInteractive });
   return (
-    <div
-      className={`bg-background text-foreground flex flex-col gap-6 rounded-lg border ${active && 'ring-primary ring-2'} px-4 py-6 shadow-sm`}
-      onClick={onClick}
-    >
+    <div className={styles} onClick={onClick}>
       {children}
     </div>
   );

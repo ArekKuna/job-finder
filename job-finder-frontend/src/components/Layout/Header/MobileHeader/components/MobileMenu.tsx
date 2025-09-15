@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import { CloseIcon } from 'assets/Icons/CloseIcon';
 import { BasicRoutes, userRoutes } from 'components/Layout/Header/MobileHeader/utils';
-import { Button } from 'components/ui/Button';
+import { ButtonUI } from 'components/ui/Button';
 import { authStatusAtom } from 'hooks/useAuthorization/authAtom';
 import { useLogout } from 'hooks/useAuthorization/useAuthorization';
 
@@ -26,8 +26,8 @@ export const MobileMenu = ({ onClose }: Props) => {
 
   return (
     <div className="relative p-4">
-      <div className="absolute top-4 right-4 cursor-pointer">
-        <Button
+      <div className="absolute top-2 right-0 cursor-pointer">
+        <ButtonUI
           label="close-icon"
           icon={<CloseIcon size="sm" />}
           variant="ghost"
@@ -80,7 +80,7 @@ export const MobileMenu = ({ onClose }: Props) => {
         </ul>
       ) : (
         <div className="flex flex-col gap-2 py-6">
-          <Button
+          <ButtonUI
             text="Sign In"
             variant="ghost"
             onClick={() => {
@@ -88,7 +88,7 @@ export const MobileMenu = ({ onClose }: Props) => {
               navigate('/login');
             }}
           />
-          <Button
+          <ButtonUI
             text="Get Started"
             onClick={() => {
               onClose();

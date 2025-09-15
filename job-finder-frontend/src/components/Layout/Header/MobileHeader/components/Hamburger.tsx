@@ -1,5 +1,5 @@
 import { HamburgerIcon } from 'assets/Icons/HamburgerIcon';
-import { Button } from 'components/ui/Button';
+import { ButtonUI } from 'components/ui/Button';
 
 type Props = {
   onClick: () => void;
@@ -7,7 +7,7 @@ type Props = {
 
 export const Hamburger = ({ onClick }: Props) => {
   return (
-    <Button
+    <ButtonUI
       label="hamburger-icon"
       variant="ghost"
       full={false}
