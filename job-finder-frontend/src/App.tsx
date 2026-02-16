@@ -1,9 +1,6 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AppRoutes } from "views/Router";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import "@fontsource/sen/800.css";
-import "@fontsource/geologica/400.css";
-import "./main.css";
+import { AppRoutes } from 'views/Router';
 
 const queryClient = new QueryClient();
 

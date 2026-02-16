@@ -6,22 +6,23 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { UsersService } from 'modules/users/users.service';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UserAuthenticationResponseDto } from 'modules/auth/dtos/user-authentication-response.dto';
-import { UserCredentialsDto } from 'common/dtos/user-credentials.dto';
-import { GetMeResponseDto } from 'modules/users/dtos/get-me-response.dto';
-import { AuthGuard } from 'modules/auth/guards/auth.guard';
-import { UserId } from 'common/decorators/user-id.decorator';
 import { instanceToPlain } from 'class-transformer';
+import { UserId } from 'common/decorators/user-id.decorator';
+import { UserAuthenticationResponseDto } from 'modules/auth/dtos/user-authentication-response.dto';
+import { AuthGuard } from 'modules/auth/guards/auth.guard';
+import { GetMeResponseDto } from 'modules/users/dtos/get-me-response.dto';
+import { RegisterEmployerDto } from 'modules/users/dtos/register-employer.dto';
+import { RegisterEmployeeDto } from 'modules/users/dtos/register-emplyee.dto';
+import { UsersService } from 'modules/users/users.service';
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @Post('/employee/signup')
+  @Post('register/employee')
   @ApiOperation({ summary: 'Create a new employee user' })
-  @ApiBody({ type: UserCredentialsDto })
+  @ApiBody({ type: RegisterEmployeeDto })
   @ApiResponse({
     status: 201,
     description: 'Employee user has been successfully created',
@@ -32,14 +33,14 @@ export class UsersController {
     description: 'Bad user input',
   })
   async createEmployee(
-    @Body() body: UserCredentialsDto,
+    @Body() body: RegisterEmployeeDto,
   ): Promise<UserAuthenticationResponseDto> {
     return await this.usersService.signUpEmployee(body);
   }
 
-  @Post('/employer/signup')
+  @Post('register/employer')
   @ApiOperation({ summary: 'Create a new employer user' })
-  @ApiBody({ type: UserCredentialsDto })
+  @ApiBody({ type: RegisterEmployerDto })
   @ApiResponse({
     status: 201,
     description: 'Employer user has been successfully created',
@@ -49,7 +50,7 @@ export class UsersController {
     status: 400,
     description: 'Bad user input',
   })
-  async createEmployer(@Body() body: UserCredentialsDto) {
+  async createEmployer(@Body() body: RegisterEmployerDto) {
     return await this.usersService.signUpEmployer(body);
   }
 

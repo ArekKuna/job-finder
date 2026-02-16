@@ -1,5 +1,3 @@
-import { atom } from "jotai";
+import { atom } from 'jotai';
 
-export const authStatusAtom = atom<"AUTHORIZED" | "UNAUTHORIZED">(
-  "UNAUTHORIZED"
-);
+export const authStatusAtom = atom<'AUTHORIZED' | 'UNAUTHORIZED'>('UNAUTHORIZED');

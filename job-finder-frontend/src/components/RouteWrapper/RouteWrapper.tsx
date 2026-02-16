@@ -1,5 +1,6 @@
-import { PropsWithChildren } from "react";
-import { Layout } from "components/Layout/Layout";
+import { PropsWithChildren } from 'react';
+
+import { Layout } from 'components/Layout';
 
 type Props = PropsWithChildren<unknown>;
 
